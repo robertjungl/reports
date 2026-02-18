@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophia Medical Report — February 10, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232633;
+    --border: #2e3245;
+    --text: #e4e6ef;
+    --text-muted: #8b8fa3;
+    --green: #34d399;
+    --green-bg: rgba(52,211,153,0.08);
+    --red: #f87171;
+    --red-bg: rgba(248,113,113,0.08);
+    --amber: #fbbf24;
+    --amber-bg: rgba(251,191,36,0.08);
+    --blue: #60a5fa;
+    --blue-bg: rgba(96,165,250,0.08);
+    --purple: #a78bfa;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); line-height:1.6; padding:1.5rem; }
+  .container { max-width:800px; margin:0 auto; }
+  h1 { font-size:1.5rem; font-weight:700; margin-bottom:0.25rem; }
+  .subtitle { color:var(--text-muted); font-size:0.85rem; margin-bottom:2rem; }
+  h2 { font-size:1.1rem; font-weight:600; margin:2rem 0 1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--border); }
+  h3 { font-size:0.95rem; font-weight:600; margin:1.25rem 0 0.5rem; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:0.75rem; padding:1.25rem; margin-bottom:1rem; }
+  .badge { display:inline-block; font-size:0.7rem; font-weight:600; padding:0.15rem 0.5rem; border-radius:1rem; text-transform:uppercase; letter-spacing:0.03em; }
+  .badge-green { background:var(--green-bg); color:var(--green); }
+  .badge-red { background:var(--red-bg); color:var(--red); }
+  .badge-amber { background:var(--amber-bg); color:var(--amber); }
+  .badge-blue { background:var(--blue-bg); color:var(--blue); }
+  ul { list-style:none; padding:0; }
+  ul li { position:relative; padding:0.3rem 0 0.3rem 1.1rem; font-size:0.88rem; }
+  ul li::before { content:''; position:absolute; left:0; top:0.7rem; width:5px; height:5px; border-radius:50%; background:var(--text-muted); }
+  .alert { border-radius:0.75rem; padding:1rem 1.25rem; margin-bottom:1rem; font-size:0.88rem; }
+  .alert-red { background:var(--red-bg); border:1px solid rgba(248,113,113,0.2); }
+  .alert-green { background:var(--green-bg); border:1px solid rgba(52,211,153,0.2); }
+  .alert-amber { background:var(--amber-bg); border:1px solid rgba(251,191,36,0.2); }
+  .alert strong { display:block; margin-bottom:0.25rem; }
+  table { width:100%; border-collapse:collapse; font-size:0.82rem; margin:0.5rem 0; }
+  th { text-align:left; padding:0.5rem 0.6rem; background:var(--surface2); color:var(--text-muted); font-weight:500; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.04em; }
+  td { padding:0.4rem 0.6rem; border-bottom:1px solid var(--border); }
+  .flag-high { color:var(--red); font-weight:600; }
+  .flag-normal { color:var(--green); }
+  .flag-watch { color:var(--amber); }
+  .section-label { display:flex; align-items:center; gap:0.5rem; margin-bottom:0.75rem; }
+  .divider { height:1px; background:var(--border); margin:2rem 0; }
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  @media (max-width:600px) { .two-col { grid-template-columns:1fr; } }
+  .provider { color:var(--purple); font-weight:500; font-size:0.82rem; }
+  .meta { display:flex; gap:1.5rem; flex-wrap:wrap; color:var(--text-muted); font-size:0.82rem; margin-bottom:0.5rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Sophia Sanchez — February 10, 2026</h1>
+<p class="subtitle">Memorial Sloan Kettering Cancer Center — Two Appointments + Lab Results</p>
+
+<!-- ===================== APPOINTMENT 1: RADIATION ===================== -->
+<h2>1. Radiation Oncology — Dr. Yao Yu</h2>
+<div class="meta">
+  <span>Focal SRS Planning</span>
+  <span>Present: Sophia, Robert, Lucien</span>
+</div>
+
+<div class="card">
+  <h3>Treatment Plan: Focal Stereotactic Radiosurgery (SRS)</h3>
+  <ul>
+    <li>Focal SRS chosen over whole brain radiation — mildest option, no interruption to systemic therapy (Verzenio/Aromasin)</li>
+    <li>Whole brain would require ~2 weeks off systemic treatment — not acceptable</li>
+    <li>All brain lesions remain ~5mm, under 1cm</li>
+    <li>No tumor growth between MRI and CT (~2 weeks apart) — pace is not explosive</li>
+  </ul>
+</div>
+
+<div class="alert alert-red">
+  <strong>⚠️ Critical: Trigeminal Nerve / Brainstem Tumor</strong>
+  Tumor sitting directly in front of brainstem. Even slight growth = life-threatening (trouble talking, swallowing, aspiration). Dr. Yu's #1 reason to treat now. Radiation risk: numbness or painful numbness on left side of face (not paralysis), usually short-term, treatable with steroids.
+</div>
+
+<div class="two-col">
+  <div class="card">
+    <h3>Falx Lesion</h3>
+    <ul>
+      <li>In connective tissue, not brain</li>
+      <li>Beams from multiple angles at top of head</li>
+      <li>Risk: temporary hair loss at top</li>
+      <li>Frontal lobe proximity — may feel "slower" for a couple weeks</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Expected Side Effects</h3>
+    <ul>
+      <li>90% of patients: mild fatigue + headache, resolves on its own</li>
+      <li>Short-term: fatigue, headache, possible cognitive slowness</li>
+      <li>Young patients recover well</li>
+      <li>If headaches: contact Dr. Yu for steroid taper</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Radiation Necrosis (Long-Term Risk)</h3>
+  <ul>
+    <li>Onset typically 6 months to 1-2 years</li>
+    <li>At her tumor size (3-4mm): ~2% risk at 2 years</li>
+    <li>At 1cm: ~10%. At 2cm: 30-40%</li>
+    <li>Near 100% chance of problems if untreated vs ~2% necrosis risk if treated</li>
+    <li>Treatment: steroids (50% resolve), Avastin, or <strong>Boswellia serrata</strong> (frankincense) — Dr. Yu says clinical data is "surprisingly well-supported"</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Current Symptoms</h3>
+  <ul>
+    <li>Pain: chest, legs, knees, joints, lower back (bone mets, not brain)</li>
+    <li>Difficulty walking, thigh pain</li>
+    <li>Chest cough, mild nausea</li>
+    <li>Headaches minimal</li>
+    <li>Pain level ~2/6</li>
+    <li>Klonopin discussed for sleep/anxiety</li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===================== APPOINTMENT 2: ROBSON ===================== -->
+<h2>2. Medical Oncology — Dr. Mark Robson</h2>
+<div class="meta">
+  <span>Present: Sophia, Robert</span>
+</div>
+
+<div class="card">
+  <h3>Pain Assessment</h3>
+  <ul>
+    <li>Widespread: back, legs, deep aching ("like flu but deeper"), intense muscle spasms</li>
+    <li>Fluctuates daily — inflammatory component, not just cancer</li>
+    <li>Multiple causes: bone mets, menopause, Aromasin joint pain, radiation inflammation, steroid fluctuation</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Pain Management Plan</h3>
+  <ul>
+    <li><strong>Oxycodone:</strong> Half tab every 6 hours, regular schedule (don't play catch-up)</li>
+    <li><strong>PPI:</strong> Being sent to pharmacy (stomach protection for steroids)</li>
+    <li><strong>Stool softener:</strong> Required with oxy (mag citrate OK)</li>
+    <li><strong>Klonopin:</strong> Reserved for insomnia-only nights, keep separated from oxy</li>
+    <li>Once off steroids: can add Aleve/naproxen for breakthrough</li>
+    <li>No NSAIDs with steroids — GI bleed risk</li>
+    <li>Supportive/palliative care referral being set up</li>
+  </ul>
+</div>
+
+<div class="alert alert-red">
+  <strong>🚨 RED FLAGS — Go to ER Immediately</strong>
+  Bowel or bladder changes, or radiation of pain down legs.
+</div>
+
+<div class="card">
+  <h3>Xgeva (Denosumab) — Bone Protection</h3>
+  <ul>
+    <li>Robson independently recommended — most patients with her bone mets are on it</li>
+    <li>Robert advocated strongly (aligned with antiparasitic research findings)</li>
+    <li>Reduces fracture risk, helps bone pain, prevents dangerous calcium release</li>
+    <li>Subcutaneous injection, minimal side effects</li>
+    <li><strong>Sophia sleeping on it</strong> — Robson will send to Westchester if she decides yes</li>
+  </ul>
+</div>
+
+<div class="alert alert-amber">
+  <strong>⚠️ Skin Nodules — Watch Closely</strong>
+  New/growing nodules (underarm, breast, other areas) since December. Most likely breast cancer skin deposits. Growth rate at noticeable pace concerns Robson. If continues: treatment escalation beyond Verzenio+Aromasin (oral chemo, then stronger options). Reassess ~1 month.
+</div>
+
+<div class="card">
+  <h3>Current Medications</h3>
+  <ul>
+    <li>Verzenio (abemaciclib) 100mg 2x/day</li>
+    <li>Aromasin (exemestane) 25mg daily</li>
+    <li>Dexamethasone taper: 4mg x3 days → 2mg x2 days</li>
+    <li>Oxycodone (low dose, half tab q6h) — NEW</li>
+    <li>Clonazepam 0.5mg (insomnia only) — NEW</li>
+    <li>PPI (stomach protection) — NEW</li>
+    <li>Turkey Tail Mushroom 500mg</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Other Notes</h3>
+  <ul>
+    <li>Cough improving, small pleural fluid (not enough to drain)</li>
+    <li>Headaches subsided since hospital</li>
+    <li>Hot flashes not yet, mood swings yes</li>
+    <li>Next visit: couple weeks (telehealth preferred)</li>
+    <li>Radiation treatment tomorrow: Feb 11 at 3:10 PM (Haupt Radiation Oncology, Floor 2)</li>
+  </ul>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===================== LAB RESULTS ===================== -->
+<h2>3. Lab Results — Feb 10, 2026</h2>
+<div class="meta">
+  <span>Collected 2:16 PM</span>
+  <span class="provider">Ordered by Dr. Mark Robson</span>
+</div>
+
+<!-- Summary Alerts -->
+<div class="alert alert-green">
+  <strong>✅ Anemia Resolved</strong>
+  Hemoglobin 10.8 → 12.4, Hematocrit 30.3 → 38.5%. Nutrition also improving (BUN 5→10, Protein 6.1→7.8). Kidneys excellent (eGFR 118).
+</div>
+
+<div class="alert alert-red">
+  <strong>🚨 Vitamin D TOXIC: >150 ng/mL</strong>
+  Normal is 20-50. Above 80 = toxicity. She is 3x the upper limit. Must stop all vitamin D supplementation immediately. Risk: hypercalcemia, kidney damage, cardiac arrhythmia. Calcium already creeping up (9.1→10.1).
+</div>
+
+<div class="alert alert-amber">
+  <strong>⚠️ Bone Activity Surging</strong>
+  Alk Phos 162 → 249 (nearly doubled). AST 52 → 70. Both rising significantly. Strongly suggests accelerating bone met activity. Reinforces urgency of Xgeva.
+</div>
+
+<!-- CBC Table -->
+<div class="card">
+  <h3>CBC with Auto Differential <span class="badge badge-red">Abnormal</span></h3>
+  <table>
+    <thead><tr><th>Test</th><th>Value</th><th>Range</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>WBC</td><td>9.27</td><td>4.00-11.00</td><td class="flag-normal">Normal</td></tr>
+      <tr><td>RBC</td><td>4.46</td><td>3.80-5.00</td><td class="flag-normal">Normal</td></tr>
+      <tr><td>Hemoglobin</td><td>12.4</td><td>11.2-15.4</td><td class="flag-normal">Normal ↑</td></tr>
+      <tr><td>Hematocrit</td><td>38.5%</td><td>34.3-46.0%</td><td class="flag-normal">Normal ↑</td></tr>
+      <tr><td>MCV</td><td>86</td><td>80-98</td><td class="flag-normal">Normal</td></tr>
+      <tr><td>Platelets</td><td>250</td><td>160-400</td><td class="flag-normal">Normal</td></tr>
+      <tr><td>Neutrophil %</td><td>80.9%</td><td>32.5-74.8%</td><td class="flag-high">High (steroids)</td></tr>
+      <tr><td>Imm Granulocyte %</td><td>1.0%</td><td>≤0.6%</td><td class="flag-high">High</td></tr>
+      <tr><td>Lymphocyte %</td><td>14.2%</td><td>12.2-47.4%</td><td class="flag-watch">Low end</td></tr>
+      <tr><td>Abs Neutrophil</td><td>7.5</td><td>1.50-7.50</td><td class="flag-watch">At ceiling</td></tr>
+      <tr><td>Abs Lymphocyte</td><td>1.32</td><td>0.90-3.20</td><td class="flag-normal">Normal</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CMP Table -->
+<div class="card">
+  <h3>Comprehensive Metabolic Panel <span class="badge badge-red">Abnormal</span></h3>
+  <table>
+    <thead><tr><th>Test</th><th>Value</th><th>Range</th><th>Status</th><th>Trend</th></tr></thead>
+    <tbody>
+      <tr><td>Sodium</td><td>142</td><td>133-143</td><td class="flag-normal">Normal</td><td></td></tr>
+      <tr><td>Potassium</td><td>4.6</td><td>3.5-5.1</td><td class="flag-normal">Normal</td><td></td></tr>
+      <tr><td>Chloride</td><td>105</td><td>98-109</td><td class="flag-normal">Normal</td><td></td></tr>
+      <tr><td>CO2</td><td>25</td><td>18-29</td><td class="flag-normal">Normal</td><td></td></tr>
+      <tr><td>BUN</td><td>10</td><td>6-20</td><td class="flag-normal">Normal</td><td>was 5 ↑</td></tr>
+      <tr><td>Creatinine</td><td>0.7</td><td>0.6-1.1</td><td class="flag-normal">Normal</td><td></td></tr>
+      <tr><td>Glucose</td><td>121</td><td>70-140</td><td class="flag-normal">Normal</td><td></td></tr>
+      <tr><td>Calcium</td><td>10.1</td><td>8.5-10.5</td><td class="flag-watch">Upper normal</td><td>was 9.1 ↑</td></tr>
+      <tr><td>AST</td><td>70</td><td>≤37</td><td class="flag-high">HIGH</td><td>was 52 ↑↑</td></tr>
+      <tr><td>ALT</td><td>11</td><td>≤55</td><td class="flag-normal">Normal</td><td></td></tr>
+      <tr><td>Alk Phos</td><td>249</td><td>≤130</td><td class="flag-high">HIGH</td><td>was 162 ↑↑↑</td></tr>
+      <tr><td>Total Protein</td><td>7.8</td><td>6.3-8.5</td><td class="flag-normal">Normal</td><td>was 6.1 ↑</td></tr>
+      <tr><td>Albumin</td><td>5.1</td><td>3.8-5.0</td><td class="flag-watch">Slightly high</td><td></td></tr>
+      <tr><td>Bilirubin</td><td>0.8</td><td>≤1.2</td><td class="flag-normal">Normal</td><td></td></tr>
+      <tr><td>eGFR</td><td>118</td><td>≥60</td><td class="flag-normal">Excellent</td><td></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Vitamin D -->
+<div class="card" style="border-color:rgba(248,113,113,0.4);">
+  <h3>Vitamin D 25 Hydroxy <span class="badge badge-red">Critical</span></h3>
+  <table>
+    <thead><tr><th>Test</th><th>Value</th><th>Optimal</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Vitamin D 25-OH</td><td style="color:var(--red);font-weight:700;font-size:1.1rem;">>150 ng/mL</td><td>20-50 ng/mL</td><td class="flag-high">TOXIC</td></tr>
+    </tbody>
+  </table>
+  <div style="margin-top:0.75rem;font-size:0.82rem;color:var(--text-muted);">
+    <div>Below 10 = severe deficiency | 10-19 = mild-moderate deficiency | 20-50 = optimal | 51-80 = hypercalciuria risk | <strong style="color:var(--red);">>80 = toxicity possible</strong></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===================== ACTION ITEMS ===================== -->
+<h2>4. Action Items</h2>
+<div class="card">
+  <ul>
+    <li><strong style="color:var(--red);">STOP vitamin D supplementation immediately</strong> — level is toxic</li>
+    <li><strong>Decide on Xgeva</strong> — both Robson and Robert agree; Alk Phos surge makes this urgent</li>
+    <li><strong>Radiation tomorrow:</strong> Feb 11 at 3:10 PM, Main Campus Haupt Radiation Oncology, Floor 2</li>
+    <li>Start Boswellia serrata — discuss dose with MSK Integrative Medicine</li>
+    <li>Discuss mebendazole with Dr. Robson + Integrative Medicine</li>
+    <li>Pick up prescriptions: Clonazepam 0.5mg, Turkey Tail 500mg</li>
+    <li>Monitor skin nodules — reassess ~1 month</li>
+    <li>Flag chest cough to Robson (bilateral pleural effusions on Jan scans)</li>
+    <li>Follow-up telehealth with Robson in couple weeks</li>
+  </ul>
+</div>
+
+<div style="text-align:center;color:var(--text-muted);font-size:0.75rem;margin-top:2rem;padding-bottom:1rem;">
+  Compiled by Aiden — February 10, 2026 | Sources: MSK MyChart Portal, Appointment Audio Transcription
+</div>
+
+</div>
+</body>
+</html>
