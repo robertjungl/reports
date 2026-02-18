@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophia — Radiation Oncology Synopsis | Feb 10, 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232733;
+    --border: #2e3345;
+    --text: #e4e6ed;
+    --text-muted: #8b8fa3;
+    --accent: #7c6ef0;
+    --accent-soft: rgba(124,110,240,0.12);
+    --green: #34d399;
+    --green-soft: rgba(52,211,153,0.12);
+    --amber: #fbbf24;
+    --amber-soft: rgba(251,191,36,0.12);
+    --red: #f87171;
+    --red-soft: rgba(248,113,113,0.12);
+    --blue: #60a5fa;
+    --blue-soft: rgba(96,165,250,0.12);
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 1rem;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+
+  .header {
+    text-align: center;
+    padding: 2.5rem 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+    border-radius: 1rem;
+    border: 1px solid var(--border);
+  }
+  .header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--accent), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .header .subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+  .header .date {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--accent-soft);
+    border-radius: 2rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-title .icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .good { background: var(--green-soft); color: var(--green); }
+  .warn { background: var(--amber-soft); color: var(--amber); }
+  .alert { background: var(--red-soft); color: var(--red); }
+  .info { background: var(--blue-soft); color: var(--blue); }
+  .purple { background: var(--accent-soft); color: var(--accent); }
+
+  ul { list-style: none; padding: 0; }
+  ul li {
+    padding: 0.4rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-muted);
+  }
+
+  .highlight {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin: 0.75rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+  }
+  .stat {
+    background: var(--surface2);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    text-align: center;
+  }
+  .stat .value {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  .stat .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+
+  .risk-table {
+    width: 100%;
+    margin: 0.75rem 0;
+    font-size: 0.85rem;
+  }
+  .risk-table td, .risk-table th {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .risk-table th {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  strong { color: #fff; font-weight: 600; }
+  .tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1rem 0;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 600px) {
+    .stat-row { grid-template-columns: 1fr; }
+    .header h1 { font-size: 1.25rem; }
+    .section { padding: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Radiation Oncology Appointment</h1>
+    <div class="subtitle">Sophia Sanchez — Dr. Yao Yu, Memorial Sloan Kettering</div>
+    <div class="date">February 10, 2026</div>
+    <div style="color:var(--text-muted); font-size:0.8rem; margin-top:0.5rem;">Present: Sophia, Robert, Kenneth (phone)</div>
+  </div>
+
+  <!-- Current Symptoms -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon purple">📋</div>
+      Current Symptoms
+    </div>
+    <ul>
+      <li>Pain in chest, legs, knees, joints, lower back (from bone mets, NOT brain tumors)</li>
+      <li>Difficulty walking, thigh pain</li>
+      <li>Chest cough</li>
+      <li>Mild nausea</li>
+      <li>Headaches — not significant currently</li>
+      <li>Sleep/anxiety — Klonopin discussed (longer lasting relief)</li>
+      <li>Pain level: ~2/6</li>
+    </ul>
+  </div>
+
+  <!-- Good News -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon good">✓</div>
+      Positive Findings
+    </div>
+    <div class="highlight good">
+      <strong>No tumor growth</strong> between MRI and CT scan (~2 weeks apart). Disease pace is not explosive. All lesions remain ~5mm. This supports continuing with focal radiation.
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="value" style="color:var(--green);">~5mm</div>
+        <div class="label">Tumor sizes (all under 1cm)</div>
+      </div>
+      <div class="stat">
+        <div class="value" style="color:var(--green);">0</div>
+        <div class="label">Growth between scans</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Treatment Plan -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon info">⚡</div>
+      Treatment: Focal SRS
+    </div>
+    <p style="font-size:0.9rem; margin-bottom:0.75rem;">
+      <strong>Focal stereotactic radiosurgery (SRS)</strong> — precisely targeted radiation on individual brain lesions. Chosen over whole brain and craniospinal radiation.
+    </p>
+    <div class="highlight info">
+      <strong>Why focal instead of whole brain?</strong> Whole brain radiation requires ~2 weeks + significant downtime during which Sophia can't take systemic therapy (Verzenio/Aromasin). Dr. Yu wants to keep her on systemic treatment without interruption.
+    </div>
+    <ul>
+      <li>Focal SRS is the <strong>mildest option</strong> — better than whole brain AND better than no treatment</li>
+      <li>Systemic therapy can also help shrink brain tumors of this type</li>
+      <li>Treating at 5mm is dramatically safer than waiting for growth</li>
+    </ul>
+  </div>
+
+  <!-- Critical Lesion #1 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon alert">⚠</div>
+      Critical: Trigeminal Nerve / Brainstem Lesion
+    </div>
+    <div class="highlight alert">
+      <strong>Dr. Yu's #1 concern.</strong> A tumor is sitting directly in front of the brainstem. The trigeminal nerve root originates in the brainstem. Even slight growth could push into the brainstem, causing life-threatening problems.
+    </div>
+    <ul>
+      <li><strong>If untreated and tumor grows:</strong> Trouble talking, swallowing, aspiration — life-threatening</li>
+      <li><strong>Radiation side effect risk:</strong> Numbness or painful numbness on left side of face</li>
+      <li><strong>NOT paralysis</strong> — no facial asymmetry expected</li>
+      <li>For tumors not yet symptomatic, numbness tends to be <strong>short-term</strong></li>
+      <li>Treatable with steroids if inflammation occurs</li>
+      <li>This is why Dr. Yu is motivated to treat now — preventing brainstem compression</li>
+    </ul>
+  </div>
+
+  <!-- Lesion #2 -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon warn">△</div>
+      Falx Lesion (Between Hemispheres)
+    </div>
+    <ul>
+      <li>Located in connective tissue between the two brain hemispheres — not in brain tissue itself</li>
+      <li>Requires beams from multiple angles at the top of the head</li>
+      <li>Main risk: <strong>temporary hair loss</strong> at top of head</li>
+      <li>Frontal lobe proximity — things may feel <strong>"a little slower"</strong> for a couple weeks</li>
+      <li>Young patients generally recover well</li>
+    </ul>
+  </div>
+
+  <!-- Side Effects -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon info">📊</div>
+      Expected Side Effects
+    </div>
+
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.75rem;">What ~90% of patients experience:</p>
+    <ul>
+      <li>Mild fatigue</li>
+      <li>Mild headache</li>
+      <li>Both resolve on their own</li>
+    </ul>
+
+    <hr class="divider">
+
+    <p style="font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Short-Term (days to weeks after treatment)</p>
+    <ul>
+      <li>Fatigue, headache, possible cognitive slowness</li>
+      <li>If headaches occur → contact Dr. Yu → short steroid taper</li>
+      <li>Possible temporary hair loss (falx lesion)</li>
+    </ul>
+
+    <hr class="divider">
+
+    <p style="font-size:0.85rem; font-weight:600; margin-bottom:0.5rem;">Radiation Necrosis Risk (long-term)</p>
+    <p style="font-size:0.85rem; margin-bottom:0.75rem;">Inflammation/necrosis at the treatment site. Onset typically 6 months to 1-2 years after treatment.</p>
+
+    <table class="risk-table">
+      <tr><th>Tumor Size</th><th>Risk at 2 Years</th></tr>
+      <tr><td>3-4mm <span class="tag good">Sophia's range</span></td><td style="color:var(--green);"><strong>~2%</strong></td></tr>
+      <tr><td>1cm</td><td style="color:var(--amber);"><strong>~10%</strong></td></tr>
+      <tr><td>2cm</td><td style="color:var(--red);"><strong>30-40%</strong></td></tr>
+    </table>
+
+    <div class="highlight info" style="margin-top:1rem;">
+      <strong>Dr. Yu's framing:</strong> Near 100% chance of serious problems if untreated (months), vs. ~2% necrosis risk at 2 years if treated now. "Probably a pretty good trade-off."
+    </div>
+
+    <p style="font-size:0.85rem; font-weight:600; margin-top:1rem; margin-bottom:0.5rem;">If Necrosis Occurs — Treatment Options</p>
+    <ul>
+      <li><strong>Steroids</strong> — resolves ~50% of cases</li>
+      <li><strong>Avastin</strong> (bevacizumab)</li>
+      <li><strong>Boswellia serrata (frankincense)</strong> — surprisingly well-supported by clinical studies. Dr. Yu has prescribed it. No objection to starting now.</li>
+    </ul>
+  </div>
+
+  <!-- MBZ Discussion -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon purple">🔬</div>
+      Antiparasitic Drug Discussion
+    </div>
+    <p style="font-size:0.9rem; margin-bottom:0.75rem;">Robert asked about mebendazole, ivermectin, and fenbendazole as supplementary treatment.</p>
+    <ul>
+      <li>Dr. Yu is <strong>not aware of strong data</strong> supporting them for brain mets</li>
+      <li>Key point: crossing the BBB does NOT equal effective treatment</li>
+      <li>His bar: 80-90% efficacy in 100-200+ patient studies</li>
+      <li><strong>No known interaction between these drugs and radiation</strong></li>
+      <li>Recommended discussing with <strong>Dr. Robson</strong> and <strong>MSK Integrative Medicine</strong></li>
+      <li>Robert clarified: supplementary only, never replacing standard treatment</li>
+    </ul>
+  </div>
+
+  <!-- Action Items -->
+  <div class="section">
+    <div class="section-title">
+      <div class="icon warn">→</div>
+      Action Items
+    </div>
+    <ul>
+      <li><strong>Start Boswellia serrata (frankincense)</strong> — discuss dose/brand with MSK Integrative Medicine</li>
+      <li><strong>Discuss mebendazole</strong> with Dr. Robson and Integrative Medicine at next visit</li>
+      <li><strong>Monitor post-treatment:</strong> Contact Dr. Yu if headaches or unusual symptoms arise</li>
+      <li><strong>Continue systemic therapy</strong> (Verzenio + Aromasin + Zoladex) without interruption</li>
+      <li><strong>Klonopin</strong> — follow up on sleep/anxiety management</li>
+      <li><strong>Chest cough</strong> — flag to Dr. Robson (given bilateral pleural effusions on Jan scans)</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    Compiled by Aiden — February 10, 2026<br>
+    Source: Voice memo transcription + handwritten appointment notes
+  </div>
+
+</div>
+</body>
+</html>

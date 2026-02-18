@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sophia Sanchez - Comprehensive Health Report</title>
+    <style>
+        :root {
+            --primary: #2c7aa0;
+            --primary-light: #4a90b5;
+            --secondary: #17a2b8;
+            --accent: #20c997;
+            --background: #f8fdff;
+            --card-bg: #ffffff;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --border: #e2e8f0;
+            --critical: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --success: #28a745;
+            --font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .header .meta {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .layout {
+            display: flex;
+            min-height: calc(100vh - 160px);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--card-bg);
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(44, 122, 160, 0.1);
+            color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .priority-indicator {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .priority-critical { color: var(--critical); }
+        .priority-important { color: var(--warning); }
+        .priority-informational { color: var(--info); }
+
+        .toggle-icon {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: transform 0.2s ease;
+        }
+
+        .section.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            display: block;
+        }
+
+        .section.collapsed .section-content {
+            display: none;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .table th,
+        .table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table th {
+            background: rgba(44, 122, 160, 0.1);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .table tr:hover {
+            background: rgba(44, 122, 160, 0.02);
+        }
+
+        .value-high { color: var(--critical); font-weight: 600; }
+        .value-low { color: var(--warning); font-weight: 600; }
+        .value-normal { color: var(--success); }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-critical {
+            background: rgba(220, 53, 69, 0.1);
+            border-left-color: var(--critical);
+            color: #721c24;
+        }
+
+        .alert-warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-left-color: var(--warning);
+            color: #856404;
+        }
+
+        .alert-info {
+            background: rgba(23, 162, 184, 0.1);
+            border-left-color: var(--info);
+            color: #0c5460;
+        }
+
+        .medication-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .medication-card {
+            background: rgba(44, 122, 160, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .medication-name {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .medication-dose {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin: 0.25rem 0;
+        }
+
+        .medication-notes {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .trial-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background: var(--card-bg);
+        }
+
+        .trial-title {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .trial-phase {
+            background: var(--info);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            background: rgba(23, 162, 184, 0.1);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+
+        .phone-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .phone-link:hover {
+            text-decoration: underline;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .drug-matrix {
+            overflow-x: auto;
+        }
+
+        .drug-matrix table {
+            min-width: 800px;
+            font-size: 0.85rem;
+        }
+
+        .interaction-safe { background: rgba(40, 167, 69, 0.1); color: #155724; }
+        .interaction-caution { background: rgba(255, 193, 7, 0.1); color: #856404; }
+        .interaction-dangerous { background: rgba(220, 53, 69, 0.1); color: #721c24; }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            .header {
+                page-break-after: avoid;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+            .main-content {
+                padding: 1rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .medication-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .collapsible-content {
+            transition: all 0.3s ease;
+        }
+
+        .auto-expand {
+            /* Auto-expanded sections will have their content visible by default */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sophia Sanchez</h1>
+            <div class="subtitle">Comprehensive Health Report</div>
+            <div class="meta">Last Updated: February 15, 2026 | Age: 32 (DOB: January 19, 1994)</div>
+        </div>
+
+        <div class="layout">
+            <nav class="sidebar">
+                <h3>Table of Contents</h3>
+                <a href="#patient-profile" class="nav-link">Patient Profile</a>
+                <a href="#current-treatment" class="nav-link">Current Treatment</a>
+                <a href="#disease-status" class="nav-link">Disease Status</a>
+                <a href="#lab-trends" class="nav-link">Lab Trends</a>
+                <a href="#critical-alerts" class="nav-link">Critical Alerts</a>
+                <a href="#molecular-testing" class="nav-link">Molecular Testing</a>
+                <a href="#clinical-trials" class="nav-link">Clinical Trials</a>
+                <a href="#repurposed-drugs" class="nav-link">Repurposed Drugs</a>
+                <a href="#drug-interactions" class="nav-link">Drug Interactions</a>
+                <a href="#abemaciclib-cns" class="nav-link">Abemaciclib CNS Data</a>
+                <a href="#financial-assistance" class="nav-link">Financial Assistance</a>
+                <a href="#what-to-ask" class="nav-link">What to Ask Dr. Robson</a>
+                <a href="#emotional-support" class="nav-link">Emotional Support</a>
+                <a href="#contact-directory" class="nav-link">Contact Directory</a>
+                <a href="#disease-timeline" class="nav-link">Disease Timeline</a>
+            </nav>
+
+            <main class="main-content">
+                <!-- Patient Profile -->
+                <section class="section auto-expand" id="patient-profile">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            Patient Profile
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="medication-list">
+                            <div class="medication-card">
+                                <div class="medication-name">Sophia Sanchez</div>
+                                <div class="medication-dose">Age: 32 (DOB: January 19, 1994)</div>
+                                <div class="medication-notes">MRN: 38365702 | CEID: MSK-D4N9-09C9-V9VH</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Primary Diagnosis</div>
+                                <div class="medication-dose">ER+/PR+/HER2- Metastatic Breast Cancer</div>
+                                <div class="medication-notes">Brain metastases with borderline leptomeningeal disease</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Contact Information</div>
+                                <div class="medication-dose">Phone: <a href="tel:9413201141" class="phone-link">941-320-1141</a></div>
+                                <div class="medication-notes">MSK Username: Sophsanch</div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Care Team</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Provider</th>
+                                    <th>Specialty</th>
+                                    <th>Phone</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Dr. Mark Robson, MD</strong></td>
+                                    <td>Medical Oncology (Primary)</td>
+                                    <td><a href="tel:6468885434" class="phone-link">646-888-5434</a></td>
+                                    <td>MATCHES Provider, Primary Oncologist</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dr. Yao Yu, MD</strong></td>
+                                    <td>Radiation Oncology</td>
+                                    <td><a href="tel:9085423427" class="phone-link">908-542-3427</a></td>
+                                    <td>PI of Radiate-LM trial (MSK 25-150)</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Janice Shen, MD</td>
+                                    <td>Medical Oncology (Consulting)</td>
+                                    <td>-</td>
+                                    <td>Consulting Physician</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Shari Goldfarb, MD</td>
+                                    <td>Medical Oncology (Consulting)</td>
+                                    <td>-</td>
+                                    <td>Consulting Physician</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Nirupa Raghunathan, MD</td>
+                                    <td>Integrative Medicine</td>
+                                    <td>-</td>
+                                    <td>Prescribed Turkey Tail Mushroom</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Andrew Barsky, MD</td>
+                                    <td>Radiation Oncology</td>
+                                    <td>-</td>
+                                    <td>Radiation simulation</td>
+                                </tr>
+                                <tr>
+                                    <td>Dr. Devika Jutagir</td>
+                                    <td>Psychology/Support</td>
+                                    <td><a href="tel:6468888361" class="phone-link">646-888-8361</a></td>
+                                    <td>Future appointment Mar 16</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Current Treatment -->
+                <section class="section auto-expand" id="current-treatment">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            Current Treatment
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="alert alert-warning">
+                            <strong>Important:</strong> Zoladex was STOPPED September 2025 - do not list as current medication.
+                        </div>
+
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: var(--primary);">Active Prescriptions</h3>
+                        <div class="medication-list">
+                            <div class="medication-card">
+                                <div class="medication-name">Abemaciclib (Verzenio)</div>
+                                <div class="medication-dose">100mg tablet - 1 tab twice daily</div>
+                                <div class="medication-notes">CDK4/6 inhibitor, crosses BBB. Prescribed Feb 3, 2026 by Dr. Mark Robson. CVS Specialty Pharmacy.</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Exemestane (Aromasin)</div>
+                                <div class="medication-dose">25mg tablet - 1 tab daily after meal</div>
+                                <div class="medication-notes">Aromatase inhibitor for ER+ disease. Prescribed Jan 28, 2026.</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Dexamethasone (Decadron)</div>
+                                <div class="medication-dose">2mg tablet - 4mg (2 tabs) daily during radiation, then taper</div>
+                                <div class="medication-notes">Brain edema management. 4mg on radiation days, 2mg for 2 days then stop. Weekend: 2mg Sat/Sun.</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Turkey Tail Mushroom</div>
+                                <div class="medication-dose">500mg capsule - 2 caps twice daily for 25 days</div>
+                                <div class="medication-notes">Prescribed by Dr. Nirupa Raghunathan. Note: Therapeutic dose in Japan is 3,000-6,000mg daily.</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Acetaminophen (Tylenol)</div>
+                                <div class="medication-dose">325mg tablet - 2 tabs every 8h PRN mild pain</div>
+                                <div class="medication-notes">Max 3,000mg/24h. Prescribed Jan 22 by Christina Dauphin, PA-C.</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Oxycodone</div>
+                                <div class="medication-dose">As needed for pain</div>
+                                <div class="medication-notes">Opioid analgesic for moderate to severe pain.</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Clonazepam</div>
+                                <div class="medication-dose">As needed for anxiety</div>
+                                <div class="medication-notes">Benzodiazepine for anxiety management.</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Proton Pump Inhibitor (PPI)</div>
+                                <div class="medication-dose">Daily</div>
+                                <div class="medication-notes">Gastric protection, especially important with multiple medications.</div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: var(--primary);">Supplements</h3>
+                        <div class="medication-list">
+                            <div class="medication-card">
+                                <div class="medication-name">Vitamin B-12 (cyanocobalamin)</div>
+                                <div class="medication-dose">1 tab daily</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Magnesium (amino acid chelate)</div>
+                                <div class="medication-dose">133mg - 1 tab twice daily</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Vitamin D-3 (cholecalciferol)</div>
+                                <div class="medication-dose">2,000 units - 1 tab daily</div>
+                                <div class="medication-notes"><strong style="color: red;">STOPPED</strong> - Patient has vitamin D toxicity (>150 ng/mL)</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">ION Gut Support</div>
+                                <div class="medication-dose">1 dose daily</div>
+                            </div>
+                            <div class="medication-card">
+                                <div class="medication-name">Other Supplements</div>
+                                <div class="medication-dose">Infinite Iodine Spray (2 sprays daily), Avini Health Zeolite (1 dose daily), Fatty15 (1 dose daily)</div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <strong>On Hold:</strong> Mushroom supplements and CellCore Products (Para 1,2,3,4) - HOLD until provider restart.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Disease Status -->
+                <section class="section auto-expand" id="disease-status">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            Disease Status
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <h3 style="margin: 0 0 1rem 0; color: var(--primary);">Current Disease Extent (January 2026)</h3>
+                        
+                        <div class="alert alert-critical">
+                            <strong>Brain Metastases (MRI Jan 19, 2026):</strong><br>
+                            • 10+ new scattered intraparenchymal, leptomeningeal and dural enhancing lesions<br>
+                            • Largest lesion: 1.3 x 0.6 cm (mid parafalcine dural)<br>
+                            • Key lesion: Left trigeminal nerve (0.8 x 0.6 cm) - KEY LMD INDICATOR<br>
+                            • Posterior left cerebellar: INCREASED from 0.4 x 0.4 cm to 1.0 x 0.8 cm
+                        </div>
+
+                        <div class="alert alert-critical">
+                            <strong>Spine & Bone Disease (MRI Jan 19, PET/CT Jan 22):</strong><br>
+                            • DIFFUSE multifocal multilevel osseous metastases throughout spine, sacrum, and ilia<br>
+                            • Highest SUV values: Right proximal femur (14.1), L2 vertebra (14.0)<br>
+                            • No spinal cord compression currently<br>
+                            • Clival osseous metastasis increased from 0.5 cm to 0.7 cm
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Complete Imaging Summary</h3>
+                        
+                        <h4 style="color: var(--secondary); margin: 1rem 0 0.5rem 0;">Brain MRI with Contrast (Jan 19, 2026)</h4>
+                        <ul style="margin-left: 2rem; line-height: 1.8;">
+                            <li>Superior right parietal: 0.4 x 0.3 cm</li>
+                            <li>Right post central gyrus: 0.5 x 0.5 cm</li>
+                            <li><strong>Mid parafalcine dural: 1.3 x 0.6 cm (LARGEST)</strong></li>
+                            <li>Anterior parafalcine dural: 0.8 x 0.5 cm</li>
+                            <li>Left anterior frontal lobe: 0.3 x 0.3 cm</li>
+                            <li>Left anteroinferior frontal: 1.0 x 0.6 cm</li>
+                            <li><strong>Left trigeminal nerve (leptomeningeal): 0.8 x 0.6 cm - KEY LMD INDICATOR</strong></li>
+                            <li>Right lateral cerebellar: 0.4 x 0.4 cm</li>
+                            <li>Cerebellar vermis: 0.6 x 0.5 cm</li>
+                        </ul>
+
+                        <h4 style="color: var(--secondary); margin: 1rem 0 0.5rem 0;">PET/CT Key SUV Values (Jan 22, 2026)</h4>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Location</th>
+                                    <th>Size (cm)</th>
+                                    <th>SUV Max</th>
+                                    <th>Significance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>Right proximal femur</strong></td>
+                                    <td>-</td>
+                                    <td><strong>14.1</strong></td>
+                                    <td>HIGHEST uptake</td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>L2 vertebra</strong></td>
+                                    <td>-</td>
+                                    <td><strong>14.0</strong></td>
+                                    <td>Very high activity</td>
+                                </tr>
+                                <tr>
+                                    <td>Left external iliac node</td>
+                                    <td>1.8 x 0.9</td>
+                                    <td>14.0</td>
+                                    <td>Nodal involvement</td>
+                                </tr>
+                                <tr>
+                                    <td>Right proximal humerus</td>
+                                    <td>-</td>
+                                    <td>12.7</td>
+                                    <td>Bone metastasis</td>
+                                </tr>
+                                <tr>
+                                    <td>Right paratracheal node</td>
+                                    <td>1.4 x 1.0</td>
+                                    <td>10.5</td>
+                                    <td>Mediastinal disease</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Leptomeningeal Disease (LMD) Status - BORDERLINE</h3>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Test</th>
+                                    <th>Result</th>
+                                    <th>Normal Range</th>
+                                    <th>Interpretation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(255, 193, 7, 0.1);">
+                                    <td><strong>Circulating Tumor Cells (CSF)</strong></td>
+                                    <td><strong>2 Cells/3.0 mL</strong></td>
+                                    <td>≤2 Cells/3.0 mL</td>
+                                    <td><strong>AT UPPER LIMIT (threshold ≥3 for LMD)</strong></td>
+                                </tr>
+                                <tr style="background: rgba(40, 167, 69, 0.1);">
+                                    <td>CSF Cytology</td>
+                                    <td>Negative</td>
+                                    <td>Negative</td>
+                                    <td>No malignant cells identified</td>
+                                </tr>
+                                <tr style="background: rgba(255, 193, 7, 0.1);">
+                                    <td>CSF Protein</td>
+                                    <td>18 mg/dL</td>
+                                    <td>21-38 mg/dL</td>
+                                    <td><strong>LOW (unusual - LMD typically shows elevated protein)</strong></td>
+                                </tr>
+                                <tr style="background: rgba(255, 193, 7, 0.1);">
+                                    <td>CSF Monocyte/Macrophage</td>
+                                    <td>47%</td>
+                                    <td>15-45%</td>
+                                    <td><strong>HIGH (possible inflammatory response)</strong></td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td>MRI Findings</td>
+                                    <td>Leptomeningeal enhancement</td>
+                                    <td>None</td>
+                                    <td><strong>CONCERNING - Trigeminal nerve lesion</strong></td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td>Clinical Symptoms</td>
+                                    <td>Worsening headaches, vomiting</td>
+                                    <td>None</td>
+                                    <td><strong>CONSISTENT with LMD progression</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="alert alert-warning">
+                            <strong>LMD Conclusion:</strong> Borderline/concerning but NOT definitively diagnosed. CSF CTCs at threshold (2/3), cytology negative, but MRI shows leptomeningeal enhancement and trigeminal involvement. Clinical symptoms support progression. Repeat CSF analysis may be indicated.
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Areas WITHOUT Metastases (Clear on Imaging)</h3>
+                        <div style="background: rgba(40, 167, 69, 0.1); padding: 1rem; border-radius: 6px;">
+                            <strong>Good News:</strong> Liver, spleen, pancreas, kidneys show NO abnormal uptake or metastases on PET/CT and CT imaging.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Lab Trends -->
+                <section class="section auto-expand" id="lab-trends">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            Lab Trends
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <h3 style="margin: 0 0 1rem 0; color: var(--primary);">Key Changes: January 22 → February 10, 2026</h3>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Test</th>
+                                    <th>Jan 22, 2026</th>
+                                    <th>Feb 10, 2026</th>
+                                    <th>Normal Range</th>
+                                    <th>Trend</th>
+                                    <th>Clinical Significance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(40, 167, 69, 0.1);">
+                                    <td><strong>Hemoglobin</strong></td>
+                                    <td class="value-low">10.8 g/dL</td>
+                                    <td class="value-normal">12.4 g/dL</td>
+                                    <td>11.2-15.4</td>
+                                    <td><strong>✅ IMPROVED</strong></td>
+                                    <td>Anemia resolved</td>
+                                </tr>
+                                <tr style="background: rgba(40, 167, 69, 0.1);">
+                                    <td><strong>Hematocrit</strong></td>
+                                    <td class="value-low">30.3%</td>
+                                    <td class="value-normal">38.5%</td>
+                                    <td>34.3-46.0%</td>
+                                    <td><strong>✅ IMPROVED</strong></td>
+                                    <td>Blood volume normalized</td>
+                                </tr>
+                                <tr style="background: rgba(40, 167, 69, 0.1);">
+                                    <td><strong>Total Protein</strong></td>
+                                    <td class="value-low">6.1 g/dL</td>
+                                    <td class="value-normal">7.8 g/dL</td>
+                                    <td>6.3-8.5</td>
+                                    <td><strong>✅ IMPROVED</strong></td>
+                                    <td>Nutrition improved</td>
+                                </tr>
+                                <tr style="background: rgba(40, 167, 69, 0.1);">
+                                    <td><strong>BUN</strong></td>
+                                    <td class="value-low">5 mg/dL</td>
+                                    <td class="value-normal">10 mg/dL</td>
+                                    <td>6-20</td>
+                                    <td><strong>✅ IMPROVED</strong></td>
+                                    <td>Better nutritional status</td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>AST</strong></td>
+                                    <td class="value-high">52 U/L</td>
+                                    <td class="value-high">70 U/L</td>
+                                    <td>≤37</td>
+                                    <td><strong>⬆️ WORSENING</strong></td>
+                                    <td>Liver stress/disease progression</td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>Alkaline Phosphatase</strong></td>
+                                    <td class="value-high">162 U/L</td>
+                                    <td class="value-high">249 U/L</td>
+                                    <td>≤130</td>
+                                    <td><strong>⬆️ SURGING</strong></td>
+                                    <td>Bone metastases activity</td>
+                                </tr>
+                                <tr style="background: rgba(255, 193, 7, 0.1);">
+                                    <td><strong>Calcium</strong></td>
+                                    <td class="value-normal">9.1 mg/dL</td>
+                                    <td class="value-normal">10.1 mg/dL</td>
+                                    <td>8.5-10.5</td>
+                                    <td><strong>⬆️ CREEPING UP</strong></td>
+                                    <td>Monitor for hypercalcemia</td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>Vitamin D 25-OH</strong></td>
+                                    <td>Not tested</td>
+                                    <td class="value-high">>150 ng/mL</td>
+                                    <td>20-50</td>
+                                    <td><strong>🚨 TOXIC</strong></td>
+                                    <td>Vitamin D toxicity - STOP supplementation</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="alert alert-critical">
+                            <strong>CRITICAL:</strong> Vitamin D level >150 ng/mL is TOXIC (normal 20-50 ng/mL, toxicity >80 ng/mL). MUST STOP vitamin D supplementation immediately. Risk: hypercalcemia, kidney damage, cardiac issues. Recheck in 3-4 weeks.
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <strong>RECOMMENDATION:</strong> Request ALP fractionation to distinguish bone-specific vs liver-specific alkaline phosphatase elevation (both are elevated, need to determine predominant source).
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Current Lab Status (Feb 10, 2026)</h3>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Current Value</th>
+                                    <th>Status</th>
+                                    <th>Clinical Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>White Blood Cells</td>
+                                    <td>9.27 K/μL</td>
+                                    <td class="value-normal">Normal</td>
+                                    <td>Good immune function</td>
+                                </tr>
+                                <tr>
+                                    <td>Platelets</td>
+                                    <td>250 K/μL</td>
+                                    <td class="value-normal">Normal</td>
+                                    <td>No bleeding risk</td>
+                                </tr>
+                                <tr>
+                                    <td>Neutrophils</td>
+                                    <td>80.9%</td>
+                                    <td class="value-high">Elevated</td>
+                                    <td>Steroid effect (dexamethasone)</td>
+                                </tr>
+                                <tr>
+                                    <td>Kidney Function (eGFR)</td>
+                                    <td>118 mL/min</td>
+                                    <td class="value-normal">Excellent</td>
+                                    <td>No kidney dysfunction</td>
+                                </tr>
+                                <tr>
+                                    <td>Glucose</td>
+                                    <td>121 mg/dL</td>
+                                    <td class="value-normal">Normal</td>
+                                    <td>Good glucose control</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Critical Alerts -->
+                <section class="section auto-expand" id="critical-alerts">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            Critical Alerts
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="alert alert-critical">
+                            <h3 style="margin: 0 0 1rem 0;">🚨 Vitamin D Toxicity</h3>
+                            <p><strong>Current Level:</strong> >150 ng/mL (TOXIC - normal 20-50 ng/mL)</p>
+                            <p><strong>Actions Taken:</strong> Vitamin D supplementation STOPPED ✅</p>
+                            <p><strong>Timeline:</strong> Recheck levels in 3-4 weeks. Takes 4-8 weeks to normalize (vitamin D half-life ~2-3 weeks)</p>
+                            <p><strong>Watch For:</strong> Confusion, nausea, constipation, excessive thirst, kidney problems</p>
+                            <p><strong>Related:</strong> Calcium creeping up (9.1→10.1 mg/dL) - monitor closely</p>
+                        </div>
+
+                        <div class="alert alert-critical">
+                            <h3 style="margin: 0 0 1rem 0;">🚨 Possible Missing XGEVA/Denosumab</h3>
+                            <p><strong>Issue:</strong> Diffuse bone metastases with very high SUV values (up to 14.1) but no evidence of bone-protective therapy</p>
+                            <p><strong>NCCN Standard:</strong> Denosumab (XGEVA) 120mg SC every 4 weeks is standard of care for bone metastases</p>
+                            <p><strong>Note:</strong> Zoladex is for ovarian suppression, NOT bone protection</p>
+                            <p><strong>Benefit:</strong> Prevents skeletal-related events (fractures, spinal cord compression)</p>
+                            <p><strong>Action:</strong> URGENT discussion with Dr. Robson about bone-protective therapy</p>
+                            <p><strong>Financial Aid:</strong> Amgen Assist program available for XGEVA</p>
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <h3 style="margin: 0 0 1rem 0;">⚠️ Turkey Tail Dosing Inadequate</h3>
+                            <p><strong>Current Dose:</strong> 500mg daily (2 caps × 250mg)</p>
+                            <p><strong>Therapeutic Dose:</strong> 3,000-6,000mg daily in Japan where PSK is an approved cancer drug</p>
+                            <p><strong>Recommendation:</strong> Discuss increasing to therapeutic dose with Dr. Raghunathan</p>
+                            <p><strong>Context:</strong> Current dose is likely too low for meaningful clinical benefit</p>
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <h3 style="margin: 0 0 1rem 0;">⚠️ Rising Liver Enzymes</h3>
+                            <p><strong>AST Trend:</strong> 52 → 70 U/L (normal ≤37)</p>
+                            <p><strong>Alk Phos Trend:</strong> 162 → 249 U/L (normal ≤130)</p>
+                            <p><strong>Likely Cause:</strong> Combination of bone metastases activity and possible drug effects</p>
+                            <p><strong>Action:</strong> Monitor weekly, consider hepatology consult if continues rising</p>
+                            <p><strong>Drug Implications:</strong> May affect eligibility for clinical trials and repurposed drugs</p>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h3 style="margin: 0 0 1rem 0;">💊 Drug Interaction Concerns</h3>
+                            <p><strong>Zeolite + ION Gut Support:</strong> Must separate by 2+ hours from all oral medications (can adsorb drugs)</p>
+                            <p><strong>Multiple Medications:</strong> Complex interaction potential - all changes should be coordinated with oncology team</p>
+                            <p><strong>New Drug Caution:</strong> Liver stress limits ability to add hepatotoxic repurposed drugs</p>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Monitoring Schedule</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Frequency</th>
+                                    <th>Next Due</th>
+                                    <th>Alert Thresholds</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Vitamin D 25-OH</td>
+                                    <td>3-4 weeks</td>
+                                    <td>Mar 3-10, 2026</td>
+                                    <td>Target: <50 ng/mL, Normal: 20-40</td>
+                                </tr>
+                                <tr>
+                                    <td>Calcium</td>
+                                    <td>Weekly until stable</td>
+                                    <td>Feb 17, 2026</td>
+                                    <td>Alert: >10.5 mg/dL</td>
+                                </tr>
+                                <tr>
+                                    <td>AST/ALT/Alk Phos</td>
+                                    <td>Weekly</td>
+                                    <td>Feb 17, 2026</td>
+                                    <td>AST >100, Alk Phos >300</td>
+                                </tr>
+                                <tr>
+                                    <td>Complete Metabolic Panel</td>
+                                    <td>Every 2 weeks</td>
+                                    <td>Feb 24, 2026</td>
+                                    <td>Standard ranges</td>
+                                </tr>
+                                <tr>
+                                    <td>CBC</td>
+                                    <td>Every 2 weeks</td>
+                                    <td>Feb 24, 2026</td>
+                                    <td>ANC <1000, Plt <100K</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Molecular Testing Strategy -->
+                <section class="section auto-expand" id="molecular-testing">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            Molecular Testing Strategy
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="alert alert-info">
+                            <strong>Why This Matters:</strong> Molecular profiling could unlock FDA-approved targeted therapies and clinical trials specifically designed for Sophia's profile, including brain-penetrant alternatives to her current regimen.
+                        </div>
+
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: var(--primary);">Tests to Request from Dr. Robson</h3>
+
+                        <div class="trial-card">
+                            <div class="trial-title">1. HER2 IHC Score (Immunohistochemistry)</div>
+                            <div class="trial-phase">HIGHEST PRIORITY</div>
+                            <p><strong>What:</strong> Measures HER2 protein expression level (may be "HER2-low" despite being classified as HER2-negative)</p>
+                            <p><strong>Why Critical:</strong> Up to 60% of "HER2-negative" tumors are actually HER2-low (IHC 1+ or 2+/ISH-)</p>
+                            <div class="contact-info">
+                                <strong>If HER2-low → Opens These Options:</strong><br>
+                                • <strong>Trastuzumab deruxtecan (Enhertu/T-DXd)</strong> - FDA-approved, excellent CNS activity<br>
+                                • <strong>TUXEDO-4 trial</strong> - specifically for HER2-low with new/progressing brain mets<br>
+                                • Phase 3b/4 data shows consistent intracranial activity
+                            </div>
+                            <p><strong>Ask Dr. Robson:</strong> "What was Sophia's HER2 IHC score? Was it 0, 1+, or 2+?"</p>
+                        </div>
+
+                        <div class="trial-card">
+                            <div class="trial-title">2. ESR1 Mutation (Liquid Biopsy/ctDNA)</div>
+                            <div class="trial-phase">HIGH PRIORITY</div>
+                            <p><strong>Test:</strong> Guardant360 CDx (FDA-approved, simple blood draw)</p>
+                            <p><strong>Why:</strong> ESR1 mutations occur in UP TO 50% of ER+ patients during metastatic endocrine therapy</p>
+                            <div class="contact-info">
+                                <strong>If ESR1 mutant → Opens These FDA-Approved Options:</strong><br>
+                                • <strong>Imlunestrant (Inluriyo)</strong> - FDA approved Sept 2025, BRAIN-PENETRANT oral SERD<br>
+                                • <strong>Elacestrant (Orserdu)</strong> - FDA approved Jan 2023, another oral SERD option<br>
+                                • Could replace exemestane for better CNS coverage
+                            </div>
+                            <p><strong>Ask Dr. Robson:</strong> "Can we run a Guardant360 CDx liquid biopsy to check for ESR1 mutations? There are now FDA-approved brain-penetrant options if positive."</p>
+                        </div>
+
+                        <div class="trial-card">
+                            <div class="trial-title">3. PIK3CA/AKT1/PTEN Mutations</div>
+                            <div class="trial-phase">HIGH PRIORITY</div>
+                            <p><strong>Test:</strong> Can be included in Guardant360 or FoundationOne panel</p>
+                            <p><strong>Why:</strong> PIK3CA mutations found in ~40% of ER+ breast cancers</p>
+                            <div class="contact-info">
+                                <strong>If PIK3CA/AKT1/PTEN mutant → Opens These FDA-Approved Options:</strong><br>
+                                • <strong>Capivasertib (Truqap)</strong> + fulvestrant - FDA approved Nov 2023<br>
+                                • <strong>Alpelisib (Piqray)</strong> + fulvestrant - FDA approved<br>
+                                • Phase 3 CAPItello-291 showed significant PFS benefit
+                            </div>
+                            <p><strong>Ask Dr. Robson:</strong> "Has Sophia been tested for PIK3CA, AKT1, or PTEN mutations?"</p>
+                        </div>
+
+                        <div class="trial-card">
+                            <div class="trial-title">4. HER3 Expression</div>
+                            <div class="trial-phase">CLINICAL TRIAL FOCUS</div>
+                            <p><strong>What:</strong> Measures HER3 protein on tumor cells (frequently overexpressed in brain mets)</p>
+                            <p><strong>Why:</strong> Opens access to patritumab deruxtecan (HER3-DXd)</p>
+                            <div class="contact-info">
+                                <strong>If HER3 positive → Clinical Trial Access:</strong><br>
+                                • <strong>HERTHENA-Breast04 (NCT07060807)</strong> - Phase 3, HR+/HER2- after CDK4/6i<br>
+                                • EXACT match for Sophia's profile<br>
+                                • Same drug showed 65% 3-month survival in LMD (TUXEDO-3)<br>
+                                • First patient dosed Aug 2025, US-based
+                            </div>
+                            <p><strong>Ask Dr. Robson:</strong> "Is MSK a site for HERTHENA-Breast04? Can we check HER3 expression?"</p>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">What to Say to Dr. Robson - Script</h3>
+                        <div class="alert alert-info">
+                            <p><strong>"We've been doing research and found several FDA-approved targeted therapies that could apply to Sophia depending on her molecular profile. We'd like to request:</strong></p>
+                            <ol style="margin: 1rem 0; padding-left: 2rem;">
+                                <li><strong>A Guardant360 liquid biopsy</strong> to check for ESR1 and PIK3CA mutations</li>
+                                <li><strong>Confirmation of her HER2 IHC score</strong> — if she's HER2-low, Enhertu has excellent brain activity</li>
+                                <li><strong>Whether MSK is enrolling in HERTHENA-Breast04</strong> for patritumab deruxtecan</li>
+                                <li><strong>Whether Dr. Yu's Radiate-LM proton CSI trial</strong> is appropriate given her borderline LMD</li>
+                            </ol>
+                            <p><strong>We understand these are conversations for the care team, and we trust Dr. Robson's clinical judgment on sequencing."</strong></p>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">FDA-Approved Targeted Therapies Summary</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Drug</th>
+                                    <th>Target</th>
+                                    <th>Required Mutation</th>
+                                    <th>BBB Penetration</th>
+                                    <th>FDA Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>T-DXd (Enhertu)</strong></td>
+                                    <td>HER2-low</td>
+                                    <td>HER2 IHC 1+ or 2+/ISH-</td>
+                                    <td><strong>Excellent CNS activity</strong></td>
+                                    <td>✅ FDA approved</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Imlunestrant (Inluriyo)</strong></td>
+                                    <td>ESR1</td>
+                                    <td>ESR1 mutation (ctDNA)</td>
+                                    <td><strong>YES - brain penetrant</strong></td>
+                                    <td>✅ FDA approved Sept 2025</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Elacestrant (Orserdu)</strong></td>
+                                    <td>ESR1</td>
+                                    <td>ESR1 mutation</td>
+                                    <td>Limited data</td>
+                                    <td>✅ FDA approved Jan 2023</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Capivasertib (Truqap)</strong></td>
+                                    <td>AKT</td>
+                                    <td>PIK3CA/AKT1/PTEN</td>
+                                    <td>Unknown</td>
+                                    <td>✅ FDA approved Nov 2023</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Alpelisib (Piqray)</strong></td>
+                                    <td>PI3K</td>
+                                    <td>PIK3CA</td>
+                                    <td>Limited</td>
+                                    <td>✅ FDA approved May 2019</td>
+                                </tr>
+                                <tr style="background: rgba(40, 167, 69, 0.1);">
+                                    <td><strong>Abemaciclib (Verzenio)</strong></td>
+                                    <td>CDK4/6</td>
+                                    <td>None required</td>
+                                    <td><strong>YES - confirmed CNS penetration</strong></td>
+                                    <td>✅ Already taking</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Clinical Trials -->
+                <section class="section auto-expand" id="clinical-trials">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            Clinical Trials
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="alert alert-info">
+                            <strong>Search Criteria:</strong> ER+/PR+/HER2- metastatic breast cancer, brain metastases ALLOWED, prior CDK4/6 inhibitor use allowed, leptomeningeal disease consideration, currently recruiting.
+                        </div>
+
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: var(--primary);">TOP PRIORITY TRIALS</h3>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">1. MSK 25-150 / NRG-BN014 (Radiate-LM) - DR. YAO YU'S TRIAL</div>
+                            <div class="trial-phase">Phase III</div>
+                            <p><strong>What:</strong> Proton craniospinal irradiation (pCSI) vs involved-field radiation (IFRT) for leptomeningeal metastasis</p>
+                            <p><strong>Who:</strong> Breast cancer or NSCLC with NEWLY DIAGNOSED LM, age 18+, ECOG able to walk/do activities >50% of waking time</p>
+                            <div class="contact-info">
+                                <strong>PI Contact:</strong> Dr. Yao Yu — <a href="tel:9085423427" class="phone-link">908-542-3427</a><br>
+                                <strong>Critical:</strong> THIS IS SOPHIA'S RADIATION ONCOLOGIST<br>
+                                <strong>Location:</strong> MSK (where Sophia is already being treated)
+                            </div>
+                            <p><strong>Why Critical:</strong> Sophia has borderline LMD (CTC CSF=2, leptomeningeal enhancement on MRI). If LMD is confirmed, this trial is led by HER OWN DOCTOR.</p>
+                            <p><strong>Action:</strong> Ask Dr. Yu about this at next appointment. The threshold question: does her leptomeningeal enhancement count as "newly diagnosed LM"?</p>
+                            <p><strong>MSK page:</strong> https://www.mskcc.org/cancer-care/clinical-trials/25-150</p>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">2. MSK 21-378 / NCT05184816 — Intrathecal Deferoxamine for LMD</div>
+                            <div class="trial-phase">Phase I</div>
+                            <p><strong>Published results:</strong> Median OS 10.0 months (95% CI 6.5-NA) in evaluable cohort (n=7). Well tolerated.</p>
+                            <p><strong>Mechanism:</strong> Iron chelation in CSF — starves cancer cells of iron they need to survive in nutrient-poor leptomeningeal space</p>
+                            <div class="contact-info">
+                                <strong>PI:</strong> Dr. Adrienne Boire (MSK neuro-oncologist, world's leading LMD researcher)<br>
+                                <strong>Contact:</strong> Jessica Wilcox — <a href="tel:2126397573" class="phone-link">212-639-7573</a>, wilcoxj@mskcc.org<br>
+                                <strong>Location:</strong> MSK NYC + NJ locations
+                            </div>
+                            <p><strong>Eligibility:</strong> Any solid tumor with LMD. Brain mets allowed if previously treated or not requiring active treatment.</p>
+                            <p><strong>Sophia fit:</strong> EXCELLENT if LMD confirmed. Already at MSK. Any breast cancer subtype accepted.</p>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">3. HERTHENA-Breast04 (NCT07060807) — EXACT PROFILE MATCH</div>
+                            <div class="trial-phase">Phase III</div>
+                            <p><strong>Drug:</strong> Patritumab deruxtecan (HER3-DXd) - HER3-targeted antibody-drug conjugate</p>
+                            <p><strong>Target population:</strong> HR+/HER2- metastatic breast cancer after CDK4/6 inhibitor progression</p>
+                            <div class="contact-info">
+                                <strong>Status:</strong> Currently recruiting (first patient dosed Aug 2025)<br>
+                                <strong>Sponsor:</strong> US-based (Daiichi Sankyo/Merck)<br>
+                                <strong>Critical:</strong> Need to check if MSK is an enrollment site
+                            </div>
+                            <p><strong>Why Perfect:</strong> That is EXACTLY Sophia - ER+/PR+, HER2-, on Verzenio (CDK4/6i)</p>
+                            <p><strong>Supporting Data:</strong> TUXEDO-3 showed 65% of LMD patients alive at 3 months, 6-month OS: 58.9%</p>
+                            <p><strong>Action:</strong> Ask Dr. Robson about HERTHENA-Breast04 eligibility at next visit</p>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">4. DATO-BASE (NCT06176261) — FDA-APPROVED DRUG</div>
+                            <div class="trial-phase">Phase II</div>
+                            <p><strong>Drug:</strong> Datopotamab deruxtecan (Dato-DXd) — TROP2-targeting ADC, FDA-APPROVED Jan 2025</p>
+                            <p><strong>Three cohorts:</strong></p>
+                            <ul style="margin: 0.5rem 0; padding-left: 2rem;">
+                                <li><strong>Cohort A: ER+/HER2- with brain mets</strong> ← SOPHIA'S EXACT PROFILE</li>
+                                <li><strong>Cohort C: Any HER2-negative with LMD</strong> ← ALSO fits if LMD confirmed</li>
+                            </ul>
+                            <div class="contact-info">
+                                <strong>Sites:</strong> Dana-Farber (Boston), Duke Cancer Institute<br>
+                                <strong>Contact:</strong> Dana-Farber 23-533
+                            </div>
+                            <p><strong>Why Critical:</strong> FDA-approved drug being tested SPECIFICALLY for brain mets in her cancer type. Even outside the trial, Dato-DXd is already FDA-approved for her indication.</p>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">ADDITIONAL HIGH-VALUE TRIALS</h3>
+
+                        <div class="trial-card">
+                            <div class="trial-title">5. TUXEDO-4 (Enrolling) — HER2-Low Brain Mets</div>
+                            <div class="trial-phase">Phase II</div>
+                            <p><strong>Drug:</strong> Trastuzumab deruxtecan (T-DXd/Enhertu)</p>
+                            <p><strong>Target:</strong> HER2-low breast cancer with NEW or PROGRESSING brain mets</p>
+                            <p><strong>Enrollment:</strong> Started June 2024, completion estimated July 2026</p>
+                            <p><strong>Requirement:</strong> Need to confirm HER2-low status (IHC 1+ or 2+/ISH-)</p>
+                        </div>
+
+                        <div class="trial-card">
+                            <div class="trial-title">6. ReSPECT-LM (NCT07098806) — Nanoliposome</div>
+                            <div class="trial-phase">Phase I</div>
+                            <p><strong>Drug:</strong> Rhenium-186 nanoliposome - radioactive nanoparticles delivered through Ommaya port</p>
+                            <p><strong>Target:</strong> ANY solid tumor with leptomeningeal metastases</p>
+                            <div class="contact-info">
+                                <strong>Location:</strong> San Antonio, TX<br>
+                                <strong>Contacts:</strong> Rachael Hersey <a href="tel:2107917723" class="phone-link">210-791-8723</a>, patients@respect-trials.com
+                            </div>
+                            <p><strong>Why Critical:</strong> Novel targeted radiotherapy, any tumor type accepted</p>
+                        </div>
+
+                        <div class="trial-card">
+                            <div class="trial-title">7. CDK4/6 Resistance Trials</div>
+                            <div class="trial-phase">Multiple Phase II/III</div>
+                            <p><strong>ASCENT-02 (NCT05104866):</strong> Sacituzumab govitecan for HR+/HER2- post-CDK4/6</p>
+                            <p><strong>EMERALD Extension (NCT04448886):</strong> Elacestrant + CDK4/6 inhibitor</p>
+                            <p><strong>VERITAC-2 (NCT05654155):</strong> Ribociclib + Alpelisib + Fulvestrant (requires PIK3CA mutation)</p>
+                            <p><strong>CAPISTUTE (NCT04791384):</strong> Capivasertib + Fulvestrant post-CDK4/6</p>
+                            <p><strong>All allow stable brain metastases and are designed for post-CDK4/6 progression</strong></p>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">FLORIDA-BASED OPTIONS (Close to Home)</h3>
+
+                        <div class="trial-card">
+                            <div class="trial-title">Moffitt Cancer Center (Tampa - 2 hours)</div>
+                            <p><strong>NCT04588545:</strong> HER2+ LMD - Intrathecal trastuzumab/pertuzumab</p>
+                            <p><strong>NCT05809752:</strong> Dendritic cell vaccine for LMD</p>
+                            <div class="contact-info">
+                                <strong>Contacts:</strong> Kamran Ahmed <a href="tel:8137458424" class="phone-link">813-745-8424</a>, Michelle DeJesus <a href="tel:8137456911" class="phone-link">813-745-6911</a>
+                            </div>
+                        </div>
+
+                        <div class="trial-card">
+                            <div class="trial-title">Mayo Clinic Florida (Jacksonville - 3 hours)</div>
+                            <p><strong>NCT05746325:</strong> Tumor Treating Fields (TTF) for spinal LMD - BREAST CANCER SPECIFIC</p>
+                            <div class="contact-info">
+                                <strong>Contact:</strong> Wendy J. Sherman <a href="tel:8557760015" class="phone-link">855-776-0015</a>, mayocliniccancerstudies@mayo.edu
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">IMMEDIATE ACTION CONTACT LIST</h3>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Trial</th>
+                                    <th>Contact</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>MSK Deferoxamine (LMD)</strong></td>
+                                    <td>Jessica Wilcox</td>
+                                    <td><a href="tel:2126397573" class="phone-link">212-639-7573</a></td>
+                                    <td>wilcoxj@mskcc.org</td>
+                                    <td><strong>CALL TODAY</strong></td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>ReSPECT-LM (Any LMD)</strong></td>
+                                    <td>Rachael Hersey</td>
+                                    <td><a href="tel:2107917723" class="phone-link">210-791-8723</a></td>
+                                    <td>patients@respect-trials.com</td>
+                                    <td><strong>CALL TODAY</strong></td>
+                                </tr>
+                                <tr style="background: rgba(255, 193, 7, 0.1);">
+                                    <td><strong>Mayo TTF (Breast LMD)</strong></td>
+                                    <td>Wendy Sherman</td>
+                                    <td><a href="tel:8557760015" class="phone-link">855-776-0015</a></td>
+                                    <td>mayocliniccancerstudies@mayo.edu</td>
+                                    <td><strong>CALL THIS WEEK</strong></td>
+                                </tr>
+                                <tr style="background: rgba(255, 193, 7, 0.1);">
+                                    <td><strong>MSK General Research</strong></td>
+                                    <td>MSK Clinical Research</td>
+                                    <td><a href="tel:2126397606" class="phone-link">212-639-7606</a></td>
+                                    <td>-</td>
+                                    <td><strong>CALL THIS WEEK</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="alert alert-warning">
+                            <strong>Key Unknowns That Determine Eligibility:</strong><br>
+                            1. <strong>HER2-low status</strong> - Opens multiple ADC trials with excellent CNS activity<br>
+                            2. <strong>PIK3CA mutation</strong> - Enables targeted resistance trials<br>
+                            3. <strong>Confirmed LMD</strong> - CSF CTC borderline, repeat analysis critical<br>
+                            4. <strong>Liver function trends</strong> - Rising enzymes may affect eligibility
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Repurposed Drugs -->
+                <section class="section auto-expand" id="repurposed-drugs">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-important">🟡</span>
+                            Repurposed Drugs
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="alert alert-warning">
+                            <strong>CRITICAL:</strong> Liver enzymes are rising (AST 52→70, Alk Phos 162→249). Most repurposed drugs must wait until liver function stabilizes. Phased approach recommended.
+                        </div>
+
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: var(--primary);">PHASE 1: SAFE TO START NOW</h3>
+
+                        <div class="medication-list">
+                            <div class="medication-card" style="border-left: 4px solid var(--success);">
+                                <div class="medication-name">Melatonin 20mg (High-Dose)</div>
+                                <div class="medication-dose">20mg nightly (start at 3mg, escalate)</div>
+                                <div class="medication-notes">
+                                    <strong>Evidence:</strong> RTOG 0119 RCT: 7.9 vs 4.1 months survival with brain met radiation<br>
+                                    <strong>BBB:</strong> Excellent - endogenous hormone, freely crosses<br>
+                                    <strong>Safety:</strong> Excellent - hepatoprotective, no interactions<br>
+                                    <strong>Special benefit:</strong> Radiosensitizer (synergy with SRS)
+                                </div>
+                            </div>
+                            <div class="medication-card" style="border-left: 4px solid var(--success);">
+                                <div class="medication-name">Low-Dose Aspirin</div>
+                                <div class="medication-dose">81mg daily (cardioprotective dose)</div>
+                                <div class="medication-notes">
+                                    <strong>Evidence:</strong> Multiple studies show reduced breast cancer risk, improved ER+ survival<br>
+                                    <strong>BBB:</strong> Moderate - achieves therapeutic CNS levels<br>
+                                    <strong>Safety:</strong> Low risk at cardioprotective doses<br>
+                                    <strong>Mechanism:</strong> COX-2 inhibition, anti-inflammatory, anti-metastatic
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">PHASE 2: AFTER LIVER STABILIZES (2-4 weeks)</h3>
+
+                        <div class="medication-list">
+                            <div class="medication-card" style="border-left: 4px solid var(--warning);">
+                                <div class="medication-name">Hydroxychloroquine (HCQ) - CDK4/6i Resistance Breaker</div>
+                                <div class="medication-dose">600mg twice daily (cancer dose)</div>
+                                <div class="medication-notes">
+                                    <strong>Mechanism:</strong> Autophagy inhibitor - blocks escape from CDK4/6 inhibitor (Verzenio)<br>
+                                    <strong>Clinical trials:</strong> NCT05953350 (Phase 1b/2) - HCQ + palbociclib effective in HR+/HER2- after CDK4/6i failure<br>
+                                    <strong>BBB:</strong> Excellent - established from decades of lupus/malaria use<br>
+                                    <strong>Safety:</strong> Phase I study (Nature, Jan 2025) safe with CDK4/6i + letrozole<br>
+                                    <strong>Interactions:</strong> Minimal CYP3A4 involvement - safe with Verzenio<br>
+                                    <strong>Cost:</strong> Very cheap, generic, widely available<br>
+                                    <strong>Risk:</strong> Retinal toxicity with long-term use - needs ophthalmology monitoring<br>
+                                    <strong>Evidence:</strong> ★★★☆☆ (Strong rationale, promising early trials)
+                                </div>
+                            </div>
+                            <div class="medication-card" style="border-left: 4px solid var(--warning);">
+                                <div class="medication-name">Doxycycline</div>
+                                <div class="medication-dose">100mg daily</div>
+                                <div class="medication-notes">
+                                    <strong>Evidence:</strong> Preclinical anti-metastatic effects, anti-angiogenic<br>
+                                    <strong>BBB:</strong> Good - lipophilic tetracycline<br>
+                                    <strong>Safety:</strong> Low hepatotoxicity risk, well-tolerated<br>
+                                    <strong>Mechanism:</strong> Cancer stem cell targeting, MMP inhibition
+                                </div>
+                            </div>
+                            <div class="medication-card" style="border-left: 4px solid var(--warning);">
+                                <div class="medication-name">Propranolol</div>
+                                <div class="medication-dose">Start 20mg twice daily</div>
+                                <div class="medication-notes">
+                                    <strong>Evidence:</strong> Stage II breast cancer: 49% reduced recurrence/metastasis risk<br>
+                                    <strong>BBB:</strong> Excellent - highly lipophilic β-blocker<br>
+                                    <strong>Dual benefit:</strong> Anti-metastatic + anxiety reduction<br>
+                                    <strong>Monitor:</strong> Blood pressure, heart rate
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">PHASE 3: AFTER LIVER COMPLETELY STABLE (4-6 weeks)</h3>
+
+                        <div class="medication-list">
+                            <div class="medication-card" style="border-left: 4px solid var(--critical);">
+                                <div class="medication-name">Mebendazole Polymorph C (TOP CHOICE)</div>
+                                <div class="medication-dose">100-200mg twice daily with fatty meal</div>
+                                <div class="medication-notes">
+                                    <strong>2024 Breakthrough:</strong> Skibinski study - significant LMD reduction in TNBC models<br>
+                                    <strong>BBB:</strong> Ratio 0.82, CSF concentrations 106 ng/mL<br>
+                                    <strong>Interactions:</strong> LOW risk - primarily CYP1A2 (not CYP3A4)<br>
+                                    <strong>Evidence:</strong> ★★★★☆ (Strong preclinical, specific to condition)
+                                </div>
+                            </div>
+                            <div class="medication-card" style="border-left: 4px solid var(--critical);">
+                                <div class="medication-name">Disulfiram + Copper</div>
+                                <div class="medication-dose">250-500mg + 2-8mg copper gluconate nightly</div>
+                                <div class="medication-notes">
+                                    <strong>Evidence:</strong> Phase IIb trial improved PFS in TNBC<br>
+                                    <strong>BBB:</strong> Excellent - disulfiram CSF/plasma ratio 0.3-0.5<br>
+                                    <strong>Mechanism:</strong> Cancer stem cell targeting, protein folding disruption<br>
+                                    <strong>Caution:</strong> Hepatotoxicity in 10-15%, avoid alcohol completely
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">CONTRAINDICATED/AVOID</h3>
+
+                        <div class="medication-list">
+                            <div class="medication-card" style="border-left: 4px solid var(--critical); background: rgba(220, 53, 69, 0.05);">
+                                <div class="medication-name">Metformin - DRUG INTERACTION</div>
+                                <div class="medication-dose">DO NOT USE</div>
+                                <div class="medication-notes">
+                                    <strong>Reason:</strong> Abemaciclib increases metformin AUC by 37%<br>
+                                    <strong>Risk:</strong> Lactic acidosis, especially with liver stress<br>
+                                    <strong>BBB:</strong> Limited penetration anyway
+                                </div>
+                            </div>
+                            <div class="medication-card" style="border-left: 4px solid var(--critical); background: rgba(220, 53, 69, 0.05);">
+                                <div class="medication-name">Itraconazole - DANGEROUS INTERACTION</div>
+                                <div class="medication-dose">DO NOT USE</div>
+                                <div class="medication-notes">
+                                    <strong>Reason:</strong> Strong CYP3A4 inhibitor<br>
+                                    <strong>Risk:</strong> Will dramatically increase Verzenio levels<br>
+                                    <strong>Could cause:</strong> Severe toxicity, liver failure
+                                </div>
+                            </div>
+                            <div class="medication-card" style="border-left: 4px solid var(--critical); background: rgba(220, 53, 69, 0.05);">
+                                <div class="medication-name">LDN (Low-Dose Naltrexone)</div>
+                                <div class="medication-dose">BLOCKS OXYCODONE</div>
+                                <div class="medication-notes">
+                                    <strong>Reason:</strong> Sophia is on oxycodone for pain<br>
+                                    <strong>Risk:</strong> LDN would block opioid pain relief<br>
+                                    <strong>Cannot use:</strong> While on opioid pain medication
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Access Information</h3>
+
+                        <div class="contact-info">
+                            <strong>Heal Navigator</strong> - Telemedicine integrative oncology<br>
+                            <strong>Website:</strong> healnavigator.com<br>
+                            <strong>Provider:</strong> Dr. Paul Zhang (MSK fellowship background)<br>
+                            <strong>Services:</strong> Prescribes repurposed drugs in 45 states<br>
+                            <strong>Note:</strong> MSK/Dr. Robson unlikely to prescribe antiparasitics
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Makis Case Reports Context</h3>
+                        
+                        <div class="alert alert-info">
+                            <strong>OneDayMD Database:</strong> 470+ cases, 70 breast cancer cases<br>
+                            <strong>Most relevant:</strong> Case 74 (2026) - 63yo Stage 4, bone mets healed on IVM+MBZ+Enhertu<br>
+                            <strong>Brain mets response:</strong> Case 70 - TNBC brain mets shrinking on IVM+MBZ<br>
+                            <strong>Important:</strong> These are anecdotal reports, not peer-reviewed trials<br>
+                            <strong>Pattern:</strong> Best results when combined with conventional treatment
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Monitoring Protocol</h3>
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Phase</th>
+                                    <th>Monitoring</th>
+                                    <th>Frequency</th>
+                                    <th>Alert Criteria</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Phase 1 (Current)</td>
+                                    <td>AST, ALT, Alk Phos</td>
+                                    <td>Weekly</td>
+                                    <td>AST >100, Alk Phos >300</td>
+                                </tr>
+                                <tr>
+                                    <td>Phase 2 (2-4 weeks)</td>
+                                    <td>Liver function + BP + Ophthalmology baseline (if HCQ)</td>
+                                    <td>Every 2 weeks</td>
+                                    <td>Transaminase doubling</td>
+                                </tr>
+                                <tr>
+                                    <td>Phase 3 (4-6 weeks)</td>
+                                    <td>Full hepatic panel</td>
+                                    <td>Weekly for 4 weeks</td>
+                                    <td>Any liver enzyme elevation</td>
+                                </tr>
+                                <tr>
+                                    <td>HCQ Long-term</td>
+                                    <td>Ophthalmologic exam (retinal toxicity screening)</td>
+                                    <td>Every 6-12 months</td>
+                                    <td>Visual field changes, retinal pigmentation</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Drug Interaction Matrix -->
+                <section class="section" id="drug-interactions">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-important">🟡</span>
+                            Drug Interaction Matrix
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="drug-matrix">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Repurposed Drug</th>
+                                        <th>Verzenio Interaction</th>
+                                        <th>Liver Safety</th>
+                                        <th>BBB Penetration</th>
+                                        <th>Evidence Quality</th>
+                                        <th>Overall Risk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Melatonin</strong></td>
+                                        <td class="interaction-safe">SAFE - No CYP3A4 involvement</td>
+                                        <td class="interaction-safe">HEPATOPROTECTIVE</td>
+                                        <td class="interaction-safe">EXCELLENT</td>
+                                        <td>★★★★☆</td>
+                                        <td class="interaction-safe">LOW</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mebendazole</strong></td>
+                                        <td class="interaction-safe">SAFE - CYP1A2 primary</td>
+                                        <td class="interaction-caution">CAUTION - Wait for stabilization</td>
+                                        <td class="interaction-safe">GOOD (0.82 BBB ratio)</td>
+                                        <td>★★★★☆</td>
+                                        <td class="interaction-caution">MODERATE</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Doxycycline</strong></td>
+                                        <td class="interaction-safe">SAFE - Minimal interactions</td>
+                                        <td class="interaction-safe">LOW RISK</td>
+                                        <td class="interaction-safe">GOOD</td>
+                                        <td>★★★☆☆</td>
+                                        <td class="interaction-safe">LOW</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Propranolol</strong></td>
+                                        <td class="interaction-safe">SAFE - No CYP3A4</td>
+                                        <td class="interaction-safe">SAFE</td>
+                                        <td class="interaction-safe">EXCELLENT</td>
+                                        <td>★★★☆☆</td>
+                                        <td class="interaction-safe">LOW</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Disulfiram</strong></td>
+                                        <td class="interaction-caution">CAUTION - May affect metabolism</td>
+                                        <td class="interaction-caution">MODERATE - Hepatitis 10-15%</td>
+                                        <td class="interaction-safe">EXCELLENT</td>
+                                        <td>★★★☆☆</td>
+                                        <td class="interaction-caution">MODERATE</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Hydroxychloroquine</strong></td>
+                                        <td class="interaction-safe">SAFE - Minimal CYP3A4 involvement</td>
+                                        <td class="interaction-caution">CAUTION - Wait for stabilization</td>
+                                        <td class="interaction-safe">EXCELLENT</td>
+                                        <td>★★★☆☆</td>
+                                        <td class="interaction-caution">MODERATE</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Aspirin</strong></td>
+                                        <td class="interaction-safe">SAFE</td>
+                                        <td class="interaction-safe">SAFE at low doses</td>
+                                        <td class="interaction-caution">MODERATE</td>
+                                        <td>★★★☆☆</td>
+                                        <td class="interaction-safe">LOW</td>
+                                    </tr>
+                                    <tr style="background: rgba(220, 53, 69, 0.05);">
+                                        <td><strong>Metformin</strong></td>
+                                        <td class="interaction-dangerous">DANGEROUS - 37% AUC increase</td>
+                                        <td class="interaction-caution">Lactic acidosis risk</td>
+                                        <td class="interaction-caution">LIMITED</td>
+                                        <td>★★☆☆☆</td>
+                                        <td class="interaction-dangerous">HIGH</td>
+                                    </tr>
+                                    <tr style="background: rgba(220, 53, 69, 0.05);">
+                                        <td><strong>Itraconazole</strong></td>
+                                        <td class="interaction-dangerous">DANGEROUS - Strong CYP3A4 inhibitor</td>
+                                        <td class="interaction-caution">Moderate hepatotoxicity</td>
+                                        <td class="interaction-caution">MODERATE</td>
+                                        <td>★★☆☆☆</td>
+                                        <td class="interaction-dangerous">HIGH</td>
+                                    </tr>
+                                    <tr style="background: rgba(220, 53, 69, 0.05);">
+                                        <td><strong>LDN</strong></td>
+                                        <td class="interaction-safe">SAFE pharmacologically</td>
+                                        <td class="interaction-safe">SAFE</td>
+                                        <td class="interaction-caution">UNKNOWN</td>
+                                        <td>★★☆☆☆</td>
+                                        <td class="interaction-dangerous">HIGH - Blocks oxycodone</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Key Drug Interaction Facts</h3>
+
+                        <div class="alert alert-critical">
+                            <strong>MBZ + abemaciclib:</strong> LOW risk (different CYP pathways). Safe to combine.<br>
+                            <strong>IVM + abemaciclib:</strong> HIGH risk (same CYP3A4 + P-gp inhibition). Could spike Verzenio levels.<br>
+                            <strong>Dexamethasone + IVM:</strong> Conflict. Dex induces CYP3A4 (reduces IVM) AND is immunosuppressive (opposes IVM anticancer mechanism).<br>
+                            <strong>Zeolite + ION Gut Support:</strong> Must separate 2+ hours from ALL oral meds (adsorbs drugs in GI tract).
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <strong>Patient Community Finding (needs verification):</strong> MBZ may BLOCK anticancer effects of disulfiram and metformin through unknown mechanism. Consider sequential rather than simultaneous use.
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Interaction Legend</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+                            <div class="interaction-safe" style="padding: 0.5rem; border-radius: 4px; text-align: center;">
+                                <strong>SAFE</strong><br>Low/No interaction risk
+                            </div>
+                            <div class="interaction-caution" style="padding: 0.5rem; border-radius: 4px; text-align: center;">
+                                <strong>CAUTION</strong><br>Monitor closely
+                            </div>
+                            <div class="interaction-dangerous" style="padding: 0.5rem; border-radius: 4px; text-align: center;">
+                                <strong>DANGEROUS</strong><br>Avoid or major dose adjustment
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Abemaciclib CNS Data -->
+                <section class="section" id="abemaciclib-cns">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-informational">🟢</span>
+                            Abemaciclib CNS Data
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="alert alert-info">
+                            <strong>Good News:</strong> Sophia is already on the RIGHT drug for brain metastases. Abemaciclib (Verzenio) has confirmed CNS penetration and activity.
+                        </div>
+
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: var(--primary);">Confirmed Blood-Brain Barrier Penetration</h3>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Study Parameter</th>
+                                    <th>Result</th>
+                                    <th>Clinical Significance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>CSF Penetration</strong></td>
+                                    <td>Plasma and CSF concentrations similar</td>
+                                    <td>Drug reaches brain at therapeutic levels</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Unbound Brain Concentration</strong></td>
+                                    <td>96-fold above CDK4 IC50</td>
+                                    <td>Far exceeds concentration needed to inhibit target</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>CDK6 Activity</strong></td>
+                                    <td>19-fold above CDK6 IC50</td>
+                                    <td>Adequate inhibition of both primary targets</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Direct CNS Response</strong></td>
+                                    <td>1 complete parenchymal brain response observed</td>
+                                    <td>Proof of concept for brain met activity</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Real-World CNS Outcomes</h3>
+
+                        <div class="trial-card">
+                            <div class="trial-title">Phase II Study Results (Clinical Cancer Research 2020)</div>
+                            <p><strong>Population:</strong> HR+/HER2- breast cancer patients with brain metastases</p>
+                            <p><strong>Treatment:</strong> Abemaciclib + local therapy (surgery/radiation)</p>
+                            <div class="contact-info">
+                                <strong>Key Outcomes:</strong><br>
+                                • <strong>Median CNS PFS:</strong> 21 months<br>
+                                • <strong>Median OS:</strong> 25 months<br>
+                                • Well tolerated in combination with brain radiation
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Dose Adequacy - 100mg is Sufficient</h3>
+
+                        <div class="alert alert-info">
+                            <strong>monarchE Study Data:</strong> Dose reduction from 150mg to 100mg BID does NOT compromise efficacy<br>
+                            <strong>Hazard Ratio:</strong> 0.905 (confidence interval overlaps with full dose)<br>
+                            <strong>Conclusion:</strong> Sophia's 100mg twice daily dose is clinically appropriate
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Combination with SRS (Stereotactic Radiosurgery)</h3>
+
+                        <div class="medication-list">
+                            <div class="medication-card" style="border-left: 4px solid var(--success);">
+                                <div class="medication-name">CDK4/6 Inhibitor + Radiation Synergy</div>
+                                <div class="medication-notes">
+                                    <strong>Mechanism:</strong> CDK4/6 inhibitors enhance radiosensitivity<br>
+                                    <strong>Clinical evidence:</strong> Improved outcomes when combined with brain radiation<br>
+                                    <strong>Sophia's situation:</strong> Currently receiving SRS while on abemaciclib - optimal timing
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Comparison to Other CDK4/6 Inhibitors</h3>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>CDK4/6 Inhibitor</th>
+                                    <th>BBB Penetration</th>
+                                    <th>CNS Activity Data</th>
+                                    <th>FDA Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(40, 167, 69, 0.1);">
+                                    <td><strong>Abemaciclib (Verzenio)</strong></td>
+                                    <td><strong>CONFIRMED - Good CSF levels</strong></td>
+                                    <td><strong>Phase II: 21-month CNS PFS</strong></td>
+                                    <td>✅ Approved (Sophia's current)</td>
+                                </tr>
+                                <tr>
+                                    <td>Palbociclib (Ibrance)</td>
+                                    <td>LIMITED - Poor BBB penetration</td>
+                                    <td>Minimal CNS activity data</td>
+                                    <td>✅ Approved</td>
+                                </tr>
+                                <tr>
+                                    <td>Ribociclib (Kisqali)</td>
+                                    <td>MODERATE - Some BBB penetration</td>
+                                    <td>Limited CNS data</td>
+                                    <td>✅ Approved (Sophia's previous)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="alert alert-success">
+                            <strong>Bottom Line:</strong> Don't panic about changing everything. Abemaciclib + SRS is a proven combination with real CNS data. The current treatment IS working in the brain.
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">Future CNS Monitoring</h3>
+
+                        <ul style="margin-left: 2rem; line-height: 1.8;">
+                            <li><strong>Brain MRI:</strong> Every 2-3 months to assess response</li>
+                            <li><strong>Neurological symptoms:</strong> Monitor headaches, cognitive function</li>
+                            <li><strong>CSF analysis:</strong> Repeat if LMD symptoms worsen</li>
+                            <li><strong>Performance status:</strong> Maintain activities of daily living</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Financial Assistance -->
+                <section class="section auto-expand" id="financial-assistance">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            Financial Assistance
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="alert alert-critical">
+                            <strong>URGENT:</strong> Sophia qualifies for multiple HIGH-PRIORITY, FAST-TRACKED assistance programs. Estimated total first-year value: $50,000-$100,000+. Apply immediately to time-sensitive programs.
+                        </div>
+
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: var(--primary);">🚨 APPLY IMMEDIATELY (Within 48 Hours)</h3>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">1. Social Security Disability (SSDI) - Compassionate Allowance ⭐⭐⭐</div>
+                            <div class="trial-phase">GUARANTEED APPROVAL</div>
+                            <p><strong>What:</strong> Metastatic breast cancer automatically qualifies for expedited SSDI approval</p>
+                            <p><strong>Processing:</strong> 3 weeks instead of 3-12 months due to Compassionate Allowance</p>
+                            <p><strong>Amount:</strong> $800-$3,000+ monthly for life (based on work history)</p>
+                            <div class="contact-info">
+                                <strong>How to Apply:</strong><br>
+                                • Online: ssa.gov/benefits/disability/<br>
+                                • Phone: <a href="tel:18007721213" class="phone-link">1-800-772-1213</a><br>
+                                • Required: Medical records showing metastatic breast cancer
+                            </div>
+                            <p><strong>Leads to:</strong> Medicare eligibility (typically 24 months after approval)</p>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">2. CancerCare Co-Payment Assistance Fund ⭐⭐⭐</div>
+                            <div class="trial-phase">UP TO $10,000</div>
+                            <p><strong>Amount:</strong> $6,000 initial grant, up to $10,000 total program cap</p>
+                            <p><strong>Coverage:</strong> Chemotherapy, targeted treatments (Verzenio, Aromasin)</p>
+                            <p><strong>Requirements:</strong> Federal insurance, income ≤500% Federal Poverty Level (~$75,000)</p>
+                            <div class="contact-info">
+                                <strong>Apply:</strong><br>
+                                • Online: cancercare.org/copay-apply<br>
+                                • Phone: <a href="tel:8665526729" class="phone-link">866-552-6729</a>
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">3. Lilly Cares Foundation (FREE Verzenio) ⭐⭐⭐</div>
+                            <div class="trial-phase">UP TO $15,000+ VALUE</div>
+                            <p><strong>What:</strong> FREE Verzenio for up to 12 months for qualifying patients</p>
+                            <p><strong>Value:</strong> Verzenio retail ~$15,000/year - massive savings</p>
+                            <div class="contact-info">
+                                <strong>Apply:</strong><br>
+                                • Phone: <a href="tel:18005456962" class="phone-link">1-800-545-6962</a><br>
+                                • Website: lillycares.com<br>
+                                • Also apply for Verzenio Savings Card
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">🏥 IMMEDIATE HIGH-VALUE PROGRAMS</h3>
+
+                        <div class="medication-list">
+                            <div class="medication-card" style="border-left: 4px solid var(--warning);">
+                                <div class="medication-name">Hope Lodge NYC (American Cancer Society)</div>
+                                <div class="medication-dose">FREE lodging + meals + transportation</div>
+                                <div class="medication-notes">
+                                    <strong>Perfect for MSK treatments:</strong> 60 guest rooms, private bathrooms<br>
+                                    <strong>Value:</strong> $3,000+ in free housing and meals<br>
+                                    <strong>Action:</strong> Ask MSK social worker for referral
+                                </div>
+                            </div>
+                            <div class="medication-card" style="border-left: 4px solid var(--warning);">
+                                <div class="medication-name">Susan G. Komen Financial Assistance</div>
+                                <div class="medication-dose">$500 grants for living expenses</div>
+                                <div class="medication-notes">
+                                    <strong>Coverage:</strong> Rent, utilities, food, transportation<br>
+                                    <strong>Frequency:</strong> Once every 12 months<br>
+                                    <strong>Apply:</strong> MyKomen Health portal (komen.org/financial-assistance-program)
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">🏠 FLORIDA-SPECIFIC PROGRAMS</h3>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--success);">
+                            <div class="trial-title">Florida Cancer Specialists Foundation ⭐⭐⭐</div>
+                            <p><strong>Coverage:</strong> Rent/mortgage, utilities, homeowner's insurance, phone bills</p>
+                            <p><strong>Income Limit:</strong> 250% Federal Poverty Level (~$40,000 for individual)</p>
+                            <div class="contact-info">
+                                <strong>Apply:</strong><br>
+                                • Website: grantinterface.com/Home/Logon?urlkey=flcancer<br>
+                                • Phone: <a href="tel:9416777183" class="phone-link">(941) 677-7183</a>
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--success);">
+                            <div class="trial-title">Ribbon Riders Breast Cancer Assistance</div>
+                            <p><strong>Florida-based, breast cancer specific assistance</strong></p>
+                            <p><strong>Coverage:</strong> Rent/mortgage, utilities, gas for treatment, groceries, insurance premiums</p>
+                            <div class="contact-info">
+                                <strong>Phone:</strong> <a href="tel:4077967465" class="phone-link">(407) 796-PINK (7465)</a>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">💊 DRUG-SPECIFIC ASSISTANCE</h3>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Drug/Program</th>
+                                    <th>Benefit</th>
+                                    <th>Contact</th>
+                                    <th>Eligibility</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Lilly Cares (Verzenio)</strong></td>
+                                    <td>Free medication up to 12 months</td>
+                                    <td><a href="tel:18005456962" class="phone-link">1-800-545-6962</a></td>
+                                    <td>Financial need, no/inadequate insurance</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Amgen Assist (XGEVA)</strong></td>
+                                    <td>Co-pay assistance for denosumab</td>
+                                    <td>xgeva.com/get-copay-help</td>
+                                    <td>If prescribed XGEVA for bone mets</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HealthWell Foundation</strong></td>
+                                    <td>Co-pay, premium, deductible assistance</td>
+                                    <td><a href="tel:18006758416" class="phone-link">1-800-675-8416</a></td>
+                                    <td>Insurance required, income ≤500% FPL</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PAN Foundation</strong></td>
+                                    <td>Co-pay assistance for medications</td>
+                                    <td><a href="tel:8663167263" class="phone-link">866-316-7263</a></td>
+                                    <td>Insurance required, financial need</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">📅 SCHEDULED APPLICATIONS</h3>
+
+                        <div class="alert alert-warning">
+                            <strong>Living Beyond Breast Cancer (LBBC) Fund:</strong><br>
+                            • <strong>Next Application Period:</strong> March 16-20, 2026<br>
+                            • <strong>Amount:</strong> $500-$1,250 based on circumstances<br>
+                            • <strong>Coverage:</strong> Rent, mortgage, utilities, car payment, car insurance<br>
+                            • <strong>Mark Calendar:</strong> Applications open every other month<br>
+                            • <strong>Contact:</strong> grantinfo@lbbc.org or <a href="tel:8558076386" class="phone-link">(855) 807-6386</a>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">👥 YOUNG ADULT PROGRAMS (Age 32)</h3>
+
+                        <div class="medication-list">
+                            <div class="medication-card" style="border-left: 4px solid var(--info);">
+                                <div class="medication-name">Young Survival Coalition ⭐⭐⭐</div>
+                                <div class="medication-notes">
+                                    <strong>Target:</strong> Women 40 and under with breast cancer<br>
+                                    <strong>Services:</strong> Financial assistance resources, support networks<br>
+                                    <strong>Website:</strong> youngsurvival.org
+                                </div>
+                            </div>
+                            <div class="medication-card" style="border-left: 4px solid var(--info);">
+                                <div class="medication-name">Patient Advocate Foundation Programs</div>
+                                <div class="medication-notes">
+                                    <strong>Multiple programs:</strong> Co-pay relief, caregiver support, financial aid<br>
+                                    <strong>Phone:</strong> <a href="tel:8558247941" class="phone-link">855-824-7941</a><br>
+                                    <strong>Website:</strong> patientadvocate.org
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">💰 ESTIMATED TOTAL AVAILABLE ASSISTANCE</h3>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Potential Value</th>
+                                    <th>Timeframe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(40, 167, 69, 0.1);">
+                                    <td><strong>SSDI (Monthly)</strong></td>
+                                    <td>$800-$3,000+ monthly</td>
+                                    <td>For life after approval</td>
+                                </tr>
+                                <tr>
+                                    <td>Immediate Grants</td>
+                                    <td>$10,000-$25,000</td>
+                                    <td>First 6 months</td>
+                                </tr>
+                                <tr>
+                                    <td>Drug assistance (Verzenio)</td>
+                                    <td>Up to $15,000 annual value</td>
+                                    <td>12-month programs</td>
+                                </tr>
+                                <tr>
+                                    <td>Housing/Support (Hope Lodge)</td>
+                                    <td>$3,000+ value</td>
+                                    <td>During treatment</td>
+                                </tr>
+                                <tr style="background: rgba(23, 162, 184, 0.1);">
+                                    <td><strong>TOTAL FIRST YEAR</strong></td>
+                                    <td><strong>$50,000-$100,000+</strong></td>
+                                    <td><strong>Combined value</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">📞 PRIORITY CONTACT LIST</h3>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Program</th>
+                                    <th>Phone</th>
+                                    <th>Priority</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>SSDI</strong></td>
+                                    <td><a href="tel:18007721213" class="phone-link">1-800-772-1213</a></td>
+                                    <td><strong>CALL TODAY</strong></td>
+                                    <td>$800-$3,000+ monthly</td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>CancerCare</strong></td>
+                                    <td><a href="tel:8665526729" class="phone-link">866-552-6729</a></td>
+                                    <td><strong>CALL TODAY</strong></td>
+                                    <td>Up to $10,000</td>
+                                </tr>
+                                <tr style="background: rgba(220, 53, 69, 0.1);">
+                                    <td><strong>Lilly Cares</strong></td>
+                                    <td><a href="tel:18005456962" class="phone-link">1-800-545-6962</a></td>
+                                    <td><strong>CALL TODAY</strong></td>
+                                    <td>$15,000+ value</td>
+                                </tr>
+                                <tr>
+                                    <td>Florida Cancer Specialists</td>
+                                    <td><a href="tel:9416777183" class="phone-link">(941) 677-7183</a></td>
+                                    <td>This week</td>
+                                    <td>Variable</td>
+                                </tr>
+                                <tr>
+                                    <td>Ribbon Riders</td>
+                                    <td><a href="tel:4077967465" class="phone-link">(407) 796-7465</a></td>
+                                    <td>This week</td>
+                                    <td>Variable</td>
+                                </tr>
+                                <tr>
+                                    <td>Patient Advocate Foundation</td>
+                                    <td><a href="tel:8558247941" class="phone-link">855-824-7941</a></td>
+                                    <td>This week</td>
+                                    <td>Multiple programs</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="alert alert-info">
+                            <strong>Critical Application Tips:</strong><br>
+                            • <strong>Apply to multiple programs simultaneously</strong> - they don't conflict<br>
+                            • <strong>Start with highest dollar value programs first</strong> (SSDI, CancerCare)<br>
+                            • <strong>Keep application records</strong> - track dates, confirmation numbers<br>
+                            • <strong>Get MSK social worker assistance</strong> with applications and documentation<br>
+                            • <strong>Emergency assistance:</strong> Dial 211 for local emergency resources
+                        </div>
+                    </div>
+                </section>
+
+                <!-- What to Ask Dr. Robson -->
+                <section class="section auto-expand" id="what-to-ask">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h2 class="section-title">
+                            <span class="priority-indicator priority-critical">🔴</span>
+                            What to Ask Dr. Robson
+                        </h2>
+                        <span class="toggle-icon">▼</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="alert alert-info">
+                            <strong>Conversation Guide:</strong> Structured questions covering molecular testing, XGEVA, clinical trials, repurposed drugs, and treatment optimization. Print this section for the appointment.
+                        </div>
+
+                        <h3 style="margin: 1.5rem 0 1rem 0; color: var(--primary);">🧬 MOLECULAR TESTING (HIGHEST PRIORITY)</h3>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">1. HER2-Low Testing</div>
+                            <div class="contact-info">
+                                <strong>Question:</strong> "What was Sophia's HER2 IHC score? Was it 0, 1+, or 2+?"<br><br>
+                                <strong>Why Important:</strong> If HER2-low (1+ or 2+), opens Trastuzumab deruxtecan (Enhertu)<br>
+                                • FDA-approved for HER2-low metastatic breast cancer<br>
+                                • Excellent CNS activity in brain mets<br>
+                                • TUXEDO-4 trial specifically for HER2-low with brain mets<br><br>
+                                <strong>Follow-up:</strong> "Up to 60% of 'HER2-negative' tumors are actually HER2-low. Should we confirm this?"
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">2. ESR1 Mutation Testing</div>
+                            <div class="contact-info">
+                                <strong>Question:</strong> "Can we run a Guardant360 liquid biopsy to check for ESR1 mutations?"<br><br>
+                                <strong>Why Important:</strong> ESR1 mutations occur in up to 50% of ER+ patients during metastatic therapy<br>
+                                • If positive → Imlunestrant (Inluriyo) FDA-approved Sept 2025<br>
+                                • Brain-penetrant oral SERD (exemestane does NOT cross BBB)<br>
+                                • Made by Lilly (same as Verzenio) - may have financial assistance<br><br>
+                                <strong>Alternative:</strong> Elacestrant (Orserdu) also FDA-approved for ESR1 mutations
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">3. PIK3CA/AKT1/PTEN Testing</div>
+                            <div class="contact-info">
+                                <strong>Question:</strong> "Has Sophia been tested for PIK3CA, AKT1, or PTEN mutations?"<br><br>
+                                <strong>Why Important:</strong> PIK3CA mutations found in ~40% of ER+ breast cancers<br>
+                                • If positive → Capivasertib (Truqap) + fulvestrant FDA-approved<br>
+                                • If positive → Alpelisib (Piqray) + fulvestrant also approved<br>
+                                • Can be included in Guardant360 panel or FoundationOne<br><br>
+                                <strong>Context:</strong> These are FDA-approved targeted therapies specifically for her situation
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">🦴 BONE PROTECTION (URGENT)</h3>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--critical);">
+                            <div class="trial-title">Missing XGEVA/Denosumab?</div>
+                            <div class="contact-info">
+                                <strong>Question:</strong> "Is Sophia receiving denosumab (XGEVA) or zoledronic acid for her bone metastases?"<br><br>
+                                <strong>Context:</strong> She has diffuse bone mets with very high SUV values (up to 14.1)<br>
+                                • NCCN Guidelines recommend bone-protective therapy<br>
+                                • XGEVA 120mg SC every 4 weeks is standard<br>
+                                • Prevents fractures, spinal cord compression<br>
+                                • Note: Zoladex is for ovarian suppression, not bone protection<br><br>
+                                <strong>Financial:</strong> Amgen Assist program available for XGEVA co-pay assistance
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">🔬 CLINICAL TRIALS</h3>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--warning);">
+                            <div class="trial-title">1. HERTHENA-Breast04 Trial</div>
+                            <div class="contact-info">
+                                <strong>Question:</strong> "Is MSK enrolling in HERTHENA-Breast04 for patritumab deruxtecan?"<br><br>
+                                <strong>Why Perfect Match:</strong><br>
+                                • Phase 3 trial for HR+/HER2- after CDK4/6 inhibitor - EXACT profile<br>
+                                • First patient dosed Aug 2025, actively recruiting<br>
+                                • Same drug showed 65% 3-month survival in LMD patients<br><br>
+                                <strong>Backup:</strong> Even if not a trial site, could we access through compassionate use?
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--warning);">
+                            <div class="trial-title">2. Dr. Yu's Radiate-LM Trial</div>
+                            <div class="contact-info">
+                                <strong>Context:</strong> To discuss with Dr. Yu at next radiation appointment<br><br>
+                                <strong>Question for you:</strong> "Given Sophia's borderline LMD status (CTC=2, leptomeningeal enhancement on MRI), would you recommend discussing the Radiate-LM proton CSI trial with Dr. Yu?"<br><br>
+                                <strong>Trial Details:</strong> MSK 25-150, Phase 3, proton vs standard radiation for LMD<br>
+                                • Dr. Yu is the Principal Investigator<br>
+                                • Question: Does her MRI enhancement qualify as "newly diagnosed LM"?
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--warning);">
+                            <div class="trial-title">3. MSK LMD Trials</div>
+                            <div class="contact-info">
+                                <strong>Question:</strong> "Are there other MSK trials for leptomeningeal disease that might apply?"<br><br>
+                                <strong>Specific mention:</strong> Intrathecal deferoxamine trial (Dr. Adrienne Boire)<br>
+                                • Published 10-month median survival results<br>
+                                • Jessica Wilcox contact: <a href="tel:2126397573" class="phone-link">212-639-7573</a><br>
+                                • Any solid tumor with LMD accepted<br><br>
+                                <strong>General:</strong> "Should we get on the MSK research coordinator's radar for future trials?"
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">💊 REPURPOSED DRUGS & INTEGRATIVE APPROACHES</h3>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--info);">
+                            <div class="trial-title">1. Turkey Tail Dosing</div>
+                            <div class="contact-info">
+                                <strong>Question:</strong> "The current Turkey Tail dose is 500mg. In Japan, PSK is approved as a cancer drug at 3,000-6,000mg daily. Should we discuss increasing the dose with Dr. Raghunathan?"<br><br>
+                                <strong>Context:</strong> Current dose may be too low for clinical benefit<br>
+                                <strong>Provider:</strong> Dr. Nirupa Raghunathan prescribed it through MSK Integrative Medicine
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--info);">
+                            <div class="trial-title">2. Repurposed Drug Discussion</div>
+                            <div class="contact-info">
+                                <strong>Question:</strong> "We've been researching repurposed drugs with blood-brain barrier penetration. Given the liver enzyme elevation, what's your comfort level with discussing options like melatonin or other brain-penetrating compounds?"<br><br>
+                                <strong>Specific mention:</strong><br>
+                                • High-dose melatonin (20mg) - RCT data with brain radiation<br>
+                                • Hydroxychloroquine (HCQ) - autophagy inhibitor that overcomes CDK4/6i resistance<br>
+                                • Doxycycline - good BBB penetration, low liver risk<br>
+                                • Mebendazole - after liver enzymes stabilize<br><br>
+                                <strong>HCQ rationale:</strong> Phase 1b/2 trial showed HCQ + CDK4/6i effective after CDK4/6i failure. Could prevent/overcome Verzenio resistance.<br><br>
+                                <strong>Context:</strong> Understanding MSK's approach to integrative oncology
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">📊 CURRENT TREATMENT OPTIMIZATION</h3>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--success);">
+                            <div class="trial-title">1. Liver Enzyme Monitoring</div>
+                            <div class="contact-info">
+                                <strong>Current Trend:</strong> AST 52→70, Alk Phos 162→249<br><br>
+                                <strong>Questions:</strong><br>
+                                • "What's driving the liver enzyme elevation - disease or drugs?"<br>
+                                • "Should we get an ALP fractionation to distinguish bone vs liver?"<br>
+                                • "At what point would we consider dose reduction or hepatology consult?"<br>
+                                • "Does this affect clinical trial eligibility?"
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--success);">
+                            <div class="trial-title">2. Vitamin D Toxicity Management</div>
+                            <div class="contact-info">
+                                <strong>Current Status:</strong> >150 ng/mL (TOXIC), supplementation stopped<br><br>
+                                <strong>Questions:</strong><br>
+                                • "When should we recheck vitamin D levels?"<br>
+                                • "The calcium is creeping up (9.1→10.1) - is this related?"<br>
+                                • "Any symptoms to watch for?"<br>
+                                • "Should we check 1,25-dihydroxy vitamin D as well?"
+                            </div>
+                        </div>
+
+                        <div class="trial-card" style="border-left: 4px solid var(--success);">
+                            <div class="trial-title">3. LMD Status Clarification</div>
+                            <div class="contact-info">
+                                <strong>Current Status:</strong> Borderline (CTC=2, cytology negative, MRI enhancement)<br><br>
+                                <strong>Questions:</strong><br>
+                                • "Should we repeat CSF analysis to definitively rule in/out LMD?"<br>
+                                • "What clinical signs would trigger repeat lumbar puncture?"<br>
+                                • "How does borderline LMD affect treatment decisions?"<br>
+                                • "If confirmed, what are the treatment options?"
+                            </div>
+                        </div>
+
+                        <h3 style="margin: 2rem 0 1rem 0; color: var(--primary);">📋 CONVERSATION SCRIPT SUMMARY</h3>
+
+                        <div class="alert alert-warning">
+                            <strong>Opening:</strong> "We've been doing comprehensive research and found several FDA-approved options and clinical trials that might apply to Sophia's situation. We have some specific questions about molecular testing and treatment optimization."<br><br>
+
+                            <strong>Priority Order:</strong><br>
+                            1. <strong>Molecular testing</strong> (HER2-low, ESR1, PIK3CA) - opens FDA-approved drugs<br>
+                            2. <strong>XGEVA for bone mets</strong> - standard of

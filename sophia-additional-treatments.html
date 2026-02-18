@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophia Sanchez — Additional Treatment Options</title>
+<style>
+  :root {
+    --bg: #f8fafb;
+    --card: #ffffff;
+    --primary: #1a6b5a;
+    --primary-light: #e8f5f1;
+    --accent: #2d9b83;
+    --danger: #c0392b;
+    --danger-bg: #fdf0ef;
+    --warning: #e67e22;
+    --warning-bg: #fef9f0;
+    --safe: #27ae60;
+    --safe-bg: #eefbf3;
+    --text: #1a1a2e;
+    --text-secondary: #5a5a7a;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  
+  header {
+    background: linear-gradient(135deg, #1a6b5a 0%, #2d9b83 100%);
+    color: white;
+    padding: 32px 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  header .subtitle { opacity: 0.9; font-size: 14px; }
+  header .updated { opacity: 0.7; font-size: 12px; margin-top: 8px; }
+  
+  .patient-bar {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    font-size: 13px;
+  }
+  .patient-bar .item { display: flex; gap: 6px; }
+  .patient-bar .label { color: var(--text-secondary); }
+  .patient-bar .val { font-weight: 600; }
+  
+  .alert-box {
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    border-left: 4px solid;
+  }
+  .alert-box.danger { background: var(--danger-bg); border-color: var(--danger); }
+  .alert-box.warning { background: var(--warning-bg); border-color: var(--warning); }
+  .alert-box.safe { background: var(--safe-bg); border-color: var(--safe); }
+  .alert-box h3 { font-size: 14px; margin-bottom: 6px; }
+  .alert-box p, .alert-box li { font-size: 13px; }
+  .alert-box ul { margin: 6px 0 0 18px; }
+  
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 16px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+  .section-header:hover { background: #f1f5f9; }
+  .section-header h2 { font-size: 17px; }
+  .section-header .arrow { font-size: 12px; color: var(--text-secondary); transition: transform 0.2s; }
+  .section.open .arrow { transform: rotate(90deg); }
+  .section-body { padding: 0 20px 20px; display: none; }
+  .section.open .section-body { display: block; }
+  
+  .drug-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .drug-card.recommended { border-color: var(--safe); background: #fafff8; }
+  .drug-card.caution { border-color: var(--warning); background: #fffcf5; }
+  .drug-card.avoid { border-color: var(--danger); background: #fff8f7; }
+  
+  .drug-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+  .drug-class { font-size: 12px; color: var(--text-secondary); margin-bottom: 10px; }
+  
+  .drug-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .drug-stat {
+    font-size: 12px;
+    padding: 6px 10px;
+    background: #f4f6f8;
+    border-radius: 6px;
+  }
+  .drug-stat .stat-label { color: var(--text-secondary); display: block; font-size: 11px; }
+  .drug-stat .stat-val { font-weight: 600; }
+  
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge.green { background: #d4edda; color: #155724; }
+  .badge.yellow { background: #fff3cd; color: #856404; }
+  .badge.red { background: #f8d7da; color: #721c24; }
+  .badge.blue { background: #d1ecf1; color: #0c5460; }
+  
+  .evidence-bar {
+    display: flex; gap: 2px; margin: 4px 0;
+  }
+  .evidence-bar .star { width: 14px; height: 14px; border-radius: 2px; }
+  .evidence-bar .star.filled { background: var(--accent); }
+  .evidence-bar .star.empty { background: #e0e0e0; }
+  
+  .drug-notes { font-size: 13px; margin-top: 8px; color: var(--text); }
+  .drug-notes strong { color: var(--text); }
+  .drug-notes .sophia-specific { 
+    background: var(--primary-light); 
+    padding: 8px 12px; 
+    border-radius: 6px; 
+    margin-top: 8px;
+    font-size: 12px;
+  }
+  
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th { background: #f1f5f9; text-align: left; padding: 8px 10px; font-weight: 600; font-size: 12px; }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    margin-bottom: 8px;
+    border-bottom: 2px solid var(--primary);
+  }
+  .phase-header h3 { font-size: 15px; color: var(--primary); }
+  .phase-tag {
+    font-size: 11px;
+    background: var(--primary);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 20px;
+  }
+
+  .interaction-matrix td:first-child { font-weight: 600; }
+  
+  .cost-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .cost-total { font-weight: 700; font-size: 15px; padding-top: 8px; border-top: 2px solid var(--primary); margin-top: 4px; }
+  
+  .access-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+  .access-card h4 { font-size: 14px; margin-bottom: 4px; }
+  .access-card p { font-size: 12px; color: var(--text-secondary); }
+  .access-card a { color: var(--primary); font-weight: 600; }
+  
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 600px) {
+    .drug-grid { grid-template-columns: 1fr; }
+    .patient-bar { flex-direction: column; gap: 6px; }
+    .container { padding: 12px; }
+  }
+  
+  @media print {
+    body { font-size: 12px; }
+    .section-body { display: block !important; }
+    .section-header .arrow { display: none; }
+    .container { max-width: 100%; padding: 0; }
+    header { break-after: avoid; }
+    .drug-card { break-inside: avoid; }
+    .section { border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Additional Treatment Options for Sophia</h1>
+  <div class="subtitle">Repurposed drugs & supplements evaluated against her current labs, medications, and disease status</div>
+  <div class="updated">Last Updated: February 15, 2026 &middot; Compiled by Albus for Robert Paslaqua</div>
+</header>
+
+<div class="patient-bar">
+  <div class="item"><span class="label">Patient:</span><span class="val">Sophia Sanchez, 32</span></div>
+  <div class="item"><span class="label">Dx:</span><span class="val">ER+/PR+/HER2- MBC, brain mets, borderline LMD</span></div>
+  <div class="item"><span class="label">Current Tx:</span><span class="val">Verzenio 100mg BID + Aromasin 25mg QD</span></div>
+  <div class="item"><span class="label">Key Labs (Feb 10):</span><span class="val">AST 70↑ &middot; ALP 249↑ &middot; VitD >150 TOXIC &middot; Ca 10.1↑</span></div>
+</div>
+
+<!-- CRITICAL ALERTS -->
+<div class="alert-box danger">
+  <h3>🔴 Liver Under Stress — Limits What She Can Start Now</h3>
+  <p>AST rising (52→70), Alk Phos surging (162→249). Any hepatotoxic drug is off the table until these normalize. This rules out MBZ, disulfiram, statins, and diclofenac for now.</p>
+</div>
+
+<div class="alert-box danger">
+  <h3>🔴 Vitamin D >150 ng/mL — TOXIC</h3>
+  <p>Supplementation stopped. Takes 4-8 weeks to normalize. Calcium creeping (9.1→10.1) likely related. Recheck both in 3-4 weeks. Watch for confusion, nausea, excessive thirst.</p>
+</div>
+
+<div class="alert-box warning">
+  <h3>🟡 CYP3A4 Is the Gatekeeper</h3>
+  <p>Verzenio (abemaciclib) is metabolized by CYP3A4. Any strong CYP3A4 inhibitor will dangerously increase Verzenio blood levels. This eliminates itraconazole, ketoconazole, cimetidine, and berberine. Moderate inhibitors require caution.</p>
+</div>
+
+<div class="alert-box warning">
+  <h3>🟡 Oxycodone Blocks LDN</h3>
+  <p>Low-dose naltrexone (LDN) would block her opioid pain medication. Cannot use while on oxycodone.</p>
+</div>
+
+<div class="alert-box safe">
+  <h3>🟢 XGEVA (Denosumab) — May Be Missing</h3>
+  <p>NCCN standard of care for bone mets. Sophia has diffuse bone mets (SUV up to 14.1) but may not be receiving bone-protective therapy. <strong>Ask Dr. Robson immediately.</strong> Amgen Assist program available for cost help.</p>
+</div>
+
+<!-- PHASE 1: START NOW -->
+<div class="section open" id="phase1">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>🟢 Phase 1 — Start Now</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+    <div class="phase-header">
+      <h3>Safe to begin immediately</h3>
+      <span class="phase-tag">No liver risk &middot; No CYP3A4 conflict</span>
+    </div>
+
+    <div class="drug-card recommended">
+      <div class="drug-name">Melatonin (High-Dose) <span class="badge green">START NOW</span></div>
+      <div class="drug-class">Hormone / Antioxidant / Radiosensitizer</div>
+      <div class="drug-grid">
+        <div class="drug-stat"><span class="stat-label">BBB Penetration</span><span class="stat-val">Excellent ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">CYP3A4 Interaction</span><span class="stat-val">None ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Liver Safety</span><span class="stat-val">Hepatoprotective ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Cost</span><span class="stat-val">$25-40/month OTC</span></div>
+      </div>
+      <div class="evidence-bar">
+        <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star empty"></div>
+      </div>
+      <div class="drug-notes">
+        <strong>Why:</strong> Crosses BBB freely. Induces apoptosis in ER+ breast cancer cells. Enhances radiation effectiveness — critical since Sophia is receiving SRS.<br><br>
+        <strong>Key Evidence:</strong> RTOG 0119 randomized trial — high-dose melatonin + radiation for brain mets: <strong>7.9 months median survival vs 4.1 months</strong> (control). Multiple RCTs confirm survival benefit in metastatic breast cancer.<br><br>
+        <strong>Dose:</strong> Start 3mg, escalate to <strong>20mg nightly</strong> over 1 week. Take 1-2 hours before bed. Extended-release preferred.<br><br>
+        <strong>Where to buy:</strong> <strong>Pure Encapsulations Melatonin 20mg</strong> (medical-grade, hypoallergenic) — Amazon. ~$30 for 60 capsules.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> May actually help her sleep (she's on clonazepam for anxiety/sleep). Hepatoprotective — could help her elevated AST. Also modulates aromatase activity, complementing her Aromasin. Zero downside.
+        </div>
+      </div>
+    </div>
+
+    <div class="drug-card recommended">
+      <div class="drug-name">Low-Dose Aspirin <span class="badge green">START NOW</span></div>
+      <div class="drug-class">COX Inhibitor / Anti-inflammatory / Anti-metastatic</div>
+      <div class="drug-grid">
+        <div class="drug-stat"><span class="stat-label">BBB Penetration</span><span class="stat-val">Moderate</span></div>
+        <div class="drug-stat"><span class="stat-label">CYP3A4 Interaction</span><span class="stat-val">None ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Liver Safety</span><span class="stat-val">Safe at 81mg ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Cost</span><span class="stat-val">$5-10/month OTC</span></div>
+      </div>
+      <div class="evidence-bar">
+        <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star empty"></div><div class="star empty"></div>
+      </div>
+      <div class="drug-notes">
+        <strong>Why:</strong> COX-2 inhibition reduces inflammation driving metastasis. Anti-platelet effect disrupts tumor cell circulation. NF-κB pathway modulation.<br><br>
+        <strong>Key Evidence:</strong> Multiple meta-analyses show improved survival in ER+ breast cancer with regular aspirin use. Anti-metastatic properties confirmed in preclinical models.<br><br>
+        <strong>Dose:</strong> <strong>81mg daily</strong> (baby aspirin). Take with food.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> She's on a PPI (proton pump inhibitor) which protects against aspirin GI bleeding. Safe combination. Monitor for any unusual bruising since she's not on anticoagulants.
+        </div>
+      </div>
+    </div>
+
+    <div class="drug-card recommended">
+      <div class="drug-name">Turkey Tail Mushroom — DOSE INCREASE <span class="badge blue">ADJUST</span></div>
+      <div class="drug-class">Immunomodulator (PSK/PSP)</div>
+      <div class="drug-grid">
+        <div class="drug-stat"><span class="stat-label">Current Dose</span><span class="stat-val">500mg/day</span></div>
+        <div class="drug-stat"><span class="stat-label">Therapeutic Dose</span><span class="stat-val">3,000-6,000mg/day</span></div>
+        <div class="drug-stat"><span class="stat-label">CYP3A4 Interaction</span><span class="stat-val">None ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Cost</span><span class="stat-val">$40-80/month</span></div>
+      </div>
+      <div class="evidence-bar">
+        <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star empty"></div><div class="star empty"></div>
+      </div>
+      <div class="drug-notes">
+        <strong>Why:</strong> PSK (polysaccharide-K) is an approved cancer drug in Japan. Enhances NK cell activity, modulates immune response. Sophia's current dose (500mg, prescribed by Dr. Raghunathan at MSK) is well below therapeutic range.<br><br>
+        <strong>Key Evidence:</strong> Japanese RCTs showed improved survival in breast and colorectal cancer at 3,000mg+ daily. Approved as adjuvant cancer therapy in Japan since 1977.<br><br>
+        <strong>Action:</strong> Discuss dose increase with Dr. Raghunathan (MSK Integrative Medicine). Target <strong>3,000mg daily</strong> minimum.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> Already prescribed by her MSK integrative oncologist — so the care team is on board with the concept. Just needs the dose conversation. No liver concerns, no drug interactions.
+        </div>
+      </div>
+    </div>
+
+    <div class="drug-card recommended">
+      <div class="drug-name">Propranolol <span class="badge green">DISCUSS WITH DR</span></div>
+      <div class="drug-class">Beta-blocker / Anti-metastatic / Anxiolytic</div>
+      <div class="drug-grid">
+        <div class="drug-stat"><span class="stat-label">BBB Penetration</span><span class="stat-val">Excellent ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">CYP3A4 Interaction</span><span class="stat-val">Minimal ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Liver Safety</span><span class="stat-val">Good ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Cost</span><span class="stat-val">$10-20/month Rx</span></div>
+      </div>
+      <div class="evidence-bar">
+        <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star empty"></div><div class="star empty"></div>
+      </div>
+      <div class="drug-notes">
+        <strong>Why:</strong> Blocks the stress-cancer growth axis. β-adrenergic signaling promotes tumor angiogenesis, migration, and metastasis. Propranolol disrupts all three.<br><br>
+        <strong>Key Evidence:</strong> Stage II breast cancer study: <strong>49% reduced risk of recurrence/distant metastasis</strong> (HR 0.51). July 2025 systematic review confirms anti-metastatic properties across multiple cancer types.<br><br>
+        <strong>Dose:</strong> 20-40mg 2x daily (standard anti-anxiety dose).<br><br>
+        <strong>Requires:</strong> Prescription. Monitor blood pressure and heart rate.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> She's on clonazepam for anxiety. Propranolol could potentially replace or reduce clonazepam need (it's commonly prescribed for anxiety). Dual benefit: anti-cancer + anti-anxiety. Crosses BBB well for her brain mets. Needs BP monitoring — ask if she runs low.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2: AFTER PARTIAL LIVER RECOVERY -->
+<div class="section open" id="phase2">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>🟡 Phase 2 — After Partial Liver Recovery (2-4 Weeks)</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+    <div class="phase-header">
+      <h3>Start when AST drops below 50 and Vitamin D below 100</h3>
+      <span class="phase-tag">Low liver risk &middot; Recheck labs first</span>
+    </div>
+
+    <div class="drug-card caution">
+      <div class="drug-name">Doxycycline <span class="badge yellow">WAIT FOR LABS</span></div>
+      <div class="drug-class">Tetracycline Antibiotic / Anti-angiogenic / CSC Targeting</div>
+      <div class="drug-grid">
+        <div class="drug-stat"><span class="stat-label">BBB Penetration</span><span class="stat-val">Good ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">CYP3A4 Interaction</span><span class="stat-val">Minimal ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Liver Safety</span><span class="stat-val">Low risk (rare hepatotoxicity)</span></div>
+        <div class="drug-stat"><span class="stat-label">Cost</span><span class="stat-val">$30-50/month Rx</span></div>
+      </div>
+      <div class="evidence-bar">
+        <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star empty"></div><div class="star empty"></div>
+      </div>
+      <div class="drug-notes">
+        <strong>Why:</strong> Inhibits mitochondrial protein synthesis in cancer cells. Anti-angiogenic. Blocks matrix metalloproteinases (MMPs) that cancer uses to invade tissue. Targets cancer stem cells specifically.<br><br>
+        <strong>Key Evidence:</strong> Preclinical models show anti-metastatic effects. Part of the COC Protocol (Care Oncology Clinic). Good CNS penetration documented.<br><br>
+        <strong>Dose:</strong> 100mg daily. Take on empty stomach, avoid dairy/calcium within 2 hours. Separate from Aromasin timing.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> Low liver risk makes this a good early addition. Separate timing from exemestane (may reduce absorption). Photosensitivity warning — use sunscreen. Can cause esophageal irritation — take upright with full glass of water.
+        </div>
+      </div>
+    </div>
+
+    <div class="drug-card caution">
+      <div class="drug-name">Hydroxychloroquine (HCQ) <span class="badge yellow">WAIT FOR LABS</span></div>
+      <div class="drug-class">Autophagy Inhibitor / CDK4/6i Resistance Breaker</div>
+      <div class="drug-grid">
+        <div class="drug-stat"><span class="stat-label">BBB Penetration</span><span class="stat-val">Excellent ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">CYP3A4 Interaction</span><span class="stat-val">Minimal ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Liver Safety</span><span class="stat-val">Generally safe (rare hepatotoxicity)</span></div>
+        <div class="drug-stat"><span class="stat-label">Cost</span><span class="stat-val">$20-40/month Rx</span></div>
+      </div>
+      <div class="evidence-bar">
+        <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star empty"></div><div class="star empty"></div>
+      </div>
+      <div class="drug-notes">
+        <strong>Why:</strong> Cancer cells use autophagy to survive CDK4/6 inhibitor treatment (like Verzenio). HCQ blocks this escape route, potentially overcoming or preventing Verzenio resistance.<br><br>
+        <strong>Key Evidence:</strong>
+        <ul style="margin:6px 0 0 18px;">
+          <li><strong>Phase 1b/2 (NCT05953350, Dec 2024):</strong> HCQ 600mg BID + high-dose palbociclib (CDK4/6i) = tolerable toxicity + promising efficacy in HR+/HER2- breast cancer <em>after CDK4/6i failure</em></li>
+          <li><strong>Phase I (Nature, Jan 2025):</strong> HCQ + palbociclib + letrozole safe and tolerable in ER+/HER2-</li>
+          <li><strong>Univ of Arizona 2024:</strong> Targeting autophagy significantly reduced breast cancer brain metastases in mouse models</li>
+        </ul><br>
+        <strong>Dose:</strong> 200-400mg daily (start low). Cancer trials use up to 600mg BID but that's aggressive.<br><br>
+        <strong>Requires:</strong> Prescription. Baseline ophthalmology exam (retinal toxicity risk with long-term use). Cardiac monitoring recommended.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> Uniquely relevant because she's ON a CDK4/6 inhibitor. The whole point of HCQ in this context is to prevent Verzenio resistance — which is her biggest treatment risk. Crosses BBB for brain mets. Decades of safety data from lupus/RA. Could be the most strategically important drug on this list.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 3: AFTER FULL LIVER NORMALIZATION -->
+<div class="section open" id="phase3">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>🔴 Phase 3 — After Full Liver Normalization (4-6 Weeks)</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+    <div class="phase-header">
+      <h3>Start when AST &lt;37 (normal), ALP trending down, Vitamin D &lt;80</h3>
+      <span class="phase-tag">Moderate liver risk &middot; Weekly LFT monitoring required</span>
+    </div>
+
+    <div class="drug-card caution">
+      <div class="drug-name">Mebendazole (Polymorph C) <span class="badge yellow">#1 PRIORITY WHEN LIVER CLEARS</span></div>
+      <div class="drug-class">Benzimidazole / Tubulin Inhibitor / Radiosensitizer</div>
+      <div class="drug-grid">
+        <div class="drug-stat"><span class="stat-label">BBB Penetration</span><span class="stat-val">Excellent (ratio 0.82) ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">CYP3A4 Interaction</span><span class="stat-val">Minimal ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Liver Safety</span><span class="stat-val">⚠️ Monitor closely — can elevate AST</span></div>
+        <div class="drug-stat"><span class="stat-label">Cost</span><span class="stat-val">$150-300/month (compounded)</span></div>
+      </div>
+      <div class="evidence-bar">
+        <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star empty"></div>
+      </div>
+      <div class="drug-notes">
+        <strong>Why:</strong> The strongest repurposed drug candidate for Sophia's specific situation. Polymorph C has the highest BBB penetration of any benzimidazole (brain:plasma ratio 0.82). Directly relevant to her brain mets and borderline LMD.<br><br>
+        <strong>Key Evidence:</strong>
+        <ul style="margin:6px 0 0 18px;">
+          <li><strong>Skibinski/Chernikova 2024 (J Neuro-Oncol):</strong> MBZ reduced leptomeningeal disease tumor growth and extended survival in breast cancer LMD mouse model. CSF concentrations reached therapeutic levels.</li>
+          <li><strong>Makis Case 49:</strong> 34yo Stage 4 breast → brain/lung/liver/spine mets. IVM+MBZ protocol. All brain mets shrinking.</li>
+          <li><strong>Makis Case 74 (2026):</strong> Stage 4 breast bone mets — most healed/resolved on IVM+MBZ+ADC</li>
+          <li><strong>Phase 2 GI trial WARNING:</strong> 40% hyperprogression observed — MBZ is not risk-free</li>
+        </ul><br>
+        <strong>Dose:</strong> Start 100mg daily with fatty food, escalate to 200-400mg daily. Polymorph C formulation is critical — must be compounded specifically.<br><br>
+        <strong>Access:</strong> <strong>Heal Navigator</strong> (healnavigator.com) — Dr. Paul Zhang, MSK cancer research fellowship background, telemedicine available. Can prescribe and monitor MBZ for cancer patients.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> The #1 drug on this list for her brain mets and borderline LMD specifically. The 2024 Skibinski paper was done in a breast cancer LMD model — not generic cancer, HER cancer. BUT: her AST is 70 and climbing. MBZ can cause further liver elevation. MUST wait until AST normalizes. Take with sesame oil or high-fat meal for absorption. Weekly LFTs for first month. The 40% hyperprogression in the Phase 2 GI trial is a real risk — this needs careful monitoring.
+        </div>
+      </div>
+    </div>
+
+    <div class="drug-card caution">
+      <div class="drug-name">Disulfiram + Copper <span class="badge yellow">AFTER LIVER CLEARS</span></div>
+      <div class="drug-class">ALDH Inhibitor / Cancer Stem Cell Targeting</div>
+      <div class="drug-grid">
+        <div class="drug-stat"><span class="stat-label">BBB Penetration</span><span class="stat-val">Excellent ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">CYP3A4 Interaction</span><span class="stat-val">Minimal (CYP2E1 mainly) ✓</span></div>
+        <div class="drug-stat"><span class="stat-label">Liver Safety</span><span class="stat-val">⚠️ Hepatitis in 10-15%</span></div>
+        <div class="drug-stat"><span class="stat-label">Cost</span><span class="stat-val">$40-60/month Rx</span></div>
+      </div>
+      <div class="evidence-bar">
+        <div class="star filled"></div><div class="star filled"></div><div class="star filled"></div><div class="star empty"></div><div class="star empty"></div>
+      </div>
+      <div class="drug-notes">
+        <strong>Why:</strong> Targets cancer stem cells (CD44+/CD24-) which drive metastasis and treatment resistance. Copper chelation creates cytotoxic complexes inside cancer cells. Radiosensitizer.<br><br>
+        <strong>Key Evidence:</strong> Phase IIb trial showed improved PFS in triple-negative breast cancer. Strong preclinical data on cancer stem cell elimination.<br><br>
+        <strong>Dose:</strong> Disulfiram 250mg daily + Copper gluconate 2mg daily. <strong>ZERO ALCOHOL</strong> — even trace amounts cause violent Antabuse reaction.<br><br>
+        <strong>Requires:</strong> Prescription. Absolute alcohol avoidance. Weekly LFTs.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> 10-15% hepatitis rate means this is only safe after her liver fully normalizes. Cannot combine with MBZ initially — add one at a time with LFT monitoring between each. The alcohol restriction is absolute. Even alcohol in mouthwash or hand sanitizer can cause a reaction.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DO NOT TAKE -->
+<div class="section open" id="avoid">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>🚫 Do NOT Take — Dangerous With Her Regimen</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Metformin <span class="badge red">CONTRAINDICATED</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> Abemaciclib increases metformin blood levels by 37% (AUC). This dramatically raises lactic acidosis risk — potentially fatal. Also, poor BBB penetration makes it useless for her brain mets. The CCTG MA.32 trial showed no benefit in non-diabetic breast cancer patients.</div>
+    </div>
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Itraconazole <span class="badge red">CONTRAINDICATED</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> Strong CYP3A4 inhibitor. Would cause dangerous accumulation of Verzenio (abemaciclib) in her blood, leading to severe toxicity — neutropenia, hepatotoxicity, fatal diarrhea. Never combine with CDK4/6 inhibitors.</div>
+    </div>
+
+    <div class="drug-card caution">
+      <div class="drug-name">Low-Dose Naltrexone (LDN) <span class="badge yellow">BLOCKED BY OXYCODONE</span></div>
+      <div class="drug-class">Immunomodulator / Opioid Growth Factor Receptor Agonist</div>
+      <div class="drug-notes">
+        <strong>LDN is a strong candidate — but only if oxycodone is discontinued.</strong><br><br>
+        <strong>What it does:</strong> At low doses (1-4.5mg), naltrexone briefly blocks opioid receptors, triggering a rebound increase in endorphins and enkephalins. This modulates the immune system, inhibits cancer cell proliferation via the opioid growth factor-receptor (OGFr) axis, and reduces IL-6 via TLR-7,8,9 pathways. 2024 review confirms anti-cancer properties.<br><br>
+        <strong>BBB Penetration:</strong> Excellent — naltrexone freely crosses the blood-brain barrier.<br><br>
+        <strong>Evidence:</strong> Growing body of case reports and small trials showing benefit in various cancers. Strong immunomodulatory rationale. Very safe, very cheap ($30-50/month compounded).<br><br>
+        <strong>The problem:</strong> Naltrexone is an opioid antagonist. Sophia takes oxycodone for pain. LDN would <strong>block oxycodone's pain relief</strong> and could trigger acute opioid withdrawal (sweating, cramping, agitation, severe pain). These two drugs cannot coexist.<br><br>
+        <strong>Path forward:</strong> If Sophia's pain management can transition away from opioids (e.g., to nerve blocks, gabapentin, or non-opioid protocols), LDN becomes viable and should be strongly considered. Discuss with her pain management team.
+        <div class="sophia-specific">
+          <strong>Sophia-specific:</strong> LDN is worth pursuing as a future option. If her SRS successfully treats brain mets and pain improves enough to taper off oxycodone, LDN could be added for immune support and anti-cancer effect. Crosses BBB, cheap, minimal side effects, no liver toxicity, no CYP3A4 interaction. The opioid conflict is the only barrier.
+        </div>
+      </div>
+    </div>
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Cimetidine <span class="badge red">CONTRAINDICATED</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> Inhibits multiple CYP enzymes including CYP3A4. Would significantly increase Verzenio blood levels. Use famotidine or omeprazole instead if H2/PPI needed.</div>
+    </div>
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Berberine <span class="badge red">CAUTION — CYP3A4</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> Moderate CYP3A4 inhibitor that would increase Verzenio levels. Also has poor oral bioavailability and limited BBB penetration. The AMPK activation (similar to metformin) is not worth the interaction risk.</div>
+    </div>
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Ivermectin (Systemic) <span class="badge red">NOT RECOMMENDED</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> Does NOT cross the blood-brain barrier — useless for her brain mets, which are the primary threat. Also a CYP3A4 substrate that could compete with Verzenio metabolism. Case reports of IVM+MBZ combos exist, but IVM alone adds risk without CNS benefit.</div>
+    </div>
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Fenbendazole <span class="badge red">NOT RECOMMENDED</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> Highest hepatotoxicity risk of all benzimidazoles. Veterinary formulations with inconsistent dosing. The published breast cancer paper was <strong>retracted</strong>. Mebendazole Polymorph C is superior in every way — better BBB penetration, better safety profile, more clinical data.</div>
+    </div>
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Diclofenac <span class="badge red">NOT NOW</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> Well-known hepatotoxic NSAID. Risk of fulminant hepatitis. Absolutely contraindicated with her current elevated liver enzymes (AST 70, ALP 249). Low-dose aspirin provides similar anti-inflammatory benefit with far less liver risk.</div>
+    </div>
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Keto Diet <span class="badge red">MIXED EVIDENCE</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> October 2024 Columbia University study showed ketogenic diet <strong>increased lung metastases</strong> in breast cancer mouse models. Some RCTs show tumor size reduction, but the metastasis risk is unacceptable for Sophia who already has widespread metastatic disease. Do not aggressively pursue.</div>
+    </div>
+
+    <div class="drug-card avoid">
+      <div class="drug-name">Vitamin D Supplementation <span class="badge red">STOP — TOXIC</span></div>
+      <div class="drug-notes"><strong>Why not:</strong> Current level >150 ng/mL is toxic. Causing calcium elevation (10.1, creeping toward hypercalcemia). Can cause kidney damage and cardiac arrhythmias. STOP all Vitamin D supplements. Resume only after levels drop below 50 ng/mL (4-8 weeks).</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DRUG INTERACTION MATRIX -->
+<div class="section" id="interactions">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>💊 Drug Interaction Matrix</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+    <p style="font-size:13px;margin-bottom:12px;">Every recommended drug evaluated against Sophia's current medications:</p>
+    <div style="overflow-x:auto;">
+    <table class="interaction-matrix">
+      <tr>
+        <th>Additional Drug</th>
+        <th>Verzenio (CYP3A4)</th>
+        <th>Aromasin</th>
+        <th>Oxycodone</th>
+        <th>Clonazepam</th>
+        <th>Dexamethasone</th>
+      </tr>
+      <tr>
+        <td>Melatonin 20mg</td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Additive sedation</span></td>
+        <td><span class="badge yellow">Mild additive sedation</span></td>
+        <td><span class="badge green">Safe</span></td>
+      </tr>
+      <tr>
+        <td>Aspirin 81mg</td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge yellow">GI risk ↑</span></td>
+      </tr>
+      <tr>
+        <td>Propranolol</td>
+        <td><span class="badge green">Minimal</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge yellow">Additive sedation</span></td>
+        <td><span class="badge green">Safe</span></td>
+      </tr>
+      <tr>
+        <td>Doxycycline</td>
+        <td><span class="badge green">Minimal</span></td>
+        <td><span class="badge yellow">Separate timing</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+      </tr>
+      <tr>
+        <td>Hydroxychloroquine</td>
+        <td><span class="badge green">Minimal</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+      </tr>
+      <tr>
+        <td>Mebendazole</td>
+        <td><span class="badge green">Minimal</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge green">Safe</span></td>
+      </tr>
+      <tr>
+        <td>Disulfiram</td>
+        <td><span class="badge yellow">CYP2E1 (minor)</span></td>
+        <td><span class="badge green">Safe</span></td>
+        <td><span class="badge yellow">Monitor</span></td>
+        <td><span class="badge yellow">Monitor CNS</span></td>
+        <td><span class="badge green">Safe</span></td>
+      </tr>
+    </table>
+    </div>
+    <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;">⚠️ Zeolite/ION Gut Support must be taken 2+ hours from ALL oral medications to avoid absorption interference.</p>
+  </div>
+</div>
+
+<!-- TIMING GUIDE -->
+<div class="section" id="timing">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>⏰ Daily Timing Guide</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+    <p style="font-size:13px;margin-bottom:12px;">Suggested schedule integrating new treatments with her current medications:</p>
+    <table>
+      <tr><th>Time</th><th>Medication</th><th>Notes</th></tr>
+      <tr><td><strong>Morning (8 AM)</strong></td><td>Verzenio 100mg<br>Aromasin 25mg<br>Aspirin 81mg</td><td>Take with breakfast (fat helps Verzenio absorption). Aromasin must be taken after a meal.</td></tr>
+      <tr><td><strong>Mid-morning (10 AM)</strong></td><td>Turkey Tail 1,500mg<br>Doxycycline 100mg*</td><td>*Phase 2. Doxy on empty stomach, no dairy within 2hrs. Turkey tail separate from other meds.</td></tr>
+      <tr><td><strong>Afternoon (2 PM)</strong></td><td>ION Gut Support<br>Zeolite</td><td>2+ hours away from all oral meds</td></tr>
+      <tr><td><strong>Evening (6 PM)</strong></td><td>Verzenio 100mg<br>Turkey Tail 1,500mg<br>HCQ 200mg*</td><td>*Phase 2. Take with dinner.</td></tr>
+      <tr><td><strong>Bedtime (9-10 PM)</strong></td><td>Melatonin 20mg<br>Clonazepam (PRN)<br>Propranolol 20mg*</td><td>*If prescribed. Melatonin 1-2hr before bed. Additive sedation with clonazepam — start low.</td></tr>
+      <tr><td><strong>As needed</strong></td><td>Oxycodone (pain)<br>Tylenol (mild pain)<br>Dexamethasone (radiation days)</td><td>Tylenol max 3,000mg/24hr. Dexa per Dr. Yu's taper schedule.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- COST & ACCESS -->
+<div class="section" id="cost">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>💰 Cost & Access</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+    <h3 style="font-size:14px;margin-bottom:12px;">Monthly Cost Estimate (Full Protocol)</h3>
+    <div class="cost-row"><span>Melatonin 20mg (OTC)</span><span>$25-40</span></div>
+    <div class="cost-row"><span>Aspirin 81mg (OTC)</span><span>$5-10</span></div>
+    <div class="cost-row"><span>Turkey Tail 3,000mg (OTC)</span><span>$40-80</span></div>
+    <div class="cost-row"><span>Propranolol (Rx, generic)</span><span>$10-20</span></div>
+    <div class="cost-row"><span>Doxycycline 100mg (Rx, generic)</span><span>$30-50</span></div>
+    <div class="cost-row"><span>Hydroxychloroquine (Rx, generic)</span><span>$20-40</span></div>
+    <div class="cost-row"><span>Mebendazole Polymorph C (compounded)</span><span>$150-300</span></div>
+    <div class="cost-row"><span>Disulfiram + Copper (Rx + supplement)</span><span>$40-60</span></div>
+    <div class="cost-row cost-total"><span>Total (all phases combined)</span><span>$320-600/month</span></div>
+    
+    <h3 style="font-size:14px;margin:20px 0 12px;">How to Access</h3>
+    
+    <div class="access-card">
+      <h4>Heal Navigator (MBZ Access)</h4>
+      <p><strong>Dr. Paul Zhang</strong> — MSK cancer research fellowship background. Telemedicine available. Can prescribe and monitor Mebendazole Polymorph C for cancer patients.</p>
+      <p><a href="https://healnavigator.com" target="_blank">healnavigator.com</a></p>
+    </div>
+    
+    <div class="access-card">
+      <h4>COC Protocol (Care Oncology Clinic)</h4>
+      <p>Established 4-drug protocol: Metformin + Atorvastatin + Doxycycline + Mebendazole. <strong>Note: Skip metformin for Sophia</strong> (Verzenio interaction). Can prescribe the other three.</p>
+      <p><a href="https://careoncology.com" target="_blank">careoncology.com</a></p>
+    </div>
+    
+    <div class="access-card">
+      <h4>Pure Encapsulations Melatonin 20mg</h4>
+      <p>Medical-grade, hypoallergenic, third-party tested. The brand integrative oncologists recommend.</p>
+      <p><a href="https://www.amazon.com/Pure-Encapsulations-Melatonin-Hypoallergenic-Supplement/dp/B00164QFRQ" target="_blank">Amazon — Pure Encapsulations Melatonin 20mg</a></p>
+    </div>
+    
+    <div class="access-card">
+      <h4>Amgen Assist (XGEVA/Denosumab)</h4>
+      <p>Co-pay assistance for bone-protective therapy. If Dr. Robson prescribes XGEVA.</p>
+      <p><a href="https://www.xgeva.com/get-copay-help" target="_blank">xgeva.com/get-copay-help</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- MONITORING -->
+<div class="section" id="monitoring">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>📋 Monitoring Protocol</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+    <table>
+      <tr><th>Timeline</th><th>Tests</th><th>Watch For</th></tr>
+      <tr><td><strong>Now (baseline)</strong></td><td>Most recent: Feb 10 labs</td><td>AST 70↑, ALP 249↑, VitD >150, Ca 10.1</td></tr>
+      <tr><td><strong>2-3 weeks</strong></td><td>CMP + Vitamin D + Calcium</td><td>AST trending down? VitD dropping? Ca stable?</td></tr>
+      <tr><td><strong>Week 1-4 of any new Rx</strong></td><td>Weekly LFTs (AST, ALT, ALP, Bili)</td><td>Any >2x rise = stop that drug immediately</td></tr>
+      <tr><td><strong>Monthly ongoing</strong></td><td>Full CMP + CBC</td><td>Liver function, kidney function, blood counts</td></tr>
+      <tr><td><strong>If starting HCQ</strong></td><td>Baseline ophthalmology exam</td><td>Retinal health (annual screening after that)</td></tr>
+      <tr><td><strong>If starting propranolol</strong></td><td>BP + heart rate check</td><td>Hypotension, bradycardia</td></tr>
+      <tr><td><strong>ALP fractionation</strong></td><td>Bone-specific ALP (BAP)</td><td>Distinguish bone vs liver source of ALP 249</td></tr>
+    </table>
+    
+    <div class="alert-box warning" style="margin-top:16px;">
+      <h3>⚠️ Stop Rules</h3>
+      <ul>
+        <li>AST or ALT rises >3x upper limit of normal (>111) → stop all new drugs, call oncologist</li>
+        <li>New severe GI symptoms (diarrhea grade 3+) → may be Verzenio interaction</li>
+        <li>Visual changes on HCQ → stop immediately, ophthalmology ASAP</li>
+        <li>Any signs of hypercalcemia (confusion, excessive thirst, nausea) → ER</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SUMMARY TABLE -->
+<div class="section open" id="summary">
+  <div class="section-header" onclick="this.parentElement.classList.toggle('open')">
+    <h2>📊 Quick Reference Summary</h2>
+    <span class="arrow">▶</span>
+  </div>
+  <div class="section-body">
+    <div style="overflow-x:auto;">
+    <table>
+      <tr>
+        <th>Drug</th>
+        <th>BBB</th>
+        <th>CYP3A4 Safe</th>
+        <th>Liver Safe Now</th>
+        <th>Evidence</th>
+        <th>When</th>
+      </tr>
+      <tr style="background:#eefbf3;">
+        <td><strong>Melatonin 20mg</strong></td><td>★★★</td><td>✅</td><td>✅</td><td>★★★★</td><td>NOW</td>
+      </tr>
+      <tr style="background:#eefbf3;">
+        <td><strong>Aspirin 81mg</strong></td><td>★★</td><td>✅</td><td>✅</td><td>★★★</td><td>NOW</td>
+      </tr>
+      <tr style="background:#eefbf3;">
+        <td><strong>Turkey Tail ↑dose</strong></td><td>N/A</td><td>✅</td><td>✅</td><td>★★★</td><td>NOW</td>
+      </tr>
+      <tr style="background:#eefbf3;">
+        <td><strong>Propranolol</strong></td><td>★★★</td><td>✅</td><td>✅</td><td>★★★</td><td>NOW (Rx)</td>
+      </tr>
+      <tr style="background:#fffcf5;">
+        <td><strong>Doxycycline</strong></td><td>★★★</td><td>✅</td><td>⚠️</td><td>★★★</td><td>2-4 wks</td>
+      </tr>
+      <tr style="background:#fffcf5;">
+        <td><strong>Hydroxychloroquine</strong></td><td>★★★</td><td>✅</td><td>⚠️</td><td>★★★</td><td>2-4 wks</td>
+      </tr>
+      <tr style="background:#fff8f7;">
+        <td><strong>Mebendazole PC</strong></td><td>★★★★</td><td>✅</td><td>❌</td><td>★★★★</td><td>4-6 wks</td>
+      </tr>
+      <tr style="background:#fff8f7;">
+        <td><strong>Disulfiram+Cu</strong></td><td>★★★</td><td>✅</td><td>❌</td><td>★★★</td><td>4-6 wks</td>
+      </tr>
+    </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>DISCLAIMER:</strong> This document is for educational purposes. All additions must be approved by Sophia's MSK oncology team before starting. Drug interactions and individual responses may vary.</p>
+  <p style="margin-top:8px;">Compiled by Albus for Robert Paslaqua &middot; February 15, 2026</p>
+  <p style="margin-top:4px;">Sources: PubMed, Nature Medicine, J Neuro-Oncol, ASCO 2025, OneDayMD, ClinicalTrials.gov, FDA prescribing information</p>
+</footer>
+
+</div>
+
+<script>
+// Auto-expand sections marked with .open class (already handled by CSS)
+// Toggle functionality
+document.querySelectorAll('.section-header').forEach(h => {
+  h.addEventListener('click', () => h.parentElement.classList.toggle('open'));
+});
+</script>
+</body>
+</html>

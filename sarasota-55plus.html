@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>55+ Active Adult Communities in Sarasota County — For Janice Laird</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f1117;--card:#1a1d27;--card-hover:#222633;--accent:#c9a96e;--accent2:#e8c87a;--text:#e8e6e3;--text2:#9a9da6;--green:#4caf50;--border:#2a2d3a}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent);text-decoration:none}a:hover{color:var(--accent2)}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+
+.header{text-align:center;padding:60px 20px 40px;background:linear-gradient(135deg,#1a1d27 0%,#2a1f3d 50%,#1a2a3a 100%);border-bottom:2px solid var(--accent);margin-bottom:40px}
+.header h1{font-size:2.2em;color:var(--accent2);font-weight:300;letter-spacing:1px;margin-bottom:8px}
+.header .subtitle{font-size:1.1em;color:var(--text2);font-weight:300}
+.header .prepared{margin-top:12px;font-size:0.95em;color:var(--accent);font-style:italic}
+.header .disclaimer{margin-top:16px;font-size:0.8em;color:var(--text2);max-width:700px;margin-left:auto;margin-right:auto}
+
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);margin-bottom:40px}
+table{width:100%;border-collapse:collapse;font-size:0.9em}
+th{background:#22263a;color:var(--accent2);padding:12px 16px;text-align:left;font-weight:500;cursor:pointer;white-space:nowrap;position:sticky;top:0}
+th:hover{background:#2a2e44}
+th::after{content:' ↕';font-size:0.7em;opacity:0.5}
+td{padding:10px 16px;border-top:1px solid var(--border);vertical-align:top}
+tr:hover td{background:var(--card-hover)}
+.price-cell{font-weight:600;color:var(--green);white-space:nowrap}
+
+.tier{margin-bottom:50px}
+.tier-header{display:flex;align-items:center;gap:12px;margin-bottom:24px;padding:16px 20px;border-radius:12px;border:1px solid var(--border)}
+.tier-header .tier-icon{font-size:1.8em}
+.tier-header h2{font-size:1.4em;font-weight:300;color:var(--accent2)}
+.tier-header .tier-range{margin-left:auto;font-size:1.1em;color:var(--text2)}
+
+.cards{display:grid;grid-template-columns:1fr;gap:24px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform 0.2s,box-shadow 0.2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.card-top{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.card-gallery{position:relative;height:280px;overflow:hidden;background:#111}
+.card-gallery img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;opacity:0;transition:opacity 0.5s}
+.card-gallery img.active{opacity:1}
+.card-gallery .no-img{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a2a3a,#2a1f3d);color:var(--accent);font-size:1.2em;text-align:center;padding:20px;flex-direction:column;gap:8px}
+.card-gallery .no-img .icon{font-size:3em}
+.gallery-nav{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:2}
+.gallery-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;border:none;transition:background 0.3s}
+.gallery-dot.active{background:var(--accent)}
+.gallery-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;padding:8px 12px;cursor:pointer;font-size:1.2em;z-index:2;border-radius:4px}
+.gallery-btn:hover{background:rgba(0,0,0,0.8)}
+.gallery-prev{left:8px}.gallery-next{right:8px}
+.card-info{padding:24px}
+.card-name{font-size:1.4em;font-weight:400;color:var(--accent2);margin-bottom:4px}
+.card-name a{color:var(--accent2)}
+.card-type{margin-bottom:12px}
+.card-price{font-size:1.8em;color:var(--green);font-weight:600;margin-bottom:12px}
+.card-price small{font-size:0.5em;color:var(--text2);font-weight:300}
+.card-address{color:var(--text2);margin-bottom:8px;font-size:0.95em}
+.card-address a{color:var(--text2)}
+.card-address a:hover{color:var(--accent)}
+.card-phone{margin-bottom:16px;font-size:0.95em}
+.card-phone a{color:var(--accent)}
+.card-body{padding:0 24px 24px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card-section h4{color:var(--accent);font-size:0.85em;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;font-weight:500}
+.card-section p,.card-section ul{font-size:0.9em;color:var(--text2)}
+.card-section ul{list-style:none;padding:0}
+.card-section ul li{padding:3px 0}
+.card-section ul li::before{content:'✓ ';color:var(--green);font-weight:bold}
+.amenity-badges{display:flex;flex-wrap:wrap;gap:6px}
+.amenity-badge{display:inline-block;padding:4px 10px;background:#2a2d3a;border-radius:16px;font-size:0.8em;color:var(--text2);border:1px solid var(--border)}
+.btn{display:inline-block;padding:10px 24px;border-radius:8px;font-size:0.95em;font-weight:500;transition:all 0.2s;text-align:center}
+.btn-primary{background:var(--accent);color:#1a1d27}.btn-primary:hover{background:var(--accent2);color:#1a1d27}
+.btn-outline{border:1px solid var(--accent);color:var(--accent)}.btn-outline:hover{background:var(--accent);color:#1a1d27}
+.card-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.special-badge{background:#2d7d46;color:#fff;padding:4px 12px;border-radius:8px;font-size:0.8em;display:inline-block;margin-left:6px}
+.note{color:var(--text2);font-style:italic;font-size:0.85em}
+
+.footer{text-align:center;padding:40px 20px;color:var(--text2);font-size:0.85em;border-top:1px solid var(--border);margin-top:40px}
+
+@media(max-width:900px){
+.card-top{grid-template-columns:1fr}
+.card-gallery{height:220px}
+.card-body{grid-template-columns:1fr}
+.header h1{font-size:1.5em}
+}
+@media(max-width:600px){
+.container{padding:10px}
+.card-info{padding:16px}
+.card-body{padding:0 16px 16px}
+table{font-size:0.75em}
+th,td{padding:8px}
+}
+@media print{
+body{background:#fff;color:#000}
+.card{break-inside:avoid;border:1px solid #ccc}
+.card-gallery{height:200px}
+.btn,.gallery-nav,.gallery-btn{display:none}
+.header{background:#fff;border-bottom:2px solid #333}
+.header h1,.header .subtitle,.header .prepared{color:#333}
+th{background:#eee;color:#333}td{border-top:1px solid #ccc}
+.card-name a,.card-price{color:#000}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h1>55+ Active Adult Rental Communities</h1>
+<div class="subtitle">Sarasota County, Florida — Independent Living Apartments</div>
+<div class="prepared">Prepared for Janice Laird — February 2026</div>
+<div class="disclaimer">These are all independent-living, active adult apartment communities — not assisted living or nursing facilities. Pricing sourced from official websites & verified listing platforms. Contact each community directly for current rates.</div>
+</div>
+
+<div class="container">
+
+<!-- Quick Comparison -->
+<h2 style="color:var(--accent2);font-size:1.5em;margin-bottom:20px;font-weight:300;border-bottom:1px solid var(--border);padding-bottom:10px">📊 Quick Comparison — All 9 Active Adult Communities</h2>
+<div class="table-wrap">
+<table id="compTable">
+<thead>
+<tr>
+<th onclick="sortTable(0)">Community</th>
+<th onclick="sortTable(1)">1BR From</th>
+<th onclick="sortTable(2)">Sq Ft</th>
+<th onclick="sortTable(3)">Location</th>
+<th onclick="sortTable(4)">Pets</th>
+<th onclick="sortTable(5)">Standout Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>EKOS Arbor Park</td><td class="price-cell" data-sort="973">$973*</td><td>700–946</td><td>North Port</td><td>Ask</td><td>Most affordable (income-qualified)</td></tr>
+<tr><td>Casa Santa Marta I & II</td><td class="price-cell" data-sort="1676">$1,676</td><td>~650</td><td>Downtown Sarasota</td><td>Yes (1 pet)</td><td>Downtown location, 62+</td></tr>
+<tr><td>Mira at Palmer Ranch</td><td class="price-cell" data-sort="1695">$1,695</td><td>736–1,248</td><td>Palmer Ranch</td><td>Yes (2 pets, 60lb)</td><td>Sport simulator, gated</td></tr>
+<tr><td>Solea Wellen Park</td><td class="price-cell" data-sort="1797">$1,797</td><td>505–1,285</td><td>Venice (Wellen Park)</td><td>Yes</td><td>Pickleball, bocce, most events</td></tr>
+<tr><td>The Pointe at Lakewood Ranch</td><td class="price-cell" data-sort="1800">$1,800</td><td>602–1,352</td><td>Lakewood Ranch</td><td>Yes</td><td>Sauna, steam room, beer tap</td></tr>
+<tr><td>The Floridian Club</td><td class="price-cell" data-sort="1820">$1,820</td><td>921–1,339</td><td>Venice</td><td>Ask</td><td>Single-story villas, not apartments</td></tr>
+<tr><td>Arietta</td><td class="price-cell" data-sort="2078">~$2,078</td><td>Large</td><td>Sarasota</td><td>Yes</td><td>Breakfast + transportation included</td></tr>
+<tr><td>The Alloro at University Groves</td><td class="price-cell" data-sort="2130">$2,130</td><td>643–1,395</td><td>Sarasota (University)</td><td>Yes (dog park)</td><td>Award-winning, dog park</td></tr>
+<tr><td>Bayou Oaks 55+</td><td class="price-cell" data-sort="1200">~$1,200*</td><td>~1,040</td><td>Sarasota</td><td>Ask</td><td>Affordable (income-restricted)</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">* EKOS Arbor Park and Bayou Oaks have income eligibility requirements. Casa Santa Marta is 62+. Click column headers to sort.</p>
+
+<!-- ===== BUDGET ===== -->
+<div class="tier">
+<div class="tier-header" style="background:linear-gradient(90deg,rgba(45,125,70,0.15),transparent);border-color:#2d7d46">
+<div class="tier-icon">💚</div>
+<h2>Budget-Friendly</h2>
+<div class="tier-range">Under $1,700/mo</div>
+</div>
+<div class="cards">
+
+<!-- EKOS -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="ekos">
+<div class="no-img"><div class="icon">🏡</div><div>EKOS Arbor Park</div><div style="font-size:0.7em;color:var(--text2)"><a href="https://www.ekosarborpark.com/gallery" target="_blank" style="color:var(--accent)">View photos on website →</a></div></div>
+<button class="gallery-btn gallery-prev" onclick="galleryNav('ekos',-1)">‹</button>
+<button class="gallery-btn gallery-next" onclick="galleryNav('ekos',1)">›</button>
+<div class="gallery-nav"></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://www.ekosarborpark.com/" target="_blank">EKOS Arbor Park</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:#2d7d46;color:#4caf50">55+ Active Adult</span><span class="special-badge">Income-Qualified</span></div>
+<div class="card-price">From $973<small>/mo</small></div>
+<div class="card-address">📍 <a href="https://maps.google.com/?q=1310+Citizens+Pkwy,+North+Port,+FL+34288" target="_blank">1310 Citizens Pkwy, North Port, FL 34288</a></div>
+<div class="card-phone">📞 <a href="tel:9412392270">(941) 239-2270</a></div>
+<div class="card-actions">
+<a href="https://www.ekosarborpark.com/" target="_blank" class="btn btn-primary">Visit Website</a>
+<a href="https://www.ekosarborpark.com/models" target="_blank" class="btn btn-outline">Floor Plans</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>1 BR: 700–946 sq ft (from $973)</li>
+<li>2 BR: Available — contact for pricing</li>
+<li>Phase II coming soon</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>Contact community to verify</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">Resort-Style Pool</span>
+<span class="amenity-badge">Fitness Center</span>
+<span class="amenity-badge">Clubhouse</span>
+<span class="amenity-badge">Gated Community</span>
+<span class="amenity-badge">Nature Trails</span>
+</div>
+<h4 style="margin-top:12px">Important</h4>
+<p>⚠️ Income eligibility requirements apply — visit <a href="https://www.ekosarborpark.com/income-limit" target="_blank">eligibility page</a> for details. Most affordable option in Sarasota County. Located in North Port (~30 min south of downtown Sarasota).</p>
+</div>
+</div>
+</div>
+
+<!-- Bayou Oaks -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="bayou">
+<div class="no-img"><div class="icon">🏡</div><div>Bayou Oaks 55+</div><div style="font-size:0.7em;color:var(--text2)">Call for photos & tour</div></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://www.apartments.com/bayou-oaks-55-sarasota-fl/wyjqj7k/" target="_blank">Bayou Oaks 55+</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:#2d7d46;color:#4caf50">55+ Affordable</span><span class="special-badge">Income-Restricted</span></div>
+<div class="card-price">~$1,200<small>/mo (estimated)</small></div>
+<div class="card-address">📍 <a href="https://maps.google.com/?q=1160+Four+Seasons+Cir,+Sarasota,+FL+34234" target="_blank">1160 Four Seasons Cir, Sarasota, FL 34234</a></div>
+<div class="card-phone">📞 <a href="tel:9413554457">(941) 355-4457</a></div>
+<div class="card-actions">
+<a href="https://www.apartments.com/bayou-oaks-55-sarasota-fl/wyjqj7k/" target="_blank" class="btn btn-primary">View on Apartments.com</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>80 units on 8+ acres</li>
+<li>Average unit ~1,040 sq ft</li>
+<li>Built in 2000</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>Contact community to verify</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">Community Room</span>
+<span class="amenity-badge">On-Site Laundry</span>
+<span class="amenity-badge">Quiet Neighborhood</span>
+</div>
+<h4 style="margin-top:12px">Important</h4>
+<p>⚠️ Income-restricted affordable housing for 55+. Pricing is estimated — call to verify. Website currently not functioning; use phone or Apartments.com listing. Smaller, quieter community.</p>
+</div>
+</div>
+</div>
+
+<!-- Casa Santa Marta -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="casa">
+<div class="no-img"><div class="icon">🏢</div><div>Casa Santa Marta I & II</div><div style="font-size:0.7em;color:var(--text2)"><a href="https://www.casasantamartasarasota.com/" target="_blank" style="color:var(--accent)">View photos on website →</a></div></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://www.casasantamartasarasota.com/" target="_blank">Casa Santa Marta I & II</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:#2d7d46;color:#4caf50">62+ Senior Apartments</span></div>
+<div class="card-price">From $1,676<small>/mo</small></div>
+<div class="card-address">📍 <a href="https://maps.google.com/?q=1576+8th+St,+Sarasota,+FL+34236" target="_blank">1576 8th St, Sarasota, FL 34236</a></div>
+<div class="card-phone">📞 <a href="tel:9412567237">(941) 256-7237</a></div>
+<div class="card-actions">
+<a href="https://www.casasantamartasarasota.com/" target="_blank" class="btn btn-primary">Visit Website</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>1 BR / 1 BA (all units)</li>
+<li>~650 sq ft</li>
+<li>Building I: 52 units / Building II: 78 units</li>
+<li>Built 1982, 5 stories</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>✅ 1 pet allowed — cats & dogs welcome, breed restrictions apply</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">Private Balconies</span>
+<span class="amenity-badge">All-Electric Kitchen</span>
+<span class="amenity-badge">Ceramic Tile Baths</span>
+<span class="amenity-badge">Fire Sprinkler System</span>
+<span class="amenity-badge">A/C & Heat</span>
+<span class="amenity-badge">Emergency Response</span>
+</div>
+<h4 style="margin-top:12px">Location</h4>
+<p>Downtown Sarasota — walking distance to shops, restaurants, and the bayfront. Note: age requirement is 62+ (not 55+). Some units may have income qualifications.</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ===== MID-RANGE ===== -->
+<div class="tier">
+<div class="tier-header" style="background:linear-gradient(90deg,rgba(184,134,11,0.15),transparent);border-color:#b8860b">
+<div class="tier-icon">⭐</div>
+<h2>Mid-Range — Market Rate</h2>
+<div class="tier-range">$1,700 – $1,900/mo</div>
+</div>
+<div class="cards">
+
+<!-- Mira -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="mira">
+<img src="https://mira-apts.com/assets/images/cache/66-00000200_-Final-282de8c733efa82c2a5d6ac01622d422.jpg" alt="Mira at Palmer Ranch" class="active">
+<img src="https://mira-apts.com/assets/images/cache/459273248_8069971746456008_5245008657737325824_n-d2126e513d3d08bcbfeb7423264482db.jpg" alt="Mira community">
+<img src="https://mira-apts.com/assets/images/cache/474951583_122200764920063096_5202688361667442051_n-a91a03c4e5cf40ad0b64be7649f79d1e.jpg" alt="Mira amenities">
+<img src="https://mira-apts.com/assets/images/cache/Multisport-Simulator-Room-2-70b1ed6c14e8bb4c6dd96a798cb34039.jpg" alt="Mira sport simulator">
+<img src="https://mira-apts.com/assets/images/cache/497956413_17905824486081728_5759496397064599221_n-39d36e644cfcc7751a1f48765b2ff597.jpg" alt="Mira exterior">
+<button class="gallery-btn gallery-prev" onclick="galleryNav('mira',-1)">‹</button>
+<button class="gallery-btn gallery-next" onclick="galleryNav('mira',1)">›</button>
+<div class="gallery-nav"></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://mira-apts.com/" target="_blank">Mira at Palmer Ranch</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:var(--accent);color:var(--accent)">55+ Active Adult</span></div>
+<div class="card-price">From $1,695<small>/mo</small></div>
+<div class="card-address">📍 <a href="https://maps.google.com/?q=7350+Honore+Ave,+Sarasota,+FL+34238" target="_blank">7350 Honore Ave, Sarasota, FL 34238</a></div>
+<div class="card-phone">📞 <a href="tel:3054047737">(305) 404-7737</a></div>
+<div class="card-actions">
+<a href="https://mira-apts.com/" target="_blank" class="btn btn-primary">Visit Website</a>
+<a href="https://mira-apts.com/floorplans/" target="_blank" class="btn btn-outline">Floor Plans</a>
+<a href="https://mira-apts.com/virtual-tours/" target="_blank" class="btn btn-outline">Virtual Tours</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>1 BR: from 736 sq ft ($1,695/mo)</li>
+<li>2 BR: up to 1,248 sq ft</li>
+<li>Screened-in balconies on all units</li>
+<li>In-unit washer/dryer</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>✅ Max 2 pets, 60 lb weight limit. Breed restrictions apply.</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">Gated & Secured Entry</span>
+<span class="amenity-badge">Elevators</span>
+<span class="amenity-badge">Resort Pool</span>
+<span class="amenity-badge">Fitness Center</span>
+<span class="amenity-badge">Multi-Sport Simulator</span>
+<span class="amenity-badge">In-Unit W/D</span>
+<span class="amenity-badge">Granite Counters</span>
+<span class="amenity-badge">SS Appliances</span>
+<span class="amenity-badge">Screened Balconies</span>
+<span class="amenity-badge">Resident Events</span>
+</div>
+<h4 style="margin-top:12px">Why Consider</h4>
+<p>New, contemporary-style building. Gated community with secured entry buildings and elevators. Great value for the finishes. Palmer Ranch is a beautiful, established area. Managed by Greystar.</p>
+</div>
+</div>
+</div>
+
+<!-- Solea -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="solea">
+<div class="no-img"><div class="icon">🌴</div><div>Solea Wellen Park</div><div style="font-size:0.7em;color:var(--text2)"><a href="https://soleawellenpark.com/gallery/" target="_blank" style="color:var(--accent)">View photos on website →</a></div></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://soleawellenpark.com/" target="_blank">Solea Wellen Park</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:var(--accent);color:var(--accent)">55+ Active Adult</span></div>
+<div class="card-price">From $1,797<small>/mo (1BR)</small></div>
+<div class="card-address">📍 <a href="https://maps.google.com/?q=19315+W+Villages+Pkwy,+Venice,+FL+34293" target="_blank">19315 W Villages Pkwy, Venice, FL 34293</a></div>
+<div class="card-phone">📞 <a href="tel:9418003339">(941) 800-3339</a></div>
+<div class="card-actions">
+<a href="https://soleawellenpark.com/" target="_blank" class="btn btn-primary">Visit Website</a>
+<a href="https://soleawellenpark.com/floorplans/" target="_blank" class="btn btn-outline">Floor Plans</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>Studio: from $1,738 (505 sq ft)</li>
+<li>1 BR: from $1,797</li>
+<li>2 BR: from $2,192</li>
+<li>3 BR: from $2,999</li>
+<li>204 total units</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>✅ Pet-friendly community</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">Resort-Style Pool</span>
+<span class="amenity-badge">2 Fitness Centers</span>
+<span class="amenity-badge">Pickleball Court</span>
+<span class="amenity-badge">Bocce Court</span>
+<span class="amenity-badge">Craft Room</span>
+<span class="amenity-badge">Water Aerobics</span>
+<span class="amenity-badge">Exercise Classes</span>
+<span class="amenity-badge">Themed Parties</span>
+<span class="amenity-badge">Monthly Bar Events</span>
+<span class="amenity-badge">Pest Control Included</span>
+<span class="amenity-badge">Landscaping Included</span>
+</div>
+<h4 style="margin-top:12px">Why Consider</h4>
+<p>The most active social calendar of any community on this list. Weekly events, themed parties, catered pool parties, Braves game outings, instructor-led classes. All included in rent. Located in the vibrant new Downtown Wellen area. By Sparrow Living. Very highly reviewed by residents.</p>
+</div>
+</div>
+</div>
+
+<!-- Pointe -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="pointe">
+<img src="https://pointeatlakewoodranch.com/assets/images/cache/445465063_978895277298796_8244275496040169407_n-3543d3e53faf90f943e4b098703cb215.jpg" alt="The Pointe pool" class="active">
+<img src="https://pointeatlakewoodranch.com/assets/images/cache/463073058_17927675798954151_2583703016661978450_n-6126ca7dc4284bcfe4aabcb0d099c5bc.jpg" alt="The Pointe community">
+<img src="https://pointeatlakewoodranch.com/assets/images/cache/instagram-451832202_765313885542384_6426850416859041689_n-277cefb41967326dc40f86be6c7982dc.jpg" alt="The Pointe lifestyle">
+<img src="https://pointeatlakewoodranch.com/assets/images/cache/instagram-451528860_1656706321731589_6806534947910916500_n-4b614896d11c1bcaf96989ea307ae948.jpg" alt="The Pointe activities">
+<button class="gallery-btn gallery-prev" onclick="galleryNav('pointe',-1)">‹</button>
+<button class="gallery-btn gallery-next" onclick="galleryNav('pointe',1)">›</button>
+<div class="gallery-nav"></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://pointeatlakewoodranch.com/" target="_blank">The Pointe at Lakewood Ranch</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:var(--accent);color:var(--accent)">55+ Active Adult</span></div>
+<div class="card-price">From $1,800<small>/mo</small></div>
+<div class="card-address">📍 <a href="https://maps.google.com/?q=8925+77th+Terrace+East,+Lakewood+Ranch,+FL+34202" target="_blank">8925 77th Terrace East, Lakewood Ranch, FL 34202</a></div>
+<div class="card-phone">📞 <a href="tel:8632493245">(863) 249-3245</a></div>
+<div class="card-actions">
+<a href="https://pointeatlakewoodranch.com/" target="_blank" class="btn btn-primary">Visit Website</a>
+<a href="https://pointeatlakewoodranch.com/floorplans/" target="_blank" class="btn btn-outline">Floor Plans</a>
+<a href="https://viewer.tourbuilder.com/?tour=649f480ca9576b5d3533c66c" target="_blank" class="btn btn-outline">Virtual Tour</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>Studio, 1 BR, and 2 BR</li>
+<li>602–1,352 sq ft</li>
+<li>Starting from $1,800/mo</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>✅ Pet-friendly community</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">Resort-Style Pool</span>
+<span class="amenity-badge">Wellness Center</span>
+<span class="amenity-badge">Sauna</span>
+<span class="amenity-badge">Steam Room</span>
+<span class="amenity-badge">Beer Tap Room</span>
+<span class="amenity-badge">Library w/ Mezzanine</span>
+</div>
+<h4 style="margin-top:12px">Why Consider</h4>
+<p>Lakewood Ranch is one of the most desirable areas in Sarasota County — close to University Town Center mall, top restaurants, and beaches. Sauna and steam room are unusual amenities for this price range. Beer tap room is a fun social touch. Managed by Greystar.</p>
+</div>
+</div>
+</div>
+
+<!-- Floridian Club -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="floridian">
+<div class="no-img"><div class="icon">🏘️</div><div>The Floridian Club of Sarasota</div><div style="font-size:0.7em;color:var(--text2)"><a href="https://www.liveatthefloridian.com" target="_blank" style="color:var(--accent)">View gallery on website →</a></div></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://www.liveatthefloridian.com" target="_blank">The Floridian Club of Sarasota</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:var(--accent);color:var(--accent)">55+ Active Adult</span> <span style="font-size:0.85em;color:var(--accent2)">★ Single-Story Villas</span></div>
+<div class="card-price">From $1,820<small>/mo</small></div>
+<div class="card-address">📍 <a href="https://maps.google.com/?q=19600+Floridian+Club+Dr,+Venice,+FL+34292" target="_blank">19600 Floridian Club Dr, Venice, FL 34292</a></div>
+<div class="card-phone">📞 <a href="tel:9413603838">(941) 360-3838</a></div>
+<div class="card-actions">
+<a href="https://www.liveatthefloridian.com" target="_blank" class="btn btn-primary">Visit Website</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>1 BR: 921 sq ft (from $1,820)</li>
+<li>2 BR: up to 1,339 sq ft (from $2,215)</li>
+<li>309 units, built 2018</li>
+<li>ALL single-story villa homes (no stairs!)</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>Contact community — (941) 360-3838</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">10,000 sq ft Clubhouse</span>
+<span class="amenity-badge">Large Gym</span>
+<span class="amenity-badge">Daily Fitness Classes</span>
+<span class="amenity-badge">Pickleball Courts</span>
+<span class="amenity-badge">Lake & Fishing</span>
+<span class="amenity-badge">Fire Pits</span>
+<span class="amenity-badge">Gated Community</span>
+<span class="amenity-badge">Walkable Streets</span>
+<span class="amenity-badge">Social Clubs</span>
+</div>
+<h4 style="margin-top:12px">Why Consider</h4>
+<p><strong>This is the only villa-style option</strong> — single-story homes, not apartments. Feels like a neighborhood, not a complex. Annual and multi-year leases (no short-term rentals allowed, which keeps it stable). Gated resort community. The 1BR at 921 sq ft is very generous. Open Mon–Sat.</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ===== PREMIUM ===== -->
+<div class="tier">
+<div class="tier-header" style="background:linear-gradient(90deg,rgba(192,57,43,0.15),transparent);border-color:#c0392b">
+<div class="tier-icon">💎</div>
+<h2>Premium</h2>
+<div class="tier-range">$2,000+/mo</div>
+</div>
+<div class="cards">
+
+<!-- Arietta -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="arietta">
+<img src="https://ariettaliving.com/assets/images/cache/539395196_17909839437212361_457892400151159615_n-37a332b3094166f06a125cb897a3c458.jpg" alt="Arietta community" class="active">
+<img src="https://ariettaliving.com/assets/images/cache/538749960_17909527329212361_8792374421612889372_n-b4dcab7630e49046631b65f899d3a604.jpg" alt="Arietta activities">
+<img src="https://ariettaliving.com/assets/images/cache/535890327_17908615275212361_3944773185297660744_n-d9dfeeff0c8291c37e3ee7f18bd491c5.jpg" alt="Arietta lifestyle">
+<img src="https://ariettaliving.com/assets/images/cache/528384437_17907314055212361_557721139897331981_n-2854f371b0f36f16e234a81f43f2b23c.jpg" alt="Arietta events">
+<button class="gallery-btn gallery-prev" onclick="galleryNav('arietta',-1)">‹</button>
+<button class="gallery-btn gallery-next" onclick="galleryNav('arietta',1)">›</button>
+<div class="gallery-nav"></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://ariettaliving.com/" target="_blank">Arietta 55+ Senior Living</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:var(--accent);color:var(--accent)">55+ Active Adult</span> <span style="font-size:0.85em;color:var(--accent2)">★ Breakfast & Transport Included</span></div>
+<div class="card-price">~$2,078<small>/mo (1BR est.)</small></div>
+<div class="card-address">📍 <a href="https://maps.app.goo.gl/hHCqpMDMEuf7B6bu7" target="_blank">4 Maggie Ln, Sarasota, FL 34232</a></div>
+<div class="card-phone">📞 <a href="tel:9412779667">(941) 277-9667</a></div>
+<div class="card-actions">
+<a href="https://ariettaliving.com/" target="_blank" class="btn btn-primary">Visit Website</a>
+<a href="https://ariettaliving.com/floorplans/" target="_blank" class="btn btn-outline">Floor Plans</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>1 BR and 2 BR available</li>
+<li>Largest 2BR floor plans in Sarasota</li>
+<li>Total monthly price ~$2,156–$3,431</li>
+<li>Call for exact current pricing</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>✅ Pet-friendly community</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">Daily Continental Breakfast</span>
+<span class="amenity-badge">Transportation Service</span>
+<span class="amenity-badge">Pool</span>
+<span class="amenity-badge">Fitness Center</span>
+<span class="amenity-badge">Social Events Calendar</span>
+<span class="amenity-badge">"Fun at Arietta!" Program</span>
+</div>
+<h4 style="margin-top:12px">Why Consider</h4>
+<p><strong>Only community that includes daily breakfast AND transportation.</strong> This is a significant value-add — other communities charge extra or don't offer these. When you factor in the breakfast and transport, the effective cost is very competitive. Largest 2BR floor plans in the area. Managed by Greystar.</p>
+</div>
+</div>
+</div>
+
+<!-- Alloro -->
+<div class="card">
+<div class="card-top">
+<div class="card-gallery" data-gallery="alloro">
+<div class="no-img"><div class="icon">🌟</div><div>The Alloro at University Groves</div><div style="font-size:0.7em;color:var(--text2)"><a href="https://www.thealloro.com/sarasota/alloro-at-university-groves/photos/" target="_blank" style="color:var(--accent)">View photos on website →</a></div></div>
+</div>
+<div class="card-info">
+<div class="card-name"><a href="https://www.thealloro.com/" target="_blank">The Alloro at University Groves</a></div>
+<div class="card-type"><span class="amenity-badge" style="border-color:var(--accent);color:var(--accent)">55+ Active Adult</span> <span style="font-size:0.85em;color:var(--accent2)">★ Award-Winning</span></div>
+<div class="card-price">From $2,130<small>/mo (1BR)</small></div>
+<div class="card-address">📍 <a href="https://maps.google.com/?q=3540+Broadway+Ave,+Sarasota,+FL+34243" target="_blank">3540 Broadway Ave, Sarasota, FL 34243</a></div>
+<div class="card-phone">📞 <a href="tel:9413063459">(941) 306-3459</a></div>
+<div class="card-actions">
+<a href="https://www.thealloro.com/" target="_blank" class="btn btn-primary">Visit Website</a>
+<a href="https://www.thealloro.com/sarasota/alloro-at-university-groves/" target="_blank" class="btn btn-outline">Floor Plans</a>
+<a href="https://www.thealloro.com/sarasota/alloro-at-university-groves/photos/" target="_blank" class="btn btn-outline">Photo Gallery</a>
+</div>
+</div>
+</div>
+<div class="card-body">
+<div class="card-section">
+<h4>Floor Plans</h4>
+<ul>
+<li>1 BR "Rembrandt": 685 sq ft ($2,130)</li>
+<li>Various 1 BR & 2 BR layouts</li>
+<li>643–1,395 sq ft range</li>
+<li>Up to $4,150 for largest 2BR</li>
+</ul>
+<h4 style="margin-top:12px">Pet Policy</h4>
+<p>✅ Yes — dedicated dog park on-site</p>
+</div>
+<div class="card-section">
+<h4>Amenities</h4>
+<div class="amenity-badges">
+<span class="amenity-badge">Resort Pool</span>
+<span class="amenity-badge">Dog Park</span>
+<span class="amenity-badge">Game Center</span>
+<span class="amenity-badge">Fitness Center</span>
+<span class="amenity-badge">Activities Program</span>
+<span class="amenity-badge">Clubhouse</span>
+</div>
+<h4 style="margin-top:12px">Why Consider</h4>
+<p>Award-winning community. The most upscale feel of the bunch. If you have a dog, the dedicated dog park is a standout. Located near University Pkwy with good access to shopping and dining. Floor plans are named after famous artists (Rembrandt, Raphael, etc.).</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- Key Takeaways -->
+<div style="background:var(--card);border:2px solid var(--accent);border-radius:16px;padding:30px;margin-top:30px">
+<h2 style="color:var(--accent2);font-weight:300;margin-bottom:20px">💡 Janice's Cheat Sheet</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;font-size:0.95em">
+<div>
+<h4 style="color:var(--green);margin-bottom:8px">🏆 Best Overall Value</h4>
+<p style="color:var(--text2)"><strong style="color:var(--text)">Mira at Palmer Ranch</strong> — $1,695/mo gets you a gated, new-build apartment with in-unit W/D, granite, screened balcony. Hard to beat.</p>
+</div>
+<div>
+<h4 style="color:var(--green);margin-bottom:8px">🎉 Most Social & Active</h4>
+<p style="color:var(--text2)"><strong style="color:var(--text)">Solea Wellen Park</strong> — Weekly events, pickleball, bocce, pool parties, exercise classes, bar nights. All included. Residents rave about the community feel.</p>
+</div>
+<div>
+<h4 style="color:var(--green);margin-bottom:8px">🏘️ Feels Like a Real Home</h4>
+<p style="color:var(--text2)"><strong style="color:var(--text)">The Floridian Club</strong> — Single-story villas (not apartments). 921 sq ft 1BR. Gated resort community. Feels like owning a home without the hassle.</p>
+</div>
+<div>
+<h4 style="color:var(--green);margin-bottom:8px">🍳 Most Included in Rent</h4>
+<p style="color:var(--text2)"><strong style="color:var(--text)">Arietta</strong> — Daily breakfast + transportation services included. When you factor those in, the ~$2,078 is a better deal than it looks.</p>
+</div>
+<div>
+<h4 style="color:var(--green);margin-bottom:8px">🧖 Best Amenities Per Dollar</h4>
+<p style="color:var(--text2)"><strong style="color:var(--text)">The Pointe at Lakewood Ranch</strong> — $1,800/mo gets you a sauna, steam room, wellness center, beer tap room, library, and proximity to UTC mall.</p>
+</div>
+<div>
+<h4 style="color:var(--green);margin-bottom:8px">🐕 Best for Dog Owners</h4>
+<p style="color:var(--text2)"><strong style="color:var(--text)">The Alloro</strong> — Dedicated dog park. Also, <strong style="color:var(--text)">Mira</strong> allows 2 pets up to 60 lbs.</p>
+</div>
+</div>
+
+<div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
+<h4 style="color:var(--accent);margin-bottom:8px">📍 Geography Note</h4>
+<p style="color:var(--text2);font-size:0.9em">
+<strong>Downtown Sarasota:</strong> Casa Santa Marta<br>
+<strong>Palmer Ranch (south Sarasota):</strong> Mira<br>
+<strong>East Sarasota:</strong> Arietta<br>
+<strong>North Sarasota / University area:</strong> The Alloro, Bayou Oaks<br>
+<strong>Lakewood Ranch:</strong> The Pointe<br>
+<strong>Venice / Wellen Park:</strong> Solea, The Floridian Club<br>
+<strong>North Port:</strong> EKOS Arbor Park
+</p>
+</div>
+
+<div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--border)">
+<h4 style="color:var(--accent);margin-bottom:8px">📞 Next Steps</h4>
+<p style="color:var(--text2);font-size:0.9em">
+1. Pick your top 3–4 favorites from this list<br>
+2. Call to schedule tours (all offer in-person tours, some have virtual)<br>
+3. Ask about current specials — many run move-in promotions<br>
+4. Ask about waitlists — popular communities fill up fast in season
+</p>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+<p>Prepared with care for Janice Laird — February 2026</p>
+<p style="margin-top:8px">All communities listed are <strong>independent living, active adult 55+ apartment rentals</strong> — no assisted living or nursing facilities.</p>
+<p style="margin-top:4px">Pricing from official websites, Apartments.com, RentCafe, After55, and Seniorly. Subject to change.</p>
+<p style="margin-top:8px;font-size:0.8em">Report generated February 17, 2026</p>
+</div>
+
+<script>
+function initGalleries(){
+document.querySelectorAll('.card-gallery').forEach(g=>{
+const imgs=g.querySelectorAll('img');
+const nav=g.querySelector('.gallery-nav');
+if(!nav||imgs.length<2)return;
+nav.innerHTML='';
+imgs.forEach((_,i)=>{
+const d=document.createElement('button');
+d.className='gallery-dot'+(i===0?' active':'');
+d.onclick=()=>showSlide(g,i);
+nav.appendChild(d);
+});
+});
+}
+function showSlide(gallery,idx){
+const imgs=gallery.querySelectorAll('img');
+const dots=gallery.querySelectorAll('.gallery-dot');
+imgs.forEach((img,i)=>{img.classList.toggle('active',i===idx)});
+dots.forEach((dot,i)=>{dot.classList.toggle('active',i===idx)});
+gallery.dataset.current=idx;
+}
+function galleryNav(id,dir){
+const g=document.querySelector(`[data-gallery="${id}"]`);
+if(!g)return;
+const imgs=g.querySelectorAll('img');
+let cur=parseInt(g.dataset.current||0);
+cur=(cur+dir+imgs.length)%imgs.length;
+showSlide(g,cur);
+}
+function sortTable(col){
+const t=document.getElementById('compTable');
+const b=t.querySelector('tbody');
+const rows=[...b.querySelectorAll('tr')];
+const asc=t.dataset.sortCol==col&&t.dataset.sortDir==='asc';
+rows.sort((a,b_)=>{
+let av,bv;
+if(col===1){
+av=parseInt(a.cells[col].dataset.sort)||99999;
+bv=parseInt(b_.cells[col].dataset.sort)||99999;
+}else{
+av=a.cells[col].textContent.trim().toLowerCase();
+bv=b_.cells[col].textContent.trim().toLowerCase();
+}
+if(av<bv)return asc?1:-1;
+if(av>bv)return asc?-1:1;
+return 0;
+});
+rows.forEach(r=>b.appendChild(r));
+t.dataset.sortCol=col;
+t.dataset.sortDir=asc?'desc':'asc';
+}
+initGalleries();
+document.querySelectorAll('.card-gallery img').forEach(img=>{
+img.onerror=function(){
+this.style.display='none';
+const gallery=this.closest('.card-gallery');
+const remaining=[...gallery.querySelectorAll('img')].filter(i=>i.style.display!=='none');
+if(remaining.length===0){
+const name=gallery.closest('.card')?.querySelector('.card-name a')?.textContent||'Community';
+const fb=document.createElement('div');fb.className='no-img';
+fb.innerHTML='<div class="icon">🏠</div><div>'+name+'</div><div style="font-size:0.7em;color:var(--text2)">Visit website for photos</div>';
+gallery.appendChild(fb);
+}else if(this.classList.contains('active')&&remaining.length>0){remaining[0].classList.add('active')}
+const dots=gallery.querySelectorAll('.gallery-dot');
+const vis=[...gallery.querySelectorAll('img')].filter(i=>i.style.display!=='none');
+dots.forEach((d,i)=>{d.style.display=i<vis.length?'':'none'});
+};
+});
+</script>
+</body>
+</html>
