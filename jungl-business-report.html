@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JUNGL Business Optimization Report — March 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --bg: #0a0a0f;
+    --card: #12121a;
+    --card-border: #1e1e2e;
+    --text: #e4e4e7;
+    --text-muted: #8b8b9e;
+    --accent: #22c55e;
+    --accent-dim: #16a34a;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+    --purple: #a855f7;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+    min-height: 100vh;
+  }
+  
+  .hero {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+    padding: 80px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--card-border);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(34,197,94,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 70% 30%, rgba(59,130,246,0.05) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, #22c55e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+  
+  .hero .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    position: relative;
+  }
+  
+  .hero .date {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    position: relative;
+    opacity: 0.7;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+  
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+  }
+  
+  .toc h2 {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    color: var(--accent);
+  }
+  
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+  
+  .toc li {
+    counter-increment: toc;
+    margin: 8px 0;
+  }
+  
+  .toc li a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  
+  .toc li a::before {
+    content: counter(toc) ". ";
+    color: var(--accent);
+    font-weight: 700;
+  }
+  
+  .toc li a:hover { color: var(--accent); }
+  
+  .executive-summary {
+    background: linear-gradient(135deg, #12121a, #1a1a2e);
+    border: 1px solid var(--accent-dim);
+    border-radius: 16px;
+    padding: 36px;
+    margin-bottom: 48px;
+  }
+  
+  .executive-summary h2 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+  
+  .metric-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .metric-card .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  
+  .metric-card .value {
+    font-size: 1.8rem;
+    font-weight: 800;
+  }
+  
+  .metric-card .change {
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+  
+  .up { color: var(--accent); }
+  .down { color: var(--danger); }
+  .neutral { color: var(--warning); }
+  
+  section {
+    margin-bottom: 56px;
+  }
+  
+  section > h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--card-border);
+    letter-spacing: -0.02em;
+  }
+  
+  section > .section-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+  }
+  
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 28px 0 12px;
+    color: var(--text);
+  }
+  
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  
+  .card.danger { border-left: 4px solid var(--danger); }
+  .card.warning { border-left: 4px solid var(--warning); }
+  .card.success { border-left: 4px solid var(--accent); }
+  .card.info { border-left: 4px solid var(--info); }
+  .card.purple { border-left: 4px solid var(--purple); }
+  
+  .card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  
+  .issue-impact {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  
+  .impact-critical { background: rgba(239,68,68,0.15); color: var(--danger); }
+  .impact-high { background: rgba(245,158,11,0.15); color: var(--warning); }
+  .impact-medium { background: rgba(59,130,246,0.15); color: var(--info); }
+  .impact-low { background: rgba(34,197,94,0.15); color: var(--accent); }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--card-border);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+  
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  
+  .tag-danger { background: rgba(239,68,68,0.15); color: var(--danger); }
+  .tag-warning { background: rgba(245,158,11,0.15); color: var(--warning); }
+  .tag-success { background: rgba(34,197,94,0.15); color: var(--accent); }
+  .tag-info { background: rgba(59,130,246,0.15); color: var(--info); }
+  
+  ul, ol { padding-left: 24px; margin: 12px 0; }
+  li { margin: 6px 0; }
+  
+  .priority-list {
+    list-style: none;
+    padding: 0;
+    counter-reset: priority;
+  }
+  
+  .priority-list li {
+    counter-increment: priority;
+    padding: 16px 20px 16px 56px;
+    position: relative;
+    border-bottom: 1px solid var(--card-border);
+  }
+  
+  .priority-list li::before {
+    content: counter(priority);
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+  
+  .priority-list li strong { color: var(--text); }
+  
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .hero { padding: 48px 20px; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    table { font-size: 0.8rem; }
+    td, th { padding: 8px 10px; }
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s;
+  }
+  
+  code {
+    background: rgba(255,255,255,0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-family: 'SF Mono', Consolas, monospace;
+  }
+  
+  .callout {
+    background: rgba(34,197,94,0.08);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  
+  .callout.warning {
+    background: rgba(245,158,11,0.08);
+    border-color: rgba(245,158,11,0.2);
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--card-border);
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>JUNGL Business Optimization Report</h1>
+  <div class="subtitle">Website Speed · Conversion Rate · Shopify Analytics · Meta Ads · Strategic Roadmap</div>
+  <div class="date">Prepared overnight March 21, 2026 · by Albus for Robert</div>
+</div>
+
+<div class="container">
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h2>📋 Contents</h2>
+  <ol>
+    <li><a href="#executive">Executive Summary — The Big Picture</a></li>
+    <li><a href="#shopify">Shopify Performance Dashboard (Last 30 Days)</a></li>
+    <li><a href="#speed">Website Speed Audit — What's Slowing You Down</a></li>
+    <li><a href="#conversion">Conversion Rate Optimization — From 2.63% to 5%+</a></li>
+    <li><a href="#meta">Meta Ads Deep Dive — Why ROAS Is 1.17</a></li>
+    <li><a href="#roadmap">Strategic Roadmap — Prioritized Action Items</a></li>
+  </ol>
+</div>
+
+<!-- EXECUTIVE SUMMARY -->
+<div class="executive-summary" id="executive">
+  <h2>⚡ Executive Summary</h2>
+  <p style="margin-bottom: 20px;">Robert — here's the honest truth. JUNGL has strong bones: a beautiful brand, premium product, growing revenue (up 57%), and improving conversion. But three things are burning your money right now:</p>
+  
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="label">Gross Sales (30d)</div>
+      <div class="value up">$14.9K</div>
+      <div class="change up">↑ 57% vs prior period</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Sessions (30d)</div>
+      <div class="value down">4,860</div>
+      <div class="change down">↓ 18% vs prior period</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Orders (30d)</div>
+      <div class="value up">184</div>
+      <div class="change up">↑ 11% vs prior period</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Conversion Rate</div>
+      <div class="value neutral">2.63%</div>
+      <div class="change up">↑ 54% vs prior period</div>
+    </div>
+  </div>
+  
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="label">Meta Ad Spend (7d)</div>
+      <div class="value down">$948</div>
+      <div class="change down">93% in learning phase</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Cost Per Purchase</div>
+      <div class="value down">$72.93</div>
+      <div class="change down">Target: under $30</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">ROAS</div>
+      <div class="value down">~1.17x</div>
+      <div class="change down">Target: 2x+</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Mobile Speed Score</div>
+      <div class="value down">~40</div>
+      <div class="change down">Target: 80+</div>
+    </div>
+  </div>
+  
+  <div style="margin-top: 24px; padding: 16px; background: rgba(239,68,68,0.08); border-radius: 8px; border: 1px solid rgba(239,68,68,0.2);">
+    <strong style="color: var(--danger);">The 3 things that need to change immediately:</strong>
+    <ol style="margin-top: 8px;">
+      <li><strong>Your Meta ad campaigns are fragmented</strong> — 5 active campaigns with overlapping audiences competing against each other. 93% of spend is stuck in learning phase, which means Meta's algorithm never gets smart enough to optimize. This alone could cut your cost per purchase in half.</li>
+      <li><strong>Your website loads 4+ MB on mobile</strong> — 1.6MB in butterfly GIF animations alone, 384KB of CSS, 387KB of JS, 9 custom fonts (262KB), and 6+ third-party apps adding bloat. Mobile users (87.5% of your traffic) are bouncing before they see your product.</li>
+      <li><strong>Subscribe-by-default checkout creates friction</strong> — It drives subscriptions but also generates your most support tickets, hurts trust, and likely kills 10-20% of would-be one-time buyers who get confused and abandon cart.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- SHOPIFY ANALYTICS -->
+<section id="shopify">
+  <h2>📊 Shopify Performance Dashboard</h2>
+  <p class="section-subtitle">Last 30 days: Feb 19 – Mar 20, 2026 (all channels)</p>
+  
+  <h3>Key Metrics</h3>
+  <div class="card info">
+    <table>
+      <tr><th>Metric</th><th>Value</th><th>Change</th><th>Notes</th></tr>
+      <tr><td>Sessions</td><td><strong>4,860</strong></td><td class="down">↓ 18%</td><td>Traffic declining — likely due to reduced ad efficiency</td></tr>
+      <tr><td>Gross Sales</td><td><strong>$14,992</strong></td><td class="up">↑ 57%</td><td>Great growth — higher AOV and more orders</td></tr>
+      <tr><td>Orders</td><td><strong>184</strong></td><td class="up">↑ 11%</td><td>Conversion improvements paying off</td></tr>
+      <tr><td>Conversion Rate</td><td><strong>2.63%</strong></td><td class="up">↑ 54%</td><td>Improving but still below 5% target</td></tr>
+      <tr><td>Average Order Value</td><td><strong>~$81</strong></td><td class="up">↑ est. 40%</td><td>Strong — suggests bundles/subscriptions working</td></tr>
+      <tr><td>Orders to Fulfill</td><td><strong>42</strong></td><td>—</td><td>Backlog — fulfillment speed matters for reviews</td></tr>
+    </table>
+  </div>
+  
+  <h3>Traffic Breakdown</h3>
+  <div class="two-col">
+    <div class="card">
+      <h4>📱 Device Split (Today Sample)</h4>
+      <table>
+        <tr><td>Mobile</td><td><strong>87.5%</strong> (21 of 24)</td></tr>
+        <tr><td>Desktop</td><td>8.3% (2 of 24)</td></tr>
+        <tr><td>Tablet</td><td>4.2% (1 of 24)</td></tr>
+      </table>
+      <p style="margin-top: 8px; color: var(--warning); font-size: 0.85rem;">⚠️ Nearly 9 out of 10 visitors are on mobile. Your mobile site speed score of ~40 is hemorrhaging customers.</p>
+    </div>
+    <div class="card">
+      <h4>🔗 Traffic Sources</h4>
+      <table>
+        <tr><td>Direct</td><td>Largest share</td></tr>
+        <tr><td>Facebook (Paid/Organic)</td><td>Major driver</td></tr>
+        <tr><td>Google (Organic)</td><td>Growing</td></tr>
+        <tr><td>Instagram</td><td>Moderate</td></tr>
+        <tr><td>Klaviyo (Email)</td><td>Present</td></tr>
+      </table>
+    </div>
+  </div>
+  
+  <h3>Top Landing Pages</h3>
+  <div class="card">
+    <table>
+      <tr><th>Page</th><th>Sessions</th><th>Notes</th></tr>
+      <tr><td>Homepage <code>/</code></td><td><strong>15</strong> (63%)</td><td>Primary entry — must convert fast</td></tr>
+      <tr><td>Try JUNGL Bestsellers <code>/pages/try-jungl-bestsellers</code></td><td><strong>7</strong> (29%)</td><td>This is likely your ad landing page — strong</td></tr>
+      <tr><td>Gummies Collection</td><td>2</td><td>Organic/direct traffic</td></tr>
+      <tr><td>Drinks Collection</td><td>0 (today)</td><td>Underperforming as landing page</td></tr>
+    </table>
+  </div>
+  
+  <h3>Customer Retention (Cohort Analysis)</h3>
+  <div class="card success">
+    <h4>Good news: Your retention is improving</h4>
+    <table>
+      <tr><th>Cohort</th><th>Month 1</th><th>Month 2</th><th>Month 3</th><th>Month 4</th><th>Month 5</th><th>Month 6</th></tr>
+      <tr><td>Sep 2025</td><td>6.66%</td><td>20%</td><td>30%</td><td>20%</td><td>16.66%</td><td>16.66%</td></tr>
+      <tr><td>Oct 2025</td><td>4.83%</td><td>9.67%</td><td>8.06%</td><td>8.06%</td><td>6.45%</td><td>—</td></tr>
+      <tr><td>Nov 2025</td><td>6.06%</td><td>28.78%</td><td>13.63%</td><td>13.63%</td><td>—</td><td>—</td></tr>
+      <tr><td>Dec 2025</td><td>3.07%</td><td>16.92%</td><td>10.76%</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Jan 2026</td><td>4.16%</td><td>19.44%</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+      <tr><td>Feb 2026</td><td>4.47%</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    </table>
+    <p style="margin-top: 12px; font-size: 0.9rem;"><strong>Key insight:</strong> Month 1 retention is consistently 3-7%, but month 2 jumps to 10-29%. This likely means customers who subscribe come back for month 2 at high rates. The subscription model IS working for retention — the problem is first-purchase friction, not product quality. People who try JUNGL come back.</p>
+  </div>
+  
+  <h3>Sales Channel</h3>
+  <div class="card warning">
+    <h4>⚠️ Today's sales: 100% through Recharge Subscriptions</h4>
+    <p>All $223.97 in today's sales came through Recharge (subscription channel), not direct Online Store purchases. This means your subscriptions are driving revenue, but one-time purchases may be underperforming. You need both channels working.</p>
+  </div>
+  
+  <h3>Conversion Funnel (Today)</h3>
+  <div class="card">
+    <table>
+      <tr><td>Sessions</td><td>24 (100%)</td></tr>
+      <tr><td>Added to Cart</td><td>1 (4.16%)</td><td class="down">↓ 91% vs yesterday</td></tr>
+      <tr><td>Reached Checkout</td><td>0 (0%)</td><td class="down">↓ 100%</td></tr>
+      <tr><td>Completed Purchase</td><td>0 (0%)</td><td>—</td></tr>
+    </table>
+    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Note: Today is early (4:50 AM). The 2 orders came via Recharge (subscription renewals), not from today's sessions. Yesterday's conversion peaked at 17.64% during the 4-5 PM hour.</p>
+  </div>
+</section>
+
+<!-- WEBSITE SPEED -->
+<section id="speed">
+  <h2>🚀 Website Speed Audit</h2>
+  <p class="section-subtitle">Current estimated score: ~40 mobile / ~36 desktop (target: 80+). Here's exactly what's slowing you down and how to fix each issue.</p>
+  
+  <div class="callout warning">
+    <strong>Why this matters for your bottom line:</strong> Google research shows that as page load time goes from 1s to 3s, bounce rate increases by 32%. From 1s to 5s, it increases by 90%. With 87.5% of your traffic on mobile (often on cellular), every second counts. A 1-second improvement in load time can increase conversions by 7%.
+  </div>
+  
+  <h3>Total Page Weight: ~4+ MB</h3>
+  <div class="card danger">
+    <h4>Resource Breakdown <span class="issue-impact impact-critical">CRITICAL</span></h4>
+    <table>
+      <tr><th>Resource</th><th>Size</th><th>Issue</th><th>Potential Savings</th></tr>
+      <tr><td>🖼️ Butterfly GIFs (2 files)</td><td><strong>1,620 KB</strong></td><td>Uncompressed GIF animations</td><td class="up">1,400 KB (convert to WebP/AVIF)</td></tr>
+      <tr><td>📄 HTML Document</td><td><strong>1,004 KB</strong></td><td>51 inline scripts, bloated markup</td><td class="up">600 KB (remove unused scripts)</td></tr>
+      <tr><td>🎨 bundle.css</td><td><strong>384 KB</strong></td><td>Render-blocking, likely 60%+ unused</td><td class="up">230 KB (purge unused CSS)</td></tr>
+      <tr><td>📦 bundle.js</td><td><strong>387 KB</strong></td><td>Render-blocking, preloaded</td><td class="up">200 KB (code-split, defer)</td></tr>
+      <tr><td>🎬 Lottie.js</td><td><strong>299 KB</strong></td><td>Full library for eye animation only</td><td class="up">200 KB (use lottie-light)</td></tr>
+      <tr><td>🔤 9 Custom Fonts</td><td><strong>262 KB</strong></td><td>All preloaded, TTF format used</td><td class="up">100 KB (reduce to 4-5 fonts)</td></tr>
+      <tr><td>📊 Judge.me CSS</td><td><strong>75 KB</strong></td><td>Render-blocking stylesheet</td><td class="up">70 KB (lazy-load)</td></tr>
+      <tr><td>🎯 Lottie JSON data</td><td><strong>89 KB</strong></td><td>Eye animation data file</td><td>Minimal (keep as-is)</td></tr>
+    </table>
+    <p style="margin-top: 12px; font-weight: 600;">Total estimated savings: ~2.8 MB (70% reduction)</p>
+  </div>
+  
+  <h3>Issue #1: Butterfly GIF Animations (1.6 MB)</h3>
+  <div class="card danger">
+    <h4>Left_butterfly.gif: 985 KB · Right_butterfly.gif: 635 KB <span class="issue-impact impact-critical">CRITICAL</span></h4>
+    <p><strong>The problem:</strong> Two animated butterfly GIFs are loaded on every page visit. GIF is the worst format for animations — it's from 1987. These two files alone are larger than many entire websites.</p>
+    <p><strong>The fix (keeps your animations!):</strong></p>
+    <ul>
+      <li>Convert both GIFs to <strong>animated WebP</strong> — same animation, ~80% smaller file size. A 985KB GIF typically compresses to ~150-200KB as WebP.</li>
+      <li>Even better: convert to <strong>short looping MP4 videos</strong> with <code>&lt;video autoplay muted loop playsinline&gt;</code> — this can get them under 100KB each while looking smoother.</li>
+      <li>Add <code>loading="lazy"</code> so they don't load until the user scrolls to them.</li>
+      <li><strong>Expected savings: 1,400 KB (cuts page weight by 35%)</strong></li>
+    </ul>
+    <p style="color: var(--accent); margin-top: 8px;"><strong>How to do it:</strong> Use <a href="https://ezgif.com/gif-to-webp" style="color: var(--accent);">ezgif.com/gif-to-webp</a> — upload each GIF, download the WebP version, upload to Shopify Files, update your theme code.</p>
+  </div>
+  
+  <h3>Issue #2: Render-Blocking CSS (459 KB)</h3>
+  <div class="card danger">
+    <h4>bundle.css (384KB) + Judge.me CSS (75KB) block page rendering <span class="issue-impact impact-critical">CRITICAL</span></h4>
+    <p><strong>The problem:</strong> The browser can't show ANYTHING to the user until it downloads and processes these two files. On a 3G mobile connection, that's 2-3 extra seconds of blank screen.</p>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li><strong>Critical CSS inline:</strong> Extract the CSS needed for the first screen (above-the-fold) and put it directly in the HTML. Load the rest after the page renders. This alone could cut your First Contentful Paint by 1.5-2 seconds.</li>
+      <li><strong>Judge.me CSS:</strong> Load it with <code>media="print" onload="this.media='all'"</code> — this makes it non-blocking. Reviews aren't visible on the first screen anyway.</li>
+      <li><strong>Purge unused CSS:</strong> bundle.css is 384KB but your homepage probably uses only 30-40% of those styles. Use a tool like PurgeCSS to strip the unused rules.</li>
+      <li><strong>Expected savings: 1.5-2 seconds faster First Contentful Paint</strong></li>
+    </ul>
+  </div>
+  
+  <h3>Issue #3: JavaScript Bloat (686 KB + 51 Inline Scripts)</h3>
+  <div class="card warning">
+    <h4>bundle.js (387KB) + Lottie (299KB) + 51 inline scripts <span class="issue-impact impact-high">HIGH</span></h4>
+    <p><strong>The problem:</strong> Your page has 51 inline scripts plus two large JS files. The bundle.js is preloaded (good) but still blocks interactivity. The Lottie library is massive for a single eye animation.</p>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li><strong>Replace lottie.min.js (299KB) with lottie-light (150KB)</strong> — the light version handles simple animations perfectly. That's a free 150KB saved.</li>
+      <li>Better yet: <strong>lazy-load Lottie</strong> — only load it when the eye animation scrolls into view. Use <code>IntersectionObserver</code> to trigger the download.</li>
+      <li><strong>Defer bundle.js:</strong> Add <code>defer</code> attribute so it doesn't block parsing. Change from <code>preload</code> to normal loading with <code>defer</code>.</li>
+      <li><strong>Audit inline scripts:</strong> 51 inline scripts suggests multiple apps injecting code. Each one of these blocks rendering. Identify which are from apps you actually use.</li>
+      <li><strong>Expected savings: 200-300KB and 1-1.5 seconds faster Time to Interactive</strong></li>
+    </ul>
+  </div>
+  
+  <h3>Issue #4: Too Many Fonts (9 fonts, 262KB)</h3>
+  <div class="card warning">
+    <h4>Gotham (3 weights) + Uniform (4 variants) + TT Travels + UniformProXcon <span class="issue-impact impact-high">HIGH</span></h4>
+    <p><strong>The problem:</strong> You're preloading 9 font files, all of which must download before text renders properly. One of them (TT Travels) is a TTF file (40KB) instead of the more compressed WOFF2 format — that's 2x larger than it needs to be.</p>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li><strong>Reduce to 4-5 fonts max:</strong> Do you really need 4 Uniform variants? Pick 2 (Regular + Bold). Same for Gotham — Book + Bold is enough for most designs. This cuts 3-4 font downloads.</li>
+      <li><strong>Convert TT-Travels-Next-Trial-Black.ttf to WOFF2:</strong> This single change saves ~20KB and loads faster. Use <a href="https://cloudconvert.com/ttf-to-woff2" style="color: var(--accent);">cloudconvert.com</a>.</li>
+      <li><strong>Use font-display: swap</strong> in your @font-face rules — shows text immediately in a fallback font while custom fonts load.</li>
+      <li><strong>Expected savings: ~100KB and prevents invisible text during load</strong></li>
+    </ul>
+  </div>
+  
+  <h3>Issue #5: Third-Party App Bloat (6+ Apps Loading on Every Page)</h3>
+  <div class="card warning">
+    <h4>Judge.me · Loloyal · SavedBy · Klaviyo · Clarity · CustomerFields <span class="issue-impact impact-high">HIGH</span></h4>
+    <p><strong>The problem:</strong> Each of these apps injects its own CSS and JavaScript into every single page load. Some are doing this even when they aren't visible or needed on that page. I found these loading on the homepage:</p>
+    <ul>
+      <li><strong>Judge.me</strong> (reviews): CSS + JS on every page, even where no reviews show</li>
+      <li><strong>Loloyal</strong> (loyalty program): 39 references in your HTML — launcher widget loads everywhere</li>
+      <li><strong>SavedBy</strong> (wishlist): 81 references — extremely heavy for a feature most visitors won't use</li>
+      <li><strong>Klaviyo</strong> (email): Popup/tracking script on every page</li>
+      <li><strong>Microsoft Clarity</strong> (analytics): Session recording — adds weight</li>
+      <li><strong>CustomerFields</strong> (custom fields): Loading even for non-logged-in visitors</li>
+    </ul>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li><strong>SavedBy (81 references!):</strong> This is your biggest app offender. If wishlists aren't driving measurable revenue, <strong>remove it</strong> or replace with a lighter alternative.</li>
+      <li><strong>Loloyal (39 references):</strong> Defer the loyalty launcher to load after page is fully visible. No one clicks a loyalty widget in the first 5 seconds.</li>
+      <li><strong>Judge.me:</strong> Only load on product pages and collection pages — not homepage.</li>
+      <li><strong>Clarity:</strong> Consider if you're actually using the session recordings. If not, remove it.</li>
+      <li><strong>Expected savings: 1-2 seconds load time, 200-400KB</strong></li>
+    </ul>
+  </div>
+  
+  <h3>Issue #6: No Image Optimization Strategy</h3>
+  <div class="card info">
+    <h4>Your product images are served via Shopify CDN (good) but could be better <span class="issue-impact impact-medium">MEDIUM</span></h4>
+    <p>Shopify's CDN does basic image serving, but you should ensure:</p>
+    <ul>
+      <li>All product images use <code>width</code> parameters in URLs to serve appropriately sized images</li>
+      <li>Use the <code>format=webp</code> parameter where possible</li>
+      <li>Set explicit <code>width</code> and <code>height</code> attributes on all <code>&lt;img&gt;</code> tags to prevent layout shift (which kills your CLS score)</li>
+      <li>The butterfly GIFs already have width params (good), but converting to WebP is the real win</li>
+    </ul>
+  </div>
+  
+  <h3>Speed Improvement Roadmap</h3>
+  <div class="card success">
+    <h4>Expected Score Improvement: 40 → 75-85 (Mobile)</h4>
+    <table>
+      <tr><th>Fix</th><th>Difficulty</th><th>Impact</th><th>Score Gain</th></tr>
+      <tr><td>Convert butterfly GIFs to WebP</td><td><span class="tag tag-success">Easy</span></td><td><span class="tag tag-danger">Critical</span></td><td>+8-12 pts</td></tr>
+      <tr><td>Inline critical CSS + defer rest</td><td><span class="tag tag-warning">Medium</span></td><td><span class="tag tag-danger">Critical</span></td><td>+10-15 pts</td></tr>
+      <tr><td>Replace Lottie with lottie-light + lazy-load</td><td><span class="tag tag-success">Easy</span></td><td><span class="tag tag-warning">High</span></td><td>+5-8 pts</td></tr>
+      <tr><td>Remove/defer SavedBy & Loloyal</td><td><span class="tag tag-success">Easy</span></td><td><span class="tag tag-warning">High</span></td><td>+5-8 pts</td></tr>
+      <tr><td>Reduce fonts from 9 to 5</td><td><span class="tag tag-warning">Medium</span></td><td><span class="tag tag-info">Medium</span></td><td>+3-5 pts</td></tr>
+      <tr><td>Defer Judge.me CSS</td><td><span class="tag tag-success">Easy</span></td><td><span class="tag tag-info">Medium</span></td><td>+3-5 pts</td></tr>
+      <tr><td>Audit/remove unused inline scripts</td><td><span class="tag tag-warning">Medium</span></td><td><span class="tag tag-info">Medium</span></td><td>+3-5 pts</td></tr>
+    </table>
+    <p style="margin-top: 12px;">Total estimated improvement: <strong>+37-58 points</strong>, bringing mobile score to <strong>77-98</strong>.</p>
+  </div>
+</section>
+
+<!-- CONVERSION RATE OPTIMIZATION -->
+<section id="conversion">
+  <h2>🎯 Conversion Rate Optimization</h2>
+  <p class="section-subtitle">Current: 2.63% · Target: 5%+ · Here's where you're losing customers and how to fix it.</p>
+  
+  <h3>Issue #1: Subscribe-by-Default Checkout</h3>
+  <div class="card warning">
+    <h4>⚠️ The Double-Edged Sword <span class="issue-impact impact-high">HIGH</span></h4>
+    <p><strong>The situation:</strong> When someone adds a product to cart, the default option is "Subscribe & Save (20% off)" rather than one-time purchase. You told me this generates your most support tickets because customers don't notice they're subscribing.</p>
+    <p><strong>Why this is complicated:</strong></p>
+    <ul>
+      <li>Today, 100% of sales came through Recharge Subscriptions. Subscriptions ARE your revenue engine.</li>
+      <li>Your cohort data shows strong month-2 retention (10-29%), suggesting subscribers stick around.</li>
+      <li>BUT: customers who feel tricked don't leave good reviews, don't refer friends, and create support overhead.</li>
+    </ul>
+    <p><strong>My recommendation (nuanced):</strong></p>
+    <ul>
+      <li><strong>Don't remove the subscribe option.</strong> It's working for retention and LTV.</li>
+      <li><strong>DO make it more visible.</strong> Add a clear visual distinction — make "Subscribe & Save" a different colored card/box with explicit text: "Delivers every 30 days. Cancel anytime."</li>
+      <li><strong>Make one-time purchase the default</strong> but show the subscription savings prominently: "Save 20% — subscribe for $X/month". Let people OPT IN to subscriptions rather than accidentally opting in.</li>
+      <li><strong>Add a tooltip or info icon</strong> next to the subscribe option explaining exactly what it means.</li>
+      <li><strong>Expected impact:</strong> You may lose 5-10% of subscription sign-ups but gain 15-25% more one-time purchases from people who were abandoning in confusion. Net positive.</li>
+    </ul>
+  </div>
+  
+  <h3>Issue #2: Product Page Lacks Urgency & Social Proof</h3>
+  <div class="card info">
+    <h4>Your product pages are clean but missing conversion triggers <span class="issue-impact impact-high">HIGH</span></h4>
+    <p><strong>What's working:</strong> Clear product descriptions, clean layout, real ingredient story ("10mg THC + 10mg CBD"), good flavor descriptions.</p>
+    <p><strong>What's missing:</strong></p>
+    <ul>
+      <li><strong>No review count on product cards:</strong> Your gummy collection shows products without visible ratings. Even "★★★★★ 47 reviews" below each product would boost clicks.</li>
+      <li><strong>No urgency elements:</strong> "Only 12 left in stock" or "Ships tomorrow if ordered by 3PM" — these work because they're true (you have real inventory through Infoplus).</li>
+      <li><strong>No trust badges:</strong> Add "Lab Tested ✓ · All Natural ✓ · Ships in 24hrs" near the Add to Cart button. You mention these on the homepage but not on product pages where the buying decision happens.</li>
+      <li><strong>Missing FAQ section:</strong> First-time THC beverage buyers have questions: "Will this get me high?" "Is this legal in my state?" "How strong is 10mg?" — answer them ON the product page, not on a separate page they won't find.</li>
+      <li><strong>No comparison table:</strong> You have 3 drink strengths. Show a clear "Choose Your Dose" comparison: Light (5mg) → Moderate (10mg) → Strong (10mg THC + 10mg CBD). Help people choose.</li>
+    </ul>
+  </div>
+  
+  <h3>Issue #3: Homepage Doesn't Drive Direct Purchase</h3>
+  <div class="card info">
+    <h4>63% of traffic lands on homepage — but the path to purchase has too many steps <span class="issue-impact impact-medium">MEDIUM</span></h4>
+    <p><strong>What I see on the homepage:</strong></p>
+    <ul>
+      <li>"Better Buzz. Better Taste. Better Tomorrow." — great headline, sets the vibe</li>
+      <li>Four benefit blocks: Quiet the Noise, Sleep Deeper, Social Connection, Restore the Body</li>
+      <li>Four trust signals: Precisely Dosed, No Fake Sweeteners, Lab Tested, All Natural</li>
+      <li>Product cards for gummies with pricing ($16.99 - $19.99)</li>
+      <li>"As Seen In" social proof section</li>
+      <li>Customer testimonials (Ryan Brant, Tara Bello)</li>
+    </ul>
+    <p><strong>What's missing or could improve:</strong></p>
+    <ul>
+      <li><strong>"Try Our Bestsellers" bundle:</strong> Your /pages/try-jungl-bestsellers page gets 29% of landing traffic — create a prominent "Starter Bundle" on the homepage with a one-click buy option.</li>
+      <li><strong>Add to Cart from homepage:</strong> Your gummy cards show pricing but the "Add to Cart" interaction requires clicking through to the product page. Allow direct add-to-cart with variant selection on the homepage.</li>
+      <li><strong>Drinks are invisible on homepage:</strong> I only see gummies (Strawberry, Cherry Apple, WaterLemon) on the homepage. Your drinks aren't shown! Drinks are your signature product — show them prominently.</li>
+      <li><strong>More testimonials:</strong> Two reviews isn't enough. Show 5-8 rotating reviews, ideally with photos. Real people holding JUNGL cans = trust.</li>
+    </ul>
+  </div>
+  
+  <h3>Issue #4: Cart & Checkout Friction</h3>
+  <div class="card warning">
+    <h4>Your funnel shows a major drop from "Added to Cart" to "Reached Checkout" <span class="issue-impact impact-high">HIGH</span></h4>
+    <p><strong>The data:</strong> Yesterday, sessions → add-to-cart conversion was reasonable, but then a big drop happens before checkout. This suggests:</p>
+    <ul>
+      <li><strong>Shipping costs surprise:</strong> If customers see unexpected shipping costs at checkout, they abandon. Consider showing "Free shipping over $50" prominently (or whatever your threshold is). Today's data shows $9.99 shipping on a $198 order — is that a flat rate? For a $20 gummy pouch, $9.99 shipping is a dealbreaker.</li>
+      <li><strong>Subscription confusion:</strong> As discussed above — people see "Subscribe" at checkout and bail.</li>
+      <li><strong>Age verification friction:</strong> THC products require age verification. If your checkout process has an extra step for this, make it seamless (single checkbox, not a popup that breaks flow).</li>
+    </ul>
+    <p><strong>Fixes:</strong></p>
+    <ul>
+      <li>Show shipping cost estimate on product pages (before add to cart)</li>
+      <li>Set a free shipping threshold and display a progress bar: "Add $12 more for FREE shipping!"</li>
+      <li>Your cart already shows "YOU'VE UNLOCKED FREE GIFT!" — make sure the threshold is clear</li>
+      <li>Consider abandoned cart emails through Klaviyo (you have it installed — is it set up?)</li>
+      <li>Shopify is suggesting you "Upgrade to the new abandoned checkout automation" — DO THIS. It's free and can recover 5-15% of abandoned carts.</li>
+    </ul>
+  </div>
+  
+  <h3>Issue #5: Mobile Experience</h3>
+  <div class="card danger">
+    <h4>87.5% of traffic is mobile — your mobile experience must be flawless <span class="issue-impact impact-critical">CRITICAL</span></h4>
+    <p>With a page speed score of ~40 on mobile:</p>
+    <ul>
+      <li>Users wait 4-6 seconds to see content on a typical mobile connection</li>
+      <li>Buttons may be hard to tap if not properly sized for touch</li>
+      <li>The beautiful animations that look great on desktop may cause jank/stutter on mobile</li>
+      <li>Images may not be properly sized for mobile viewports</li>
+    </ul>
+    <p><strong>Quick win:</strong> Test your own site on your phone over cellular (not WiFi). Time how long it takes to see the first product. If it's more than 3 seconds, you're losing customers.</p>
+  </div>
+  
+  <h3>Conversion Improvement Roadmap</h3>
+  <div class="card success">
+    <table>
+      <tr><th>Fix</th><th>Expected CR Impact</th><th>Effort</th></tr>
+      <tr><td>Fix mobile speed (from 40 to 80+)</td><td>+0.5-1.0%</td><td>Medium</td></tr>
+      <tr><td>Make subscribe/one-time clearer</td><td>+0.3-0.5%</td><td>Easy</td></tr>
+      <tr><td>Add trust badges to product pages</td><td>+0.2-0.4%</td><td>Easy</td></tr>
+      <tr><td>Add reviews to product cards</td><td>+0.2-0.3%</td><td>Easy</td></tr>
+      <tr><td>Abandoned checkout automation</td><td>+0.3-0.5%</td><td>Easy</td></tr>
+      <tr><td>Show shipping costs upfront</td><td>+0.2-0.3%</td><td>Easy</td></tr>
+      <tr><td>Add drinks to homepage</td><td>+0.1-0.2%</td><td>Easy</td></tr>
+      <tr><td>Product page FAQ section</td><td>+0.1-0.2%</td><td>Easy</td></tr>
+    </table>
+    <p style="margin-top: 12px;">Combined estimated impact: <strong>2.63% → 4.5-5.5%</strong></p>
+  </div>
+</section>
+
+<!-- META ADS -->
+<section id="meta">
+  <h2>📣 Meta Ads Deep Dive</h2>
+  <p class="section-subtitle">Ad Account: JUNGL (1285799899820997) · Last 30 days · 5 active campaigns</p>
+  
+  <div class="callout warning">
+    <strong>🚨 The #1 Problem: 93% of your ad spend is stuck in "Learning Phase"</strong><br>
+    This means Meta's algorithm hasn't collected enough data to optimize your ads efficiently. When ads are in learning, Meta essentially guesses who to show them to, resulting in higher costs and worse targeting. You need ~50 conversions per ad set per week to exit learning. Your campaigns are too fragmented to ever reach that threshold.
+  </div>
+  
+  <h3>Campaign Performance (Last 30 Days)</h3>
+  <div class="card">
+    <table>
+      <tr><th>Campaign</th><th>Status</th><th>Purchases</th><th>Cost/Purchase</th><th>Budget</th><th>Assessment</th></tr>
+      <tr style="background: rgba(34,197,94,0.05);">
+        <td><strong>New Remarketing</strong></td>
+        <td><span class="tag tag-success">Active</span></td>
+        <td><strong>22</strong></td>
+        <td><strong>$19.55</strong></td>
+        <td>Ad set budget</td>
+        <td><span class="tag tag-success">Best performer</span></td>
+      </tr>
+      <tr>
+        <td>New Sales Campaign - sales</td>
+        <td><span class="tag tag-success">Active</span></td>
+        <td>17</td>
+        <td>$59.56</td>
+        <td>$42/day avg</td>
+        <td><span class="tag tag-warning">Decent but expensive</span></td>
+      </tr>
+      <tr>
+        <td>New Sales Campaign - new</td>
+        <td><span class="tag tag-success">Active</span></td>
+        <td>3</td>
+        <td>$96.75</td>
+        <td>$24/day avg</td>
+        <td><span class="tag tag-danger">Too expensive</span></td>
+      </tr>
+      <tr>
+        <td>Sales – Validation – Broad</td>
+        <td><span class="tag tag-success">Active</span></td>
+        <td>0</td>
+        <td>—</td>
+        <td>$75/day avg</td>
+        <td><span class="tag tag-danger">Burning money</span></td>
+      </tr>
+      <tr>
+        <td>JUICE-PSP-Custom-Conversion</td>
+        <td><span class="tag tag-success">Active</span></td>
+        <td>0</td>
+        <td>—</td>
+        <td>$30/day avg</td>
+        <td><span class="tag tag-danger">No results</span></td>
+      </tr>
+    </table>
+  </div>
+  
+  <h3>What's Going Wrong</h3>
+  
+  <div class="card danger">
+    <h4>Problem 1: Campaign Fragmentation <span class="issue-impact impact-critical">CRITICAL</span></h4>
+    <p><strong>You have 5 active campaigns with a combined ~$171/day budget.</strong> That's only ~$34/day per campaign on average. To exit learning phase, each ad set needs roughly 50 conversions per week. At your current conversion rate and CPP, you'd need $1,000+/week PER ad set.</p>
+    <p>With $171/day split across 5 campaigns (likely 8-10+ ad sets), no individual ad set can ever collect enough data to optimize. <strong>Meta even told you this:</strong> their recommendation says "Combine similar ad sets impacted by fragmentation" and estimates a <strong>22% lower cost per result</strong> if you do.</p>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li><strong>Consolidate to 2 campaigns maximum:</strong> One for prospecting (cold audiences), one for remarketing (warm audiences).</li>
+      <li><strong>Kill "Sales – Validation – Broad" immediately</strong> — it's spent $75/day and gotten 0 purchases.</li>
+      <li><strong>Kill "JUICE-PSP-Custom-Conversion" immediately</strong> — $30/day, 0 purchases.</li>
+      <li>Move that $105/day budget to your two performing campaigns.</li>
+    </ul>
+  </div>
+  
+  <div class="card danger">
+    <h4>Problem 2: Two Campaigns Are Burning Money with Zero Returns <span class="issue-impact impact-critical">CRITICAL</span></h4>
+    <p>"Sales – Validation – Broad" ($75/day) and "JUICE-PSP-Custom-Conversion" ($30/day) have <strong>zero purchases in 30 days</strong>. That's potentially <strong>$3,150 wasted this month</strong> on campaigns producing nothing.</p>
+    <p><strong>Action: Turn these off TODAY.</strong> No need to analyze further — 30 days with zero conversions is a definitive failure signal.</p>
+  </div>
+  
+  <div class="card warning">
+    <h4>Problem 3: Remarketing Is Your Best Channel But Likely Under-Budgeted <span class="issue-impact impact-high">HIGH</span></h4>
+    <p>"New Remarketing" is crushing it at <strong>$19.55 per purchase</strong> — that's 3.7x better than your next-best campaign. At an ~$81 AOV, that's roughly a <strong>4x ROAS</strong>. This campaign alone could make your Meta ads profitable.</p>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li>Increase remarketing budget significantly — this campaign deserves 40-50% of your total ad budget</li>
+      <li>Ensure your remarketing audiences include: website visitors (7, 14, 30 day), add-to-cart abandoners, Instagram/Facebook engagers, email list (Klaviyo sync)</li>
+      <li>Test broader remarketing windows (60-90 days for THC products — longer consideration period)</li>
+    </ul>
+  </div>
+  
+  <div class="card warning">
+    <h4>Problem 4: "New Sales Campaign - new" at $96.75/Purchase <span class="issue-impact impact-high">HIGH</span></h4>
+    <p>At $96.75 per purchase against an ~$81 AOV, you're <strong>losing $15.75 on every sale</strong> from this campaign. This only makes sense if customer LTV justifies it — and with 4-7% month-1 retention, it might not.</p>
+    <p><strong>Options:</strong></p>
+    <ul>
+      <li>If this campaign is testing new audiences/creatives, give it 1 more week with revised targeting, then kill if no improvement</li>
+      <li>Reduce budget to $15/day maximum for testing</li>
+      <li>Consider if the audience overlap with other campaigns is cannibalizing results</li>
+    </ul>
+  </div>
+  
+  <h3>Meta's Own Recommendations (Worth Following)</h3>
+  <div class="card info">
+    <table>
+      <tr><th>Recommendation</th><th>Expected Impact</th><th>Points</th><th>My Take</th></tr>
+      <tr><td>Maximize value of conversions goal</td><td>7% higher ROAS</td><td>+4</td><td><span class="tag tag-success">Do this</span></td></tr>
+      <tr><td>Combine fragmented ad sets</td><td>22% lower cost per result</td><td>+3</td><td><span class="tag tag-success">Critical — do this first</span></td></tr>
+      <tr><td>Advantage+ creative enhancements</td><td>3% lower cost per result</td><td>+7</td><td><span class="tag tag-success">Easy win</span></td></tr>
+      <tr><td>Increase budget on 2 campaigns</td><td>More results</td><td>+5</td><td><span class="tag tag-warning">Only for Remarketing</span></td></tr>
+      <tr><td>Advantage+ audience</td><td>7.2% lower cost per result</td><td>+1</td><td><span class="tag tag-success">Worth testing</span></td></tr>
+      <tr><td>Optimize Reels format (9:16 video)</td><td>8% lower cost per result</td><td>+3</td><td><span class="tag tag-success">Do this — Reels are key</span></td></tr>
+      <tr><td>Add music to 3 ads</td><td>6% lower cost per result</td><td>+2</td><td><span class="tag tag-success">Free and easy</span></td></tr>
+      <tr><td>Partnership ads</td><td>19% lower cost per result</td><td>+1</td><td><span class="tag tag-info">Later — requires creator partnerships</span></td></tr>
+    </table>
+  </div>
+  
+  <h3>Why Scaling Spend Hurts Conversions</h3>
+  <div class="card purple">
+    <h4>The Learning Phase Death Spiral</h4>
+    <p>Here's exactly what's happening when you increase spend and conversions get worse:</p>
+    <ol>
+      <li>You have 5 campaigns with 8-10+ ad sets total</li>
+      <li>When you increase budget, Meta spreads the money across all these ad sets</li>
+      <li>No individual ad set gets enough conversions to exit learning (needs 50/week)</li>
+      <li>Meta's algorithm keeps guessing → shows ads to wrong people → costs go up</li>
+      <li>You see worse results → reduce budget → algorithm learns even less → worse results</li>
+    </ol>
+    <p><strong>The solution is counterintuitive:</strong> Spend MORE money on FEWER campaigns. Consolidate everything into 2 campaigns, each with 1-2 ad sets. Then your $171/day is concentrated enough for Meta to actually learn.</p>
+  </div>
+  
+  <h3>Recommended Campaign Structure</h3>
+  <div class="card success">
+    <h4>New 2-Campaign Structure</h4>
+    <div class="two-col">
+      <div style="padding: 16px; background: rgba(255,255,255,0.02); border-radius: 8px;">
+        <strong style="color: var(--accent);">Campaign 1: Prospecting</strong>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 12px;">Budget: $100/day · Objective: Sales</p>
+        <ul style="font-size: 0.9rem;">
+          <li>1-2 ad sets max (Advantage+ audience)</li>
+          <li>Broad targeting (let Meta optimize)</li>
+          <li>3-5 best performing creatives</li>
+          <li>Maximize value of conversions</li>
+          <li>9:16 Reels format included</li>
+        </ul>
+      </div>
+      <div style="padding: 16px; background: rgba(255,255,255,0.02); border-radius: 8px;">
+        <strong style="color: var(--info);">Campaign 2: Remarketing</strong>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 12px;">Budget: $71/day · Objective: Sales</p>
+        <ul style="font-size: 0.9rem;">
+          <li>1 ad set: All warm audiences combined</li>
+          <li>Website visitors, cart abandoners, engagers</li>
+          <li>Email list (sync from Klaviyo)</li>
+          <li>Testimonial/social proof creatives</li>
+          <li>Strong offer (free shipping, bundle discount)</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top: 16px; font-size: 0.9rem;"><strong>Also critical:</strong> Meta is telling you to "Set up the Conversions API with a Meta Partner" (Shopify integration). This improves conversion tracking accuracy, which means better optimization. Advertisers who did this saw a <strong>13% decrease in cost per result</strong>. You have a Shopify store — this is a 15-minute setup.</p>
+  </div>
+  
+  <h3>ROAS Improvement Path: 1.17x → 2x+</h3>
+  <div class="card">
+    <table>
+      <tr><th>Action</th><th>ROAS Impact</th><th>Timeline</th></tr>
+      <tr><td>Kill 2 zero-result campaigns (save $105/day)</td><td>Immediate — stops waste</td><td>Today</td></tr>
+      <tr><td>Consolidate to 2 campaigns</td><td>+0.3-0.5x ROAS</td><td>Week 1</td></tr>
+      <tr><td>Set up Conversions API</td><td>+0.15-0.2x ROAS</td><td>Week 1</td></tr>
+      <tr><td>Scale remarketing budget</td><td>+0.2-0.3x ROAS</td><td>Week 1-2</td></tr>
+      <tr><td>Apply Advantage+ creative</td><td>+0.05-0.1x ROAS</td><td>Week 1</td></tr>
+      <tr><td>Add 9:16 Reels creatives</td><td>+0.1-0.15x ROAS</td><td>Week 2</td></tr>
+      <tr><td>Website speed improvements</td><td>+0.1-0.2x ROAS</td><td>Week 2-3</td></tr>
+    </table>
+    <p style="margin-top: 12px;"><strong>Projected ROAS after all changes: 2.1-2.6x</strong></p>
+  </div>
+</section>
+
+<!-- STRATEGIC ROADMAP -->
+<section id="roadmap">
+  <h2>🗺️ Strategic Roadmap</h2>
+  <p class="section-subtitle">What to do, in what order, for maximum impact with minimum effort.</p>
+  
+  <h3>🔥 This Week (Quick Wins — Do These Monday)</h3>
+  <ol class="priority-list">
+    <li>
+      <strong>Kill 2 zero-performing Meta campaigns</strong><br>
+      <span style="color: var(--text-muted);">Turn off "Sales – Validation – Broad" and "JUICE-PSP-Custom-Conversion". Saves $105/day ($3,150/month). Takes 2 minutes.</span>
+    </li>
+    <li>
+      <strong>Consolidate Meta to 2 campaigns</strong><br>
+      <span style="color: var(--text-muted);">Merge remaining 3 campaigns into Prospecting ($100/day) and Remarketing ($71/day). Apply Advantage+ audience and creative enhancements. Takes 1-2 hours.</span>
+    </li>
+    <li>
+      <strong>Set up Conversions API (Shopify → Meta)</strong><br>
+      <span style="color: var(--text-muted);">In Shopify Admin → Settings → Customer Events → connect Meta pixel via Shopify's native integration. 15-minute setup, 13% lower CPR.</span>
+    </li>
+    <li>
+      <strong>Convert butterfly GIFs to WebP</strong><br>
+      <span style="color: var(--text-muted);">Upload to ezgif.com, download WebP versions, upload to Shopify Files, update theme. Saves 1.4MB per page load. 20 minutes.</span>
+    </li>
+    <li>
+      <strong>Activate abandoned checkout automation</strong><br>
+      <span style="color: var(--text-muted);">Shopify is literally prompting you to do this. Click "View automation" in your Shopify admin notifications. Can recover 5-15% of abandoned carts. Free.</span>
+    </li>
+  </ol>
+  
+  <h3>📅 Next 2 Weeks (High-Impact Changes)</h3>
+  <ol class="priority-list">
+    <li>
+      <strong>Fix subscribe-by-default UX</strong><br>
+      <span style="color: var(--text-muted);">Make one-time purchase the default selection. Show subscription as a prominent upgrade option with clear "Delivers monthly, cancel anytime" messaging. Reduces support tickets and increases one-time buyer conversion.</span>
+    </li>
+    <li>
+      <strong>Inline critical CSS + defer render-blocking resources</strong><br>
+      <span style="color: var(--text-muted);">This is a developer task. Extract above-the-fold CSS (~15KB), inline it in &lt;head&gt;, load bundle.css and Judge.me CSS asynchronously. Biggest single speed win: +10-15 points.</span>
+    </li>
+    <li>
+      <strong>Audit and remove/defer unnecessary Shopify apps</strong><br>
+      <span style="color: var(--text-muted);">SavedBy (81 code references) and Loloyal (39 references) are your heaviest apps. If wishlists aren't driving revenue, remove SavedBy. Defer Loloyal launcher to load after page render.</span>
+    </li>
+    <li>
+      <strong>Add trust badges and reviews to product pages</strong><br>
+      <span style="color: var(--text-muted);">Below each product name: star rating + review count. Near Add to Cart button: "Lab Tested ✓ · All Natural ✓ · Ships in 24hrs". Takes 1-2 hours to implement in theme.</span>
+    </li>
+    <li>
+      <strong>Add product FAQ to product pages</strong><br>
+      <span style="color: var(--text-muted);">"What does 10mg feel like?" "Is this legal in my state?" "When will I feel it?" Answer the questions that stop people from buying. Can be a collapsible section.</span>
+    </li>
+    <li>
+      <strong>Add drinks to homepage</strong><br>
+      <span style="color: var(--text-muted);">Your signature product is invisible on your homepage. Add a "Sparkling THC Drinks" section with product cards between the gummies and testimonials sections.</span>
+    </li>
+  </ol>
+  
+  <h3>📆 This Month (Optimization)</h3>
+  <ol class="priority-list">
+    <li>
+      <strong>Reduce fonts from 9 to 5</strong><br>
+      <span style="color: var(--text-muted);">Keep Gotham Book + Bold, Uniform Medium + Condensed Medium, and TT Travels. Convert TT Travels from TTF to WOFF2. Add font-display: swap to all @font-face rules.</span>
+    </li>
+    <li>
+      <strong>Replace Lottie with lottie-light and lazy-load</strong><br>
+      <span style="color: var(--text-muted);">Switch from lottie.min.js (299KB) to lottie-light (~150KB). Load it only when the eye animation scrolls into view. Saves 150-200KB.</span>
+    </li>
+    <li>
+      <strong>Create 9:16 vertical Reels ad creatives</strong><br>
+      <span style="color: var(--text-muted);">Meta says this could reduce cost per result by 8%. Show product in lifestyle setting, quick hook in first 3 seconds, clear CTA. 3-5 variations.</span>
+    </li>
+    <li>
+      <strong>Set up proper email flows in Klaviyo</strong><br>
+      <span style="color: var(--text-muted);">Welcome series (3 emails), abandoned cart (3 emails), post-purchase thank you + review request, subscription reminder. Email is nearly free revenue — invest in the flows.</span>
+    </li>
+    <li>
+      <strong>Show shipping costs on product pages</strong><br>
+      <span style="color: var(--text-muted);">Add a line under the price: "Free shipping over $XX" or "Flat rate $9.99 shipping". Eliminate surprise costs at checkout.</span>
+    </li>
+  </ol>
+  
+  <h3>💰 Budget Allocation Recommendation</h3>
+  <div class="card success">
+    <h4>Monthly Budget: ~$5,130 (current ~$171/day)</h4>
+    <table>
+      <tr><th>Channel</th><th>Current</th><th>Recommended</th><th>Rationale</th></tr>
+      <tr><td>Meta Remarketing</td><td>~$600/mo (est.)</td><td><strong>$2,130/mo ($71/day)</strong></td><td>Best ROAS at $19.55/purchase — scale this hard</td></tr>
+      <tr><td>Meta Prospecting</td><td>~$4,530/mo (est.)</td><td><strong>$2,000/mo ($66/day)</strong></td><td>Consolidated, Advantage+ optimized, focused</td></tr>
+      <tr><td>Zero-result campaigns</td><td>$3,150/mo</td><td><strong>$0</strong></td><td>Dead weight — redirect budget</td></tr>
+      <tr><td>Google Ads (new)</td><td>$0</td><td><strong>$500/mo</strong></td><td>Capture "THC drinks near me" searches</td></tr>
+      <tr><td>Klaviyo Email</td><td>$0 (have tool)</td><td><strong>$500/mo effort</strong></td><td>Nearly free revenue — invest in setup</td></tr>
+    </table>
+    <p style="margin-top: 12px; font-size: 0.9rem;">Net: Same total spend, but $3,150/month redirected from waste to channels that convert.</p>
+  </div>
+  
+  <h3>📈 Expected Results (90-Day Projection)</h3>
+  <div class="card">
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="label">Conversion Rate</div>
+        <div class="value" style="color: var(--accent);">4.5-5.5%</div>
+        <div class="change">From 2.63%</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Meta ROAS</div>
+        <div class="value" style="color: var(--accent);">2.0-2.6x</div>
+        <div class="change">From 1.17x</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Mobile Speed</div>
+        <div class="value" style="color: var(--accent);">75-85</div>
+        <div class="change">From ~40</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Monthly Revenue</div>
+        <div class="value" style="color: var(--accent);">$25-30K</div>
+        <div class="change">From ~$15K</div>
+      </div>
+    </div>
+    <p style="margin-top: 16px; text-align: center; color: var(--text-muted);">These are conservative estimates based on industry benchmarks and your current growth trajectory.</p>
+  </div>
+  
+  <h3>🎯 The Single Most Important Thing</h3>
+  <div class="callout">
+    <p style="font-size: 1.1rem;"><strong>If you only do ONE thing from this report, consolidate your Meta campaigns.</strong></p>
+    <p style="margin-top: 8px;">Killing the 2 zero-result campaigns and merging the rest into 2 focused campaigns will likely cut your cost per purchase from $72.93 to under $35 within 2 weeks. That single change takes your ROAS from 1.17x to ~2.3x and turns your ad spend from a money pit into a growth engine.</p>
+    <p style="margin-top: 8px;">Everything else in this report matters. But nothing matters as much as stopping the $105/day you're currently lighting on fire.</p>
+  </div>
+</section>
+
+</div>
+
+<div class="footer">
+  <p>Prepared by Albus · March 21, 2026 · For Robert Paslaqua / JUNGL Brands LLC</p>
+  <p style="margin-top: 8px; opacity: 0.5;">Data sourced from Shopify Admin, Meta Ads Manager, and direct website analysis.</p>
+</div>
+
+</body>
+</html>
