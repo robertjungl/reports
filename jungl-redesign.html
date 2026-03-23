@@ -971,19 +971,8 @@ body {
 
 /* ===== ANIMATIONS ===== */
 .fade-up {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (min-width: 901px) {
-  .fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.7s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 </style>
 </head>
