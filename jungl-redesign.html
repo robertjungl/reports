@@ -970,13 +970,19 @@ body {
 
 /* ===== ANIMATIONS ===== */
 .fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.7s ease;
-}
-.fade-up.visible {
   opacity: 1;
   transform: translateY(0);
+}
+@media (min-width: 901px) {
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
@@ -989,7 +995,7 @@ body {
     <h2>Are You 21+?</h2>
     <p>You must be of legal age to view this site.</p>
     <div class="age-gate-buttons">
-      <button class="btn-yes" onclick="document.getElementById('ageGate').classList.add('hidden')">Yes, I'm 21+</button>
+      <button class="btn-yes" onclick="document.getElementById('ageGate').style.display='none'">Yes, I'm 21+</button>
       <button class="btn-no" onclick="window.location='https://google.com'">No</button>
     </div>
   </div>
