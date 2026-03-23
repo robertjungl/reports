@@ -935,6 +935,7 @@ body {
   .reviews-grid { grid-template-columns: 1fr; }
   .hero { min-height: auto; padding: 7rem 1.25rem 3rem; }
   .hero h1, .hero-text h1 { font-size: 1.6rem; line-height: 1.2; }
+  .desktop-br { display: none; }
   .hero p { font-size: 1rem; }
   .hero-buttons { flex-direction: column; gap: 0.75rem; }
   .hero-buttons a, .hero-buttons .btn-primary, .hero-buttons .btn-secondary { width: 100%; text-align: center; }
@@ -1023,7 +1024,7 @@ body {
   <img src="https://jungl.com/cdn/shop/files/Violet_butterfly.png?v=1753708547&width=400" alt="" class="hero-butterfly">
   <div class="hero-content">
     <div class="hero-text">
-      <h1>Better Buzz. Better Taste. <span>Better Tomorrow.</span></h1>
+      <h1>Better Buzz.<br class="desktop-br"> Better Taste.<br class="desktop-br"> <span>Better Tomorrow.</span></h1>
       <p class="hero-tagline">THC-infused drinks & gummies — crafted for a cleaner buzz.</p>
       <p class="hero-sub">Hangovers Not Included ✨</p>
       <div class="hero-buttons">
@@ -1032,14 +1033,17 @@ body {
       </div>
     </div>
     <div class="hero-cans">
-      <img src="https://jungl.com/cdn/shop/files/strawberry_10mg_hybrid_c9acd58b-d19c-4b4f-abde-94795d9d0523_240x.webp?v=1770112771" alt="Strawberry Gummies" class="hero-can" style="transform:rotate(-5deg)">
       <img src="https://jungl.com/cdn/shop/files/Card_Hover_240x.png?v=1748434367" alt="Junglberry" class="hero-can">
       <img src="https://jungl.com/cdn/shop/files/BlackberryYuzu_240x.png?v=1748719257" alt="Blackberry Yuzu" class="hero-can">
       <img src="https://jungl.com/cdn/shop/files/TropicalSpritz_240x.png?v=1738679395" alt="Tropical Spritz" class="hero-can">
       <img src="https://jungl.com/cdn/shop/files/WaterLemon_6eebbdbb-eb8d-4b86-994c-888635640f1c_240x.png?v=1739520425" alt="WaterLemon" class="hero-can">
-      <img src="https://jungl.com/cdn/shop/files/wl_front_10_mg_hybrid_4fed5b13-4b95-43f2-bd07-719801e059ea_240x.webp?v=1768401727" alt="WaterLemon Gummies" class="hero-can" style="transform:rotate(5deg)">
       <img src="https://jungl.com/cdn/shop/files/Art_4.png?v=1739208811&width=400" alt="" class="hero-fruit hero-fruit-1">
       <img src="https://jungl.com/cdn/shop/files/Frame_2147223615.png?v=1739205167&width=400" alt="" class="hero-fruit hero-fruit-2">
+    </div>
+    <div style="display:flex;justify-content:center;gap:1.5rem;margin-top:-0.5rem;">
+      <img src="https://jungl.com/cdn/shop/files/strawberry_10mg_hybrid_c9acd58b-d19c-4b4f-abde-94795d9d0523_240x.webp?v=1770112771" alt="Strawberry Gummies" style="width:65px;transform:rotate(-3deg);filter:drop-shadow(0 4px 8px rgba(0,0,0,0.2))">
+      <img src="https://jungl.com/cdn/shop/files/ca_front_10_mg_hybrid_f22c8b19-12f1-4c2e-9807-e867a323b074_240x.webp?v=1748716683" alt="Cherry Apple Gummies" style="width:65px;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.2))">
+      <img src="https://jungl.com/cdn/shop/files/wl_front_10_mg_hybrid_4fed5b13-4b95-43f2-bd07-719801e059ea_240x.webp?v=1768401727" alt="WaterLemon Gummies" style="width:65px;transform:rotate(3deg);filter:drop-shadow(0 4px 8px rgba(0,0,0,0.2))">
     </div>
   </div>
 </section>
