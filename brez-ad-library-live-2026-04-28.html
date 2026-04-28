@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BREZ Meta Ad Library Live Snapshot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: oklch(0.984 0.004 286);
+      --panel: rgba(255,255,255,0.78);
+      --panel-strong: rgba(255,255,255,0.92);
+      --text: oklch(0.24 0.02 278);
+      --muted: oklch(0.52 0.02 278);
+      --border: rgba(112, 88, 255, 0.14);
+      --accent: oklch(0.61 0.19 312);
+      --accent-2: oklch(0.72 0.17 245);
+      --green: oklch(0.7 0.15 151);
+      --shadow: 0 18px 50px rgba(49, 28, 106, 0.10);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --font: Inter, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(183, 126, 255, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(123, 160, 255, 0.16), transparent 24%),
+        linear-gradient(180deg, #fcfbff 0%, #f4f3fb 100%);
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 20px 72px;
+    }
+    .hero {
+      background: linear-gradient(135deg, rgba(111, 78, 255, 0.14), rgba(233, 127, 255, 0.10));
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 34px;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -80px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(116, 96, 255, 0.18), transparent 70%);
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      max-width: 850px;
+    }
+    .sub {
+      max-width: 880px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-top: 14px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 14px;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      box-shadow: 0 12px 26px rgba(111, 78, 255, 0.22);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.82);
+      color: var(--text);
+      border-color: rgba(111, 78, 255, 0.14);
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .card {
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+    .stat .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat .value {
+      margin-top: 8px;
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+    .section-title {
+      margin: 0 0 6px;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+    .section-sub {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+    .patterns {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .pattern h3, .insight h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(111, 78, 255, 0.08);
+      border: 1px solid rgba(111, 78, 255, 0.12);
+      font-size: 13px;
+      font-weight: 600;
+      color: #5237c8;
+    }
+    .insights {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: start;
+    }
+    ul.clean {
+      margin: 0;
+      padding-left: 18px;
+    }
+    ul.clean li + li { margin-top: 8px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+      background: var(--panel-strong);
+      border: 1px solid rgba(111, 78, 255, 0.10);
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(111, 78, 255, 0.08);
+    }
+    th {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      background: rgba(255,255,255,0.5);
+    }
+    tr:last-child td { border-bottom: 0; }
+    .small { font-size: 12px; color: var(--muted); }
+    .quote {
+      border-left: 3px solid rgba(111, 78, 255, 0.35);
+      padding-left: 14px;
+      margin: 10px 0 0;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .footer-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 960px) {
+      .stats, .patterns, .insights { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 700px) {
+      .wrap { padding: 18px 14px 56px; }
+      .hero { padding: 22px; border-radius: 24px; }
+      .stats, .patterns, .insights { grid-template-columns: 1fr; }
+      th:nth-child(4), td:nth-child(4) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Live snapshot · Meta Ad Library · BRĒZ</div>
+      <h1>Current BRĒZ ad library, pulled live so we can study what is actually running right now.</h1>
+      <p class="sub">
+        Source query: active U.S. ads for <strong>drinkbrez</strong>, sorted by total impressions descending. This refresh surfaced a live set of BRĒZ creatives plus a few unrelated false positives that were excluded from the notes below.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&is_targeted_country=false&media_type=all&q=drinkbrez&search_type=keyword_unordered&sort_data%5Bmode%5D=total_impressions&sort_data%5Bdirection%5D=desc">Open the live Meta search</a>
+        <span class="btn btn-secondary">Pulled live on Apr 28, 2026</span>
+      </div>
+    </section>
+
+    <section class="grid stats">
+      <div class="card stat"><div class="label">Active results surfaced</div><div class="value">~63</div></div>
+      <div class="card stat"><div class="label">Newest launch date seen</div><div class="value">Apr 22</div></div>
+      <div class="card stat"><div class="label">Visible advertiser names</div><div class="value">2</div><div class="small">Drink BRĒZ, Feeling Cosmic</div></div>
+      <div class="card stat"><div class="label">Dominant CTA</div><div class="value">Shop Now</div></div>
+    </section>
+
+    <section class="card" style="margin-top:20px;">
+      <h2 class="section-title">What they are doing right now</h2>
+      <p class="section-sub">This is the pattern that keeps repeating across the freshest live ads.</p>
+      <div class="grid patterns">
+        <div class="card pattern">
+          <h3>Angle 1, alcohol replacement</h3>
+          <div class="quote">“The perfect alcohol alternative”</div>
+          <p>They keep framing BRĒZ as a substitute for drinking, not as a weed product first.</p>
+        </div>
+        <div class="card pattern">
+          <h3>Angle 2, outcome stack</h3>
+          <div class="quote">“Euphoria. Clarity. Relief.”</div>
+          <p>They are selling feelings and functional results in a clean, repeated three-part rhythm.</p>
+        </div>
+        <div class="card pattern">
+          <h3>Angle 3, zero-regret payoff</h3>
+          <div class="quote">“No hangovers or regrets”</div>
+          <p>They make the comparison against alcohol explicit and keep the payoff simple.</p>
+        </div>
+      </div>
+      <div class="pill-row">
+        <span class="pill">Microdosed infused social tonic</span>
+        <span class="pill">Ditch the hangover. Keep the buzz.</span>
+        <span class="pill">BOGO FREE offer</span>
+        <span class="pill">TRY.DRINKBREZ.COM landing path</span>
+        <span class="pill">Short video edits</span>
+      </div>
+    </section>
+
+    <section class="grid insights" style="margin-top:20px;">
+      <div class="card insight">
+        <h2 class="section-title">Practical takeaways for JUNGL</h2>
+        <ul class="clean">
+          <li>They are not running one message, they are rotating the same <strong>few core hooks</strong> over and over.</li>
+          <li>The offer-led creative is clear: <strong>BOGO FREE</strong> is a live front-end conversion push.</li>
+          <li>The copy stays very consumer-facing and experiential, with almost no technical cannabinoid language in the ad text itself.</li>
+          <li>They are using <strong>short-form video aggressively</strong>, with visible lengths like 11s, 12s, 19s, 27s, 31s, 39s, 41s, 46s, and 47s.</li>
+          <li>At least two advertiser names appear in the live library results: <strong>Drink BRĒZ</strong> and <strong>Feeling Cosmic</strong>.</li>
+        </ul>
+      </div>
+      <div class="card insight">
+        <h2 class="section-title">Most repeated phrases</h2>
+        <ul class="clean">
+          <li>“The perfect alcohol alternative”</li>
+          <li>“Microdosed Infused Social Tonic 🌿🍄”</li>
+          <li>“No hangovers or regrets”</li>
+          <li>“Ditch the hangover. Keep the buzz.”</li>
+          <li>“BOGO Free | OG Micro — Grab Yours Now🌿✨”</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:20px;">
+      <h2 class="section-title">Fresh live ad sample</h2>
+      <p class="section-sub">These are the current creative IDs and launch dates I pulled from the live library page.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Start</th>
+            <th>Library ID</th>
+            <th>Advertiser</th>
+            <th>Creative angle</th>
+            <th>Observed CTA / note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Apr 22, 2026</td>
+            <td>1588589896601787</td>
+            <td>Feeling Cosmic</td>
+            <td>Perfect alcohol alternative, 11s video, TRY.DRINKBREZ.COM</td>
+            <td>Shop now</td>
+          </tr>
+          <tr>
+            <td>Apr 22, 2026</td>
+            <td>1604542350778022</td>
+            <td>Feeling Cosmic</td>
+            <td>Perfect alcohol alternative, 46s video</td>
+            <td>Shop Now</td>
+          </tr>
+          <tr>
+            <td>Apr 22, 2026</td>
+            <td>2508696842867081</td>
+            <td>Drink BRĒZ</td>
+            <td>Perfect alcohol alternative, 27s video</td>
+            <td>Shop Now</td>
+          </tr>
+          <tr>
+            <td>Apr 22, 2026</td>
+            <td>2030479650911252</td>
+            <td>Feeling Cosmic</td>
+            <td>Perfect alcohol alternative, 27s video</td>
+            <td>Shop Now</td>
+          </tr>
+          <tr>
+            <td>Apr 16, 2026</td>
+            <td>26859768333648077</td>
+            <td>Drink BRĒZ</td>
+            <td>Ditch the hangover. Keep the buzz. 39s video, BOGO push</td>
+            <td>Shop now</td>
+          </tr>
+          <tr>
+            <td>Apr 16, 2026</td>
+            <td>1450271832812633</td>
+            <td>Drink BRĒZ</td>
+            <td>Perfect alcohol alternative, 39s video summary version</td>
+            <td>Multi-version creative</td>
+          </tr>
+          <tr>
+            <td>Apr 16, 2026</td>
+            <td>1269467178725660</td>
+            <td>Drink BRĒZ</td>
+            <td>Perfect alcohol alternative, 31s video</td>
+            <td>Shop Now</td>
+          </tr>
+          <tr>
+            <td>Apr 15, 2026</td>
+            <td>1960738678138133</td>
+            <td>Feeling Cosmic</td>
+            <td>Ditch the hangover. Keep the buzz. 39s video, BOGO push</td>
+            <td>Shop Now</td>
+          </tr>
+          <tr>
+            <td>Apr 11, 2026</td>
+            <td>1643614890097790</td>
+            <td>Drink BRĒZ</td>
+            <td>Perfect alcohol alternative, 19s video, TRY.DRINKBREZ.COM</td>
+            <td>Shop now</td>
+          </tr>
+          <tr>
+            <td>Apr 10, 2026</td>
+            <td>972196455767457</td>
+            <td>Drink BRĒZ</td>
+            <td>Perfect alcohol alternative, 39s video</td>
+            <td>Shop Now</td>
+          </tr>
+          <tr>
+            <td>Apr 9, 2026</td>
+            <td>900096176335084</td>
+            <td>Feeling Cosmic</td>
+            <td>Ditch the hangover. Keep the buzz. 47s video</td>
+            <td>Multi-version creative</td>
+          </tr>
+          <tr>
+            <td>Apr 4, 2026</td>
+            <td>1480405266806079</td>
+            <td>Drink BRĒZ</td>
+            <td>Perfect alcohol alternative, static / short-form variant</td>
+            <td>Shop Now</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="footer-note">
+        Note: the raw search also surfaced some obvious false positives unrelated to BRĒZ, so this page only summarizes the visible BRĒZ/Feeling Cosmic creatives.
+      </p>
+    </section>
+  </div>
+</body>
+</html>
