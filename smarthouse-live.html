@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="30">
+  <title>SmartHouse Live Draft</title>
+  <style>
+    :root {
+      --ink: #1d2733;
+      --muted: #667085;
+      --line: #d8dee8;
+      --navy: #17324d;
+      --note: #f7f3ea;
+      --bg: #f5f7fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      line-height: 1.48;
+    }
+    .bar {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #eaf2fb;
+      color: var(--navy);
+      border-bottom: 1px solid #cfddec;
+      padding: 9px 16px;
+      text-align: center;
+      font-size: 13px;
+    }
+    main {
+      max-width: 920px;
+      margin: 28px auto;
+      background: #fff;
+      padding: 44px 52px;
+      box-shadow: 0 12px 42px rgba(21, 35, 52, .12);
+      border-radius: 10px;
+    }
+    h1 {
+      margin: -44px -52px 26px;
+      padding: 30px 52px;
+      background: var(--navy);
+      color: #fff;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+    h2 {
+      margin: 34px 0 10px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--navy);
+      font-size: 21px;
+    }
+    h3 {
+      color: #596579;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: 12px;
+      margin: 18px 0 7px;
+    }
+    p { color: #364152; }
+    ul {
+      margin: 0 0 14px;
+      border: 1px solid #edf1f5;
+      border-radius: 8px;
+      padding: 14px 18px 14px 38px;
+      background: #fff;
+    }
+    ul.checklist li::marker {
+      content: "";
+      color: #1f4c74;
+      font-size: 14px;
+    }
+    ul.checklist {
+      padding: 10px 14px;
+    }
+    ul.checklist li {
+      list-style: none;
+    }
+    label {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 9px;
+      align-items: start;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: #17324d;
+      cursor: pointer;
+    }
+    input[type="checkbox"]:checked + span {
+      text-decoration: line-through;
+      color: #667085;
+    }
+    h3 + ul:not(.checklist) {
+      background: var(--note);
+      border-color: #e3d6bd;
+    }
+    h3 + ul:not(.checklist) li::marker {
+      content: "•  ";
+      color: #76531f;
+    }
+    li { margin: 7px 0; }
+    figure {
+      margin: 18px 0 22px;
+      border: 1px solid #d8dee8;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    img {
+      display: block;
+      width: 100%;
+      max-height: 640px;
+      object-fit: contain;
+      background: #f1f3f6;
+    }
+    video {
+      display: block;
+      width: 100%;
+      max-height: 640px;
+      background: #111827;
+    }
+    figcaption {
+      padding: 9px 12px;
+      color: #596579;
+      font-size: 13px;
+      border-top: 1px solid #e8edf3;
+    }
+    @media (max-width: 760px) {
+      main {
+        margin: 0;
+        border-radius: 0;
+        padding: 28px 22px;
+      }
+      h1 {
+        margin: -28px -22px 22px;
+        padding: 24px 22px;
+        font-size: 25px;
+      }
+    }
+  </style>
+  <script>
+    async function saveCheck(box) {
+      const payload = { id: box.dataset.id, checked: box.checked };
+      const res = await fetch('/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) {
+        box.checked = !box.checked;
+        alert('Could not save that checkbox. Please try again.');
+      }
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('input[type="checkbox"][data-id]').forEach((box) => {
+        box.addEventListener('change', () => saveCheck(box));
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="bar">Shared SmartHouse checklist. Checkmarks save live. Auto-refreshes every 30 seconds. Source modified: 1781032513</div>
+  <main><h1>SmartHouse Integration Final Closeout Punch List</h1>
+<p>Property: 1081 Tocobaga Lane, Sarasota, FL 34236</p>
+<p>This is a simplified list of remaining items that need to be corrected, completed, or confirmed before closeout.</p>
+<h2>Network &amp; Connectivity</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="506bb0b04cb81603"><span>Fix and simplify the home Wi-Fi/network setup so the property has the correct intended network configuration.</span></label></li>
+<li><label><input type="checkbox" data-id="dfcc9183230937c7"><span>Establish one reliable main house Wi-Fi network with proper roaming between access points.</span></label></li>
+<li><label><input type="checkbox" data-id="b6147453db94d984"><span>Remove unnecessary duplicate networks, including old Xfinity broadcasts and duplicate JUNGL network names.</span></label></li>
+<li><label><input type="checkbox" data-id="2b4451ce7dd97106"><span>Confirm smart-home devices are connected to the intended network.</span></label></li>
+<li><label><input type="checkbox" data-id="5af702ae240198aa"><span>Provide simple restart/recovery instructions for the core network equipment.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Current symptoms include unreliable Wi-Fi, random device drops, and devices not transitioning smoothly between access points.</li>
+<li>The goal is not to document every network that exists today. The goal is to leave the property with the correct, simplified, working network setup.</li>
+</ul>
+<h2>Cell Phone Booster</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="880b84efae366db3"><span>Test the installed cell phone booster and confirm it is working properly.</span></label></li>
+<li><label><input type="checkbox" data-id="c5bc3383a61795e7"><span>Confirm the intended coverage area.</span></label></li>
+<li><label><input type="checkbox" data-id="65cdc3d0f1ccea18"><span>Improve booster performance if the system is not providing meaningful value.</span></label></li>
+<li><label><input type="checkbox" data-id="b932846e22eab480"><span>Provide before/after signal readings or explain why the booster is not improving service.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>The booster does not currently appear to provide a meaningful improvement.</li>
+<li>Cell phone connection inside the house remains extremely poor.</li>
+<li>The installed booster currently does not seem to be working or providing value.</li>
+</ul>
+<h2>Theater Room</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="34a1cb8914ed6a77"><span>Resolve the visible line still appearing in the projector image, if resolvable. If it cannot be resolved, explain what is causing it.</span></label></li>
+<li><label><input type="checkbox" data-id="d52d0b8e4e8e4c0d"><span>Add the Theater Room source controls to Savant so the intended theater sources can be selected and operated from the Savant app/interface.</span></label></li>
+<li><label><input type="checkbox" data-id="64d919296a09a868"><span>Address ceiling speaker finish damage.</span></label></li>
+<li><label><input type="checkbox" data-id="ab5f965e8add2560"><span>Address visible damage, dirt, fingerprints, seams, scuffs, and unfinished-looking areas throughout the theater ceiling, soffit, star ceiling, and screen area.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Image of the visible projector/screen line issue is included below.</li>
+<li>Reference photo shows visible ceiling damage and speaker grille/logo issues around one ceiling speaker.</li>
+<li>Reference video shows visible dirt/fingerprints, scuffed or marked black ceiling panels, open seams, rough trim/edge work, and visible fastener points around the soffit/star ceiling/screen area.</li>
+</ul>
+<h2>Theater Soffit, Star Ceiling, Screen Area &amp; Trim</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="9df525c9a17e5906"><span>Address unfinished-looking trim and finish around the theater soffit, star ceiling, screen area, and ceiling trim.</span></label></li>
+<li><label><input type="checkbox" data-id="4af10bf3261c4dc8"><span>Address visible screw holes, fasteners, seams, miter gaps, chipped corners, scuffs, dust/debris, dirt, fingerprints, and dirty-looking edges.</span></label></li>
+<li><label><input type="checkbox" data-id="7ecbdceb31ef3b5c"><span>Confirm the black ceiling/star ceiling/screen area panels and surrounding trim look professionally finished under normal lighting.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Photos and video show visible finish issues around the theater soffit, star ceiling, screen area, and trim area.</li>
+<li>The reference video should be included/referenced because it shows the condition of the ceiling and trim across multiple angles, not just one isolated spot.</li>
+<li>This is a highly visible finished area and should not look incomplete or low quality, especially given the project budget and the expected Russell &amp; Russell finish standard.</li>
+</ul>
+<h2>Living Room Audio &amp; Wall Finish</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="315c28f0b0a2b896"><span>Complete living room audio tuning.</span></label></li>
+<li><label><input type="checkbox" data-id="8349437a11decee0"><span>Confirm TV audio and Sonos/Savant routing work properly.</span></label></li>
+<li><label><input type="checkbox" data-id="5356a84d153d2339"><span>Address the open hole/unfinished wall area behind the TV from the speaker removal.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Living room audio and wall finish should be left clean, reliable, and complete.</li>
+<li>Reference photo shows unresolved wall damage/open cutout behind the TV.</li>
+</ul>
+<h2>Outdoor Audio</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="30a9be5c25b1a545"><span>Check the outdoor speakers and Sonos/Savant routing.</span></label></li>
+<li><label><input type="checkbox" data-id="a07a07e598fcfcce"><span>Confirm both outdoor speakers are working properly.</span></label></li>
+<li><label><input type="checkbox" data-id="329535fd252837c4"><span>Run a diagnostic to determine why only one outdoor speaker worked intermittently.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Both outdoor speakers are currently working, but there were multiple days where only one speaker worked.</li>
+</ul>
+<h2>Hunter Douglas Shade Integration</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="b86c6845ab58b388"><span>Configure the Hunter Douglas shades properly in Savant.</span></label></li>
+<li><label><input type="checkbox" data-id="2067f80dc607141f"><span>Confirm the PowerView hubs are installed and placed properly.</span></label></li>
+<li><label><input type="checkbox" data-id="8b7ebe67bca44d65"><span>Confirm the shades are fully working from the intended Savant controls.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>When the project was agreed to, owner was told the shades would be incorporated into Savant and expected they would work within the Savant controls.</li>
+<li>The shades worked at least partially in Savant for a period of time, but do not work at all currently.</li>
+<li>This may be related to the current multiple-network/Wi-Fi setup and may resolve once the wireless network is corrected.</li>
+</ul>
+<h2>Lighting &amp; Scenes</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="09e8398894299cc3"><span>Install gateway for shades in appropriate server room locations.</span></label></li>
+<li><label><input type="checkbox" data-id="c8fe66ffcce8e950"><span>Add back the Star Ceiling on/off button in Savant.</span></label></li>
+<li><label><input type="checkbox" data-id="6ea1895005d22504"><span>Provide or confirm a physical way to control the Star Ceiling outside of Savant.</span></label></li>
+<li><label><input type="checkbox" data-id="ea800169f0e7742a"><span>Teach owner how to change programming for wall lights and wall buttons/keypads.</span></label></li>
+<li><label><input type="checkbox" data-id="858f093dc4224b17"><span>Resolve flickering caused by lighting scenes, including All On Dim.</span></label></li>
+<li><label><input type="checkbox" data-id="c1c745b294943cfe"><span>Add master bathroom lights that flash pink/red into the system and confirm proper behavior.</span></label></li>
+<li><label><input type="checkbox" data-id="654ed6f3fb8ac78d"><span>Fix the dead hallway switch going into the owner&#x27;s bedroom so it properly controls the full hallway lighting pattern/path.</span></label></li>
+<li><label><input type="checkbox" data-id="e707804af5135ec7"><span>Adjust All On buttons so bedrooms are not affected.</span></label></li>
+<li><label><input type="checkbox" data-id="001c2d6cdcf6b423"><span>Configure Theater Room tape lights for All On Dim: blue tape light behind TV at 2/100 and green tape lights at 2/100.</span></label></li>
+<li><label><input type="checkbox" data-id="8629cd36cee10d9b"><span>Configure Theater Room tape lights for All On Bright: same blue/green tape light behavior at 100/100.</span></label></li>
+<li><label><input type="checkbox" data-id="5342aed2b9c5236a"><span>Adjust dimming behavior so lights respond predictably.</span></label></li>
+<li><label><input type="checkbox" data-id="84067687cce34ad1"><span>Show owner how to edit these scene/button settings while going through the house.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Owner needs practical instruction on changing wall light and wall button/keypad programming.</li>
+<li>Star Ceiling should be controllable both through Savant and through a physical/non-Savant control method.</li>
+<li>Specific issues include the dead hallway switch going into the owner&#x27;s bedroom, All On Dim causing flicker, All On affecting bedrooms, master bathroom lights flashing pink/red, Theater tape-light scene levels/colors, and dimming levels not matching expected output.</li>
+</ul>
+<h2>Security System &amp; Cameras</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="aefb0bdbce65c5bf"><span>Fully test the security/alarm system and confirm it is working properly.</span></label></li>
+<li><label><input type="checkbox" data-id="1f6339eaea9f52c6"><span>Explain what happens after the alarm goes off, including siren behavior, monitoring response, notifications, and owner steps.</span></label></li>
+<li><label><input type="checkbox" data-id="aeb67f75cbe640e3"><span>Show owner how to set up, edit, and test alarm notifications.</span></label></li>
+<li><label><input type="checkbox" data-id="049bb89384a531ae"><span>Install keypad in server closet.</span></label></li>
+<li><label><input type="checkbox" data-id="2c67b61d552102a9"><span>Demonstrate camera access, event recording, and notifications.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Owner needs clear confirmation that the alarm system works, what response process is triggered, and how notifications are configured.</li>
+<li>Owner also needs a simple explanation of how to access footage and what camera alerts or recording behavior to expect.</li>
+</ul>
+<h2>Pool &amp; Spa</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="37d7467395d314e0"><span>Fix the server-room/network port setup for the pool/spa connection.</span></label></li>
+<li><label><input type="checkbox" data-id="22b61e131cdce007"><span>Confirm pool/spa controls continue working without needing to be directly connected into the modem.</span></label></li>
+<li><label><input type="checkbox" data-id="936a74bccdd1d560"><span>Confirm core pool/spa controls work from the intended Savant interface.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Pool/spa has been connected, but the current setup should not require a direct modem connection.</li>
+</ul>
+<h2>User &amp; Savant Access</h2>
+<h3>Punch List</h3>
+<ul class="checklist">
+<li><label><input type="checkbox" data-id="3010cec16b662711"><span>Show owner how to add guests and approve users.</span></label></li>
+<li><label><input type="checkbox" data-id="2666cc257ec58f60"><span>Provide a simple system handoff guide.</span></label></li>
+<li><label><input type="checkbox" data-id="0de32e8b10f814f2"><span>Explain what additional Savant access can be handed over to owner.</span></label></li>
+<li><label><input type="checkbox" data-id="db0ca0eff8c072f9"><span>Confirm whether complete Savant system control/management can be handed over to owner.</span></label></li>
+<li><label><input type="checkbox" data-id="bc893a4c416c2853"><span>Explain what owner would and would not be able to change if additional or complete access is provided.</span></label></li>
+<li><label><input type="checkbox" data-id="1d448624d62cdfde"><span>Explain what support looks like moving forward.</span></label></li>
+<li><label><input type="checkbox" data-id="66752bb9d7676d74"><span>Provide installed systems, apps, accounts, and support contacts.</span></label></li>
+<li><label><input type="checkbox" data-id="1a4ece1a346610d6"><span>Provide restart/recovery steps for common system failures.</span></label></li>
+<li><label><input type="checkbox" data-id="8052a9db89fafde1"><span>Clarify what actions may affect warranty or future support.</span></label></li>
+</ul>
+<h3>Notes</h3>
+<ul>
+<li>Owner needs one clear handoff covering user access, Savant access, management options, and future support boundaries.</li>
+</ul>
+<h2>Reference Photos and Videos - Theater Room</h2>
+<h3>Reference Video</h3>
+<ul>
+<li>Reference video is included below for live review. In the Word document, representative still frames are included because embedded video is not reliable for vendor review.</li>
+<li>The still frames are representative captures from the video showing the theater soffit, star ceiling, screen area, trim, panels, seams, dirt/fingerprints, and fastener/edge issues.</li>
+</ul>
+<figure><video controls preload="metadata" src="/assets/research/smarthouse-evidence/theater-finish-issues-video.mp4"></video><figcaption>Full theater video showing finish issues around the soffit, star ceiling, screen area, black panels, seams, and trim.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/video-frame-star-ceiling-seams.jpg" alt="Video frame showing visible seams and marked/scuffed black ceiling panels near the soffit/screen area."><figcaption>Video frame showing visible seams and marked/scuffed black ceiling panels near the soffit/screen area.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/video-frame-dirt-edge-fasteners.jpg" alt="Video frame showing dirty/scuffed black panel surface, rough/open edge, and visible fastener points."><figcaption>Video frame showing dirty/scuffed black panel surface, rough/open edge, and visible fastener points.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/video-frame-panel-scuffs-fasteners.jpg" alt="Video frame showing panel scuffs/marks and visible fastener points near the trim and recessed light area."><figcaption>Video frame showing panel scuffs/marks and visible fastener points near the trim and recessed light area.</figcaption></figure>
+<h3>Reference Photos</h3>
+<figure><img src="/assets/research/smarthouse-evidence/theater-projector-visible-line.jpg" alt="Projected image showing visible vertical line/artifact on the screen."><figcaption>Projected image showing visible vertical line/artifact on the screen.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/theater-ceiling-speaker-damage.jpg" alt="Ceiling speaker area showing visible ceiling damage and speaker grille/logo issue."><figcaption>Ceiling speaker area showing visible ceiling damage and speaker grille/logo issue.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/theater-screen-shade-track-01.jpg" alt="Theater screen area showing unfinished-looking finish, visible fastener points, and scuffed black panel area."><figcaption>Theater screen area showing unfinished-looking finish, visible fastener points, and scuffed black panel area.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/theater-trim-corner-01.jpg" alt="Theater trim corner showing visible seam/gap and rough or uneven finish."><figcaption>Theater trim corner showing visible seam/gap and rough or uneven finish.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/theater-trim-light-area-01.jpg" alt="Trim and recessed light area showing smudged/scuffed finish and uneven edge work."><figcaption>Trim and recessed light area showing smudged/scuffed finish and uneven edge work.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/theater-dust-scuff-edge-01.jpg" alt="Theater trim/panel edge showing dust/debris, scuffs, and dirty-looking finish."><figcaption>Theater trim/panel edge showing dust/debris, scuffs, and dirty-looking finish.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/theater-trim-corner-02.jpg" alt="Theater trim corner showing visible miter seam and uneven/chipped edge."><figcaption>Theater trim corner showing visible miter seam and uneven/chipped edge.</figcaption></figure>
+<figure><img src="/assets/research/smarthouse-evidence/theater-track-fasteners-01.jpg" alt="Theater screen area area showing open seam line, visible fasteners, rough inner edge, and scuffed trim."><figcaption>Theater screen area area showing open seam line, visible fasteners, rough inner edge, and scuffed trim.</figcaption></figure>
+<h2>Reference Photos - Living Room</h2>
+<figure><img src="/assets/research/smarthouse-evidence/living-room-tv-speaker-removal-wall-damage.jpg" alt="Unresolved wall damage/open cutout behind the television from speaker removal."><figcaption>Unresolved wall damage/open cutout behind the television from speaker removal.</figcaption></figure></main>
+</body>
+</html>
