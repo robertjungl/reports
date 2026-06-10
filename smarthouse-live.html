@@ -149,27 +149,53 @@
     }
   </style>
   <script>
-    async function saveCheck(box) {
-      const payload = { id: box.dataset.id, checked: box.checked };
-      const res = await fetch('/check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if (!res.ok) {
-        box.checked = !box.checked;
-        alert('Could not save that checkbox. Please try again.');
+    const CHECKBOX_STORAGE_KEY = 'smarthouse-live-checks-v1';
+
+    function loadLocalChecks() {
+      try {
+        return JSON.parse(localStorage.getItem(CHECKBOX_STORAGE_KEY) || '{}');
+      } catch (_) {
+        return {};
       }
     }
+
+    function saveLocalCheck(box) {
+      const checks = loadLocalChecks();
+      checks[box.dataset.id] = box.checked;
+      localStorage.setItem(CHECKBOX_STORAGE_KEY, JSON.stringify(checks));
+    }
+
+    async function saveCheck(box) {
+      const payload = { id: box.dataset.id, checked: box.checked };
+      try {
+        const res = await fetch('/check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          saveLocalCheck(box);
+          return;
+        }
+      } catch (_) {
+        // Static deployments do not have the preview server's /check endpoint.
+      }
+      saveLocalCheck(box);
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
+      const localChecks = loadLocalChecks();
       document.querySelectorAll('input[type="checkbox"][data-id]').forEach((box) => {
+        if (Object.prototype.hasOwnProperty.call(localChecks, box.dataset.id)) {
+          box.checked = !!localChecks[box.dataset.id];
+        }
         box.addEventListener('change', () => saveCheck(box));
       });
     });
   </script>
 </head>
 <body>
-  <div class="bar">Shared SmartHouse checklist. Checkmarks save live. Auto-refreshes every 30 seconds. Source modified: 1781032513</div>
+  <div class="bar">Shared SmartHouse checklist. Checkmarks save in this browser. Auto-refreshes every 30 seconds. Source modified: 1781032513</div>
   <main><h1>SmartHouse Integration Final Closeout Punch List</h1>
 <p>Property: 1081 Tocobaga Lane, Sarasota, FL 34236</p>
 <p>This is a simplified list of remaining items that need to be corrected, completed, or confirmed before closeout.</p>
